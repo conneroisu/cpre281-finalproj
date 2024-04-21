@@ -20,6 +20,25 @@
   "design_units": [
    {
     "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/DataMemory.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "DataMemory",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
      "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MipsCPU.v",
      "__class__": "Path"
     },
@@ -39,12 +58,69 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "alu_decoder",
+     "name": "ALU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/PC.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "PC",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ShiftLeft2.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ShiftLeft2",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/SignExtend.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "SignExtend",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -77,6 +153,158 @@
    },
    {
     "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux1.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux1",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "alu_decoder",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/AndGate.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "AndGate",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MainControl.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "MainControl",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Add_ALU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Add_ALU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/RegFile.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "RegFile",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux3.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux3",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/InstMem.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "InstMem",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
      "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/register_file.v",
      "__class__": "Path"
     },
@@ -96,12 +324,31 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux4.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "alu",
+     "name": "Mux4",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux2.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux2",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
