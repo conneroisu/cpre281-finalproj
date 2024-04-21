@@ -1,5 +1,4 @@
 module Mux3 (ReadData, ALUOut, MemtoReg, WriteData_Reg);
-
 	input [31:0] ReadData, ALUOut;
 	input MemtoReg;	
 	

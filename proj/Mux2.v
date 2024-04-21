@@ -1,5 +1,4 @@
 module Mux2 (ALUSrc, ReadData2, Extend32, ALU_B);
-
 	input ALUSrc;
 	input [31:0] ReadData2,Extend32;	
 	

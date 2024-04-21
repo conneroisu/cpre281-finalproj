@@ -1,5 +1,4 @@
 module DataMemory (clock, address, MemWrite, MemRead, WriteData, ReadData);
-
 	input clock;
 	input [6:0] address;
 	input MemWrite, MemRead;

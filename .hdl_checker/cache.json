@@ -20,6 +20,44 @@
   "design_units": [
    {
     "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MipsCPU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "MipsCPU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "alu_decoder",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
      "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MIPS.v",
      "__class__": "Path"
     },
@@ -64,25 +102,6 @@
     "type_": "entity",
     "name": {
      "name": "alu",
-     "case_sensitive": true,
-     "__class__": "VerilogIdentifier"
-    },
-    "locations": [
-     [
-      0,
-      6
-     ]
-    ],
-    "__class__": "VerilogDesignUnit"
-   },
-   {
-    "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
-     "__class__": "Path"
-    },
-    "type_": "entity",
-    "name": {
-     "name": "alu_decoder",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },

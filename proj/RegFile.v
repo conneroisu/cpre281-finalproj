@@ -1,5 +1,4 @@
 module RegFile(clock, RegWrite, ReadReg1, ReadReg2, WriteReg, WriteData, ReadData1, ReadData2);
-
 	input clock;
 	input RegWrite;
 	

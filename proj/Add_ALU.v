@@ -1,5 +1,4 @@
 module Add_ALU(PCout, ShiftOut, Add_ALUOut);
-
 	input [31:0] PCout;
 	input [31:0] ShiftOut;
 	

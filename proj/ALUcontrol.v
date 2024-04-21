@@ -1,5 +1,4 @@
 module ALUControl (ALUOp, FuncCode, ALUCtl);
-
 	input [1:0] ALUOp;
 	input [5:0] FuncCode;
 	output reg [3:0] ALUCtl;

@@ -1,5 +1,4 @@
 module Mux4 (PCout, Add_ALUOut, AndGateOut, PCin);
-
 	input [31:0] PCout, Add_ALUOut;
 	input AndGateOut;	
 	

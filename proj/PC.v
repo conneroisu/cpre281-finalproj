@@ -1,5 +1,4 @@
 module PC(clock, reset, PCin, PCout);
-
 	input clock, reset;
 	input [31:0] PCin;
 	
