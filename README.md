@@ -8,13 +8,28 @@ Name: **Conner Ohnesorge**
 
 Date: **4/10/2024**
 
+## Table of Contents
+
+## Proposal
+
+A MIPS processor that can execute a subset of the MIPS instruction set with additional features such as a clock divider, displaying the current instruction on the seven segment displays present on the FPGA board, and the ability to change the frequency of execution of the processor.
+
+More specifically, the processor will be able to execute the following instructions: add, addi, sub, subi, and, andi, or, ori, lw, sw, beq, j, and jr. 
+
+The frequency of execution for the processor will be variable and will be controlled by a clock divider that divides the 50MHz clock signal by a value set by the divider that will be used to divide the clock signal.
+
+The current instruction being executed will be displayed on the seven segment displays present on the FPGA board.
+
+The processor will be implemented in Verilog and tested using a test-bench.
+
 ## Introduction
 
-The project is a simple processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on EP4CE115F29C7 FPGA board.
+The project is a simple MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on EP4CE115F29C7 FPGA board.
 
-The variable speed of the processor is achieved through the use of a clock divider that divides the 50MHz clock signal by the value represented in the  from the FPGA board into a slower clock signal that is used to drive the processor.
+The variable speed of the processor is achieved through the use of a clock divider connected to a GPIO connected potentiometer that divides the 50MHz clock signal by the value represented in the from the FPGA board into a slower clock signal that is used to drive the processor.
 
 A clock divider is a circuit that allows for the dividing of a given clock signal by a constant value. Below is an an example of a clock divider that divides the frequency of the clock by 2.
+
 $$
 f_{\text {out }}=\frac{f_{\text {in }}}{N}
 $$
@@ -27,8 +42,7 @@ A basic single-cycle MIPS processor:
 
 ![[Pasted image 20240415102706.png]]
 
-
-The state machine has five states:
+The main processor state machine has five states:
 
 **Fetch**: In this state, the processor fetches the next instruction from memory.
 **Decode**: In this state, the processor decodes the instruction to determine what operation to perform.

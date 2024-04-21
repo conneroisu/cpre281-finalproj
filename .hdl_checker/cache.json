@@ -1,8 +1,6 @@
 {
  "builder": {
-  "_version": "<undefined>",
   "_logger": "hdl_checker.builders.fallback",
-  "_work_folder": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/.hdl_checker",
   "_builtin_libraries": [],
   "_added_libraries": [
    {
@@ -11,6 +9,8 @@
     "__class__": "Identifier"
    }
   ],
+  "_version": "<undefined>",
+  "_work_folder": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/.hdl_checker",
   "__class__": "Fallback"
  },
  "config_file": null,
@@ -20,12 +20,31 @@
   "design_units": [
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MIPS.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "ALU",
+     "name": "MIPS",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/register_file.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "register_file",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -33,6 +52,44 @@
      [
       1,
       7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "alu",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "alu_decoder",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
      ]
     ],
     "__class__": "VerilogDesignUnit"
