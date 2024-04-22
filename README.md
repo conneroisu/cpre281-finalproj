@@ -48,6 +48,6 @@ The main processor state machine has five states:
 **Decode**: In this state, the processor decodes the instruction to determine what operation to perform.
 **Execute**: In this state, the processor executes the instruction.
 **Memory**: In this state, the processor accesses memory to read or write data.
-**Writeback**: In this state, the processor writes the results of the instruction to a register.
+**Write-back**: In this state, the processor writes the results of the instruction to a register.
 
 

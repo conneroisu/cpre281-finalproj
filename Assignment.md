@@ -1,5 +1,3 @@
-
-  
 ============================
 
 The original announcement is below:
