@@ -1,6 +1,6 @@
 // file: ram.v
 // author: @conneroisu
-`timescale 1ns / 1ns
+// desc: Random access memory
 module ram (
     clk,
     we,

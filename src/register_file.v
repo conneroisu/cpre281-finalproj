@@ -1,7 +1,7 @@
-// file: REGISTER FILE.v
+// file: register_file.v
 // author: @conneroisu
-`timescale 1ns / 1ns
-module registerfile32 (
+// desc: Register file
+module register_file (
     input clk,
     input we,
     input reset,

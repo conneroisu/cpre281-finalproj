@@ -1,6 +1,6 @@
 // file: rom.v
 // author: @conneroisu
-`timescale 1ns / 1ns
+// desc: Read-only memory
 module rom (
     adr,
     dout

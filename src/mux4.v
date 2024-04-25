@@ -1,13 +1,13 @@
 // file: mux4.v
 // author: @conneroisu
-`timescale 1ns / 1ns
+// desc: 4-to-1 multiplexer
 module mux4 (
-    d0,
-    d1,
-    d2,
-    d3,
-    s,
-    y
+    d0,  // Data input 0
+    d1,  // Data input 1
+    d2,  // Data input 2
+    d3,  // Data input 3
+    s,   // Select input
+    y    // Data output
 );
   parameter n = 32;
   input [n-1:0] d0, d1, d2, d3;

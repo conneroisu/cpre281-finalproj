@@ -1,6 +1,6 @@
 // file: mux2.v
 // author: @conneroisu
-`timescale 1ns / 1ns
+// desc: 2-to-1 multiplexer
 module mux2 (
     d0,
     d1,

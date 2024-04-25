@@ -51,6 +51,7 @@ The main processor state machine has five states:
 **Write-back**: In this state, the processor writes the results of the instruction to a register.
 
 4 bit adder
+
 ![[Pasted image 20240423092137.png]]
 
 Supported Instructions:

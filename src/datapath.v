@@ -12,7 +12,7 @@
 
 `timescale 1ns / 1ns
 
-module Datapath (
+module data_path (
     input clk,
     input reset,
     input RegDst,
