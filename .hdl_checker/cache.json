@@ -1,69 +1,1231 @@
 {
  "builder": {
-  "_logger": "hdl_checker.builders.fallback",
-  "_builtin_libraries": [],
-  "_added_libraries": [
+  "_version": "2020.1",
+  "_modelsim_ini": {
+   "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/.hdl_checker/modelsim.ini",
+   "__class__": "Path"
+  },
+  "_logger": "hdl_checker.builders.msim",
+  "_work_folder": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/.hdl_checker",
+  "_builtin_libraries": [
    {
-    "name": "not_in_project",
-    "case_sensitive": true,
+    "name": "verilog",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaii_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "twentynm_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaiigz_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "modelsim_lib",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixiv_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixv_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixiv_pcie_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriavgz_pcie_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixv",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixv_pcie_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneiv_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "maxv",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "lpm_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixiv_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "altera_mf",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "maxii",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cyclonev_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriav_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaii_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixiv_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "vital2000",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriavgz_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaiigz_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "twentynm",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriavgz_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneiv_pcie_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "altera_lnsim",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "fiftyfivenm_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "fiftyfivenm",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneive",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixv_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cyclone10lp_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "twentynm_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "std",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "std_developerskit",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaiigz",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "twentynm_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriavgz_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneiv_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriav_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneiv_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaii_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaiigz_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaiigz_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cyclonev",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriavgz",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "ieee",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixiv",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaii_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneiv",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "altera",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixv_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cyclone10lp",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "twentynm_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneive_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaii_pcie_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cyclonev_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriav_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "altera_lnsim_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "maxii_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "altera_mf_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "sv_std",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "220model",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "altera_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaii",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "sgate_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cycloneiv_hssi",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "sgate",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "220model_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "lpm",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriaiigz_pcie_hip",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "maxv_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "twentynm_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "synopsys",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixv_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "cyclonev_pcie_hip_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "stratixiv_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriavgz_hssi_ver",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   },
+   {
+    "name": "arriav",
+    "case_sensitive": false,
     "__class__": "Identifier"
    }
   ],
-  "_version": "<undefined>",
-  "_work_folder": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/.hdl_checker",
-  "__class__": "Fallback"
- },
- "config_file": null,
- "database": {
-  "sources": [],
-  "inferred_libraries": [],
-  "design_units": [
+  "_added_libraries": [
    {
-    "owner": {
+    "name": "default_library",
+    "case_sensitive": false,
+    "__class__": "Identifier"
+   }
+  ],
+  "__class__": "MSim"
+ },
+ "config_file": [
+  {
+   "name": "/tmp/hdl_checker_project_pid292522.json",
+   "__class__": "Path"
+  },
+  1713827185.5676222,
+  "generated"
+ ],
+ "database": {
+  "sources": [
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/AndGate.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741642.7434008,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ALUcontrol.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713744157.2386255,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ALU.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713827175.7107234,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux2.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741656.3282533,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MainControl.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741648.6563365,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux2.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741656.3282533,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALUcontrol.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713744157.2386255,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/program_counter.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.049,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/MainControl.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741648.6563365,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ShiftLeft2.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741667.4601324,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/main_decoder.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.042,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/barrel_shifter.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.043999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/rom.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.049999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux4.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741660.3802092,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
      "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/DataMemory.v",
      "__class__": "Path"
     },
-    "type_": "entity",
-    "name": {
-     "name": "DataMemory",
-     "case_sensitive": true,
-     "__class__": "VerilogIdentifier"
+    "mtime": 1713741644.752379,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
     },
-    "locations": [
-     [
-      0,
-      6
-     ]
-    ],
-    "__class__": "VerilogDesignUnit"
+    "dependencies": [],
+    "diags": []
    },
    {
-    "owner": {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/sign_extender.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.046,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/PC.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741663.4841754,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/RegFile.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741665.5281532,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/MIPS.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.046999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/RegFile.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741665.5281532,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux4.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741660.3802092,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Add_ALU.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741640.6604233,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux3.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741658.2622323,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/SignExtend.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741697.0148113,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux3.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741658.2622323,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
      "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MipsCPU.v",
      "__class__": "Path"
     },
-    "type_": "entity",
-    "name": {
-     "name": "MipsCPU",
-     "case_sensitive": true,
-     "__class__": "VerilogIdentifier"
+    "mtime": 1713741652.2312977,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
     },
-    "locations": [
-     [
-      0,
-      6
-     ]
-    ],
-    "__class__": "VerilogDesignUnit"
+    "dependencies": [],
+    "diags": []
    },
    {
-    "owner": {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/main_decoder.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.042,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/testbench.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.048,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux1.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741654.0062785,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.042999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/barrel_shifter.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.043999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/program_counter.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.049,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/sign_extender.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.046,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/rom.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.049999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/DataMemory.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741644.752379,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/register_file.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713196647.770999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Add_ALU.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741640.6604233,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MIPS.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.046999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/tmp/tmpa4lx_u8l.v",
+     "__class__": "TemporaryPath"
+    },
+    "mtime": 1713827150.550982,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/AndGate.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741642.7434008,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/register_file.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713196647.770999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/frequency_divider.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713196861.450999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/InstMem.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741646.7513573,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/InstMem.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741646.7513573,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.042999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/testbench.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.048,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/frequency_divider.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713196861.450999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/SignExtend.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741697.0148113,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux1.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741654.0062785,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ShiftLeft2.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741667.4601324,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/data_memory.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.043999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/PC.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741663.4841754,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/MipsCPU.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713741652.2312977,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
      "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713827175.7107234,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   },
+   {
+    "path": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/data_memory.v",
+     "__class__": "Path"
+    },
+    "mtime": 1713194655.043999,
+    "flags": {
+     "source_specific": [],
+     "single": [],
+     "dependencies": []
+    },
+    "dependencies": [],
+    "diags": []
+   }
+  ],
+  "inferred_libraries": [
+   {
+    "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ALUcontrol.v",
+    "__class__": "Path"
+   },
+   {
+    "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
+    "__class__": "Path"
+   },
+   {
+    "name": "/tmp/tmp6x_kep9t.v",
+    "__class__": "Path"
+   },
+   {
+    "name": "/tmp/tmpa4lx_u8l.v",
+    "__class__": "Path"
+   }
+  ],
+  "design_units": [
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/sign_extender.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "ALU",
+     "name": "sign_extender",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -77,7 +1239,7 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/PC.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/PC.v",
      "__class__": "Path"
     },
     "type_": "entity",
@@ -96,12 +1258,50 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ShiftLeft2.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/sign_extender.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "ShiftLeft2",
+     "name": "sign_extender",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/program_counter.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "program_counter",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/AndGate.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "AndGate",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -134,12 +1334,12 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MIPS.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MainControl.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "MIPS",
+     "name": "MainControl",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -153,7 +1353,121 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux1.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux3.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux3",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/data_memory.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "data_memory",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ALU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "alu_decoder",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MipsCPU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "MipsCPU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/PC.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "PC",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux1.v",
      "__class__": "Path"
     },
     "type_": "entity",
@@ -172,12 +1486,278 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/alu_decoder.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/barrel_shifter.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "alu_decoder",
+     "name": "barrel_shifter",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/MainControl.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "MainControl",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux2.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux2",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/MipsCPU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "MipsCPU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux4.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux4",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux2.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux2",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/main_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "main_decoder",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/program_counter.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "program_counter",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/testbench.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "testbench",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      2,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/MIPS.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "MIPS",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ShiftLeft2.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ShiftLeft2",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/DataMemory.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "DataMemory",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Add_ALU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Add_ALU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/frequency_divider.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "frequency_divider",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ALUcontrol.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ALUControl",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -210,12 +1790,12 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MainControl.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux3.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "MainControl",
+     "name": "Mux3",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -229,12 +1809,50 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Add_ALU.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/frequency_divider.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "Add_ALU",
+     "name": "frequency_divider",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/testbench.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "testbench",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      2,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/main_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "main_decoder",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -242,6 +1860,120 @@
      [
       0,
       6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/Mux4.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux4",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/barrel_shifter.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "barrel_shifter",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/ALU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ALU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ShiftLeft2.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ShiftLeft2",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/alu_decoder.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "alu_decoder",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/tmp/tmpa4lx_u8l.v",
+     "__class__": "TemporaryPath"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ALU",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
      ]
     ],
     "__class__": "VerilogDesignUnit"
@@ -267,38 +1999,38 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux3.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/MIPS.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "Mux3",
+     "name": "MIPS",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
     "locations": [
      [
-      0,
-      6
+      1,
+      7
      ]
     ],
     "__class__": "VerilogDesignUnit"
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALUcontrol.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/data_memory.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "ALUControl",
+     "name": "data_memory",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
     "locations": [
      [
-      0,
-      6
+      1,
+      7
      ]
     ],
     "__class__": "VerilogDesignUnit"
@@ -311,6 +2043,44 @@
     "type_": "entity",
     "name": {
      "name": "InstMem",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/InstMem.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "InstMem",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/DataMemory.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "DataMemory",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -343,12 +2113,31 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux4.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/register_file.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "Mux4",
+     "name": "register_file",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      1,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux1.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Mux1",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },
@@ -362,12 +2151,107 @@
    },
    {
     "owner": {
-     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Mux2.v",
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/RegFile.v",
      "__class__": "Path"
     },
     "type_": "entity",
     "name": {
-     "name": "Mux2",
+     "name": "RegFile",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/rom.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "rom",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      5,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/ALUcontrol.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "ALUControl",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/rom.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "rom",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      5,
+      7
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/src/SignExtend.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "SignExtend",
+     "case_sensitive": true,
+     "__class__": "VerilogIdentifier"
+    },
+    "locations": [
+     [
+      0,
+      6
+     ]
+    ],
+    "__class__": "VerilogDesignUnit"
+   },
+   {
+    "owner": {
+     "name": "/run/media/conner/source/000Vaults/SecondBrain/academia/CPRE281/Lab/FinalProj/proj/Add_ALU.v",
+     "__class__": "Path"
+    },
+    "type_": "entity",
+    "name": {
+     "name": "Add_ALU",
      "case_sensitive": true,
      "__class__": "VerilogIdentifier"
     },

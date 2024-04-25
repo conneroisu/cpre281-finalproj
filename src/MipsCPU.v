@@ -1,3 +1,5 @@
+// file: MipsCPU.v
+// author: @conneroisu
 module MipsCPU (
     clock,
     reset,

@@ -50,4 +50,13 @@ The main processor state machine has five states:
 **Memory**: In this state, the processor accesses memory to read or write data.
 **Write-back**: In this state, the processor writes the results of the instruction to a register.
 
+4 bit adder
+![[Pasted image 20240423092137.png]]
 
+Supported Instructions:
+
+ADD ADDU ADDI ADDIU SUB SUBU
+AND ANDI OR ORI XOR XORI NOR
+SLT SLTI SLTU SLTIU SLL SRL
+SRA SLLV SRLV SRAV LW SW BEQ
+BNE J LUI

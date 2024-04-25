@@ -1,4 +1,4 @@
-# Delete old compilation results
+# Remove Old Working Library
 if { [file exists "work"] } {
     vdel -all
 }
@@ -9,19 +9,19 @@ vlib work
 
 # Compile all the Verilog sources in current folder into working library
 
-vlog  proj/*.v
+vlog proj/*.v
 
-# Open testbench module for simulation
-# The newest Modelsim versions are sometimes optimizing too greedily and you won't necessarily see all the signals. In those cases, just disable optimizations:
+# Open Test Bench Module for Simulation
 
 vsim -novopt work.testbench
 
 # Add all testbench signals to waveform diagram
 
 add wave /testbench/*
-
 onbreak resume
-# Run simulation
+
+# Run Simulation
+
 run -all
 wave zoom full
 
