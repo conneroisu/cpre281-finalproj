@@ -1,6 +1,6 @@
 // file: flopr_param.v
 // author: @conneroisu
-`timescale 1ns / 1ns
+// desc: A parameterized flop with a reset
 module flopr_param (
     clk,
     rst,
