@@ -1,13 +1,10 @@
-// file: seven_seg_decoder.v
-// author: @conneroisu
-// desc: 7-segment decoder
 module seven_seg_decoder (
     input  wire [3:0] x,   // 4-bit input representing the number (X3, X2, X1, X0)
     output reg  [6:0] seg  // 7-bit output for the segments (A-G)
 );
   always @(x) begin
     case (x)
-      4'b0000: seg = 7'b0000001;  // 0
+      4'b0000: seg = 7'b1111110;  // Nothing
       4'b0001: seg = 7'b1001111;  // 1
       4'b0010: seg = 7'b0010010;  // 2
       4'b0011: seg = 7'b0000110;  // 3

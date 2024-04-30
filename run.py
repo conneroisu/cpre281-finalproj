@@ -1,4 +1,3 @@
-from typing import Dict, List, Tuple
 
 
 def register_to_bin(reg: str) -> str:
@@ -40,7 +39,7 @@ def register_to_bin(reg: str) -> str:
     return registers.get(reg, "00000")
 
 
-def instruction_to_binary(instruction: str) -> str:
+def instruction_to_binary(instruction: str) -> str:  # type: ignore[return]
     """Converts an assembly instruction to its binary equivalent."""
     parts = instruction.split()
     op = parts[0]
@@ -53,6 +52,7 @@ def instruction_to_binary(instruction: str) -> str:
 
     if op in ["add", "sub", "and", "or"]:
         opcode = "000000"
+        immediate = "00000000000"
         rd = register_to_bin(parts[1])
         rs = register_to_bin(parts[2])
         rt = register_to_bin(parts[3])
@@ -69,6 +69,8 @@ def instruction_to_binary(instruction: str) -> str:
         rt = register_to_bin(parts[1])
         rs = register_to_bin(parts[2])
         immediate = f"{int(parts[3]):016b}"
+    else:
+        raise ValueError(f"Invalid instruction: {instruction}")
 
     if op in ["add", "sub", "and", "or"]:
         return f"{opcode}{rs}{rt}{rd}{shamt}{funct}"
@@ -80,15 +82,16 @@ def binary_to_little_endian(binary: str) -> str:
     """Converts a binary string to little endian hex format."""
     hex_value = f"{int(binary, 2):08x}"
     little_endian = "".join(
-        reversed([hex_value[i : i + 2] for i in range(0, len(hex_value), 2)])
+        reversed([hex_value[i: i + 2] for i in range(0, len(hex_value), 2)])
     )
     return little_endian
 
 
-def convert_instructions(instructions: List[str]) -> List[str]:
+def convert_instructions(instructions: list[str]) -> list[str]:
     """Converts a list of MIPS assembly instructions to little endian hex."""
     binaries = [instruction_to_binary(instr) for instr in instructions]
-    little_endian_hexes = [binary_to_little_endian(binary) for binary in binaries]
+    little_endian_hexes = [binary_to_little_endian(
+        binary) for binary in binaries]
     return little_endian_hexes
 
 
