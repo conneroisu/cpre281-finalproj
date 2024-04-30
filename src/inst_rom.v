@@ -6,7 +6,7 @@ module inst_rom (
     output [31:0] data_out
 );
   parameter ADDR_WIDTH = 8;
-  parameter INIT_PROGRAM = "test/inst_rom.memh";
+  parameter INIT_PROGRAM = "inst_rom.memh";
   reg [31:0] rom [0:2**ADDR_WIDTH-1];
   reg [31:0] out;
   assign data_out = {out[7:0], out[15:8], out[23:16], out[31:24]};  //flip bytes

@@ -92,22 +92,22 @@ https://fpgasoftware.intel.com/eula.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"INIT_PROGRAM0"
-		"c:/altera/11.1sp1/141/hello_world.data_ram0.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(parameter
 		"INIT_PROGRAM1"
-		"c:/altera/11.1sp1/141/hello_world.data_ram1.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(parameter
 		"INIT_PROGRAM2"
-		"c:/altera/11.1sp1/141/hello_world.data_ram2.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(parameter
 		"INIT_PROGRAM3"
-		"c:/altera/11.1sp1/141/hello_world.data_ram3.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(drawing

@@ -13,10 +13,10 @@ module async_memory (
 );
   parameter MEM_ADDR = 16'h1000;
   parameter DO_INIT = 0;
-  parameter INIT_PROGRAM0 = "c:/altera/11.1sp1/141/hello_world.data_ram0.memh";
-  parameter INIT_PROGRAM1 = "c:/altera/11.1sp1/141/hello_world.data_ram1.memh";
-  parameter INIT_PROGRAM2 = "c:/altera/11.1sp1/141/hello_world.data_ram2.memh";
-  parameter INIT_PROGRAM3 = "c:/altera/11.1sp1/141/hello_world.data_ram3.memh";
+  parameter INIT_PROGRAM0 = "inst_rom.memh";
+  parameter INIT_PROGRAM1 = "inst_rom.memh";
+  parameter INIT_PROGRAM2 = "inst_rom.memh";
+  parameter INIT_PROGRAM3 = "inst_rom.memh";
   reg [256*8:1] file_init0, file_init1, file_init2, file_init3;
 
   localparam NUM_WORDS = 1024;
@@ -40,8 +40,7 @@ module async_memory (
   reg [31:0] rd;
   assign data_out = rd;
 
-  //read data all the time
-
+  // Read data all the time
   always @(*) begin
     rd[31:24] <= mem3[addr_in[2+NUM_WORDS_LOG-1:2]];
     rd[23:16] <= mem2[addr_in[2+NUM_WORDS_LOG-1:2]];
@@ -68,7 +67,7 @@ module async_memory (
     endcase
   end
 
-  //we need to make sure the write data from the processor ends up in the correct byte location
+  // Make sure the write data from the processor ends up in the correct byte location
   reg [31:0] write_data;
   always @(*) begin
     case (size_in)
@@ -79,7 +78,7 @@ module async_memory (
   end
 
 
-  //on posedge of clock, write data only if wr_en is high
+  // On posedge of clock, write data only if wr_en is high
   always @(posedge clock) begin
     if (reset) begin
     end else begin
