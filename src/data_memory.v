@@ -17,10 +17,10 @@ module data_memory (
     output            serial_wren_out,
     output reg [31:0] readdata_out
 );
-  parameter INIT_PROGRAM0 = "test/data_ram0.memh";
-  parameter INIT_PROGRAM1 = "test/data_ram1.memh";
-  parameter INIT_PROGRAM2 = "test/data_ram2.memh";
-  parameter INIT_PROGRAM3 = "test/data_ram3.memh";
+  parameter INIT_PROGRAM0 = "inst_rom.memh";
+  parameter INIT_PROGRAM1 = "inst_rom.memh";
+  parameter INIT_PROGRAM2 = "inst_rom.memh";
+  parameter INIT_PROGRAM3 = "inst_rom.memh";
   wire [31:0] data_readdata_serial;
   wire [31:0] data_readdata_data;
   wire [31:0] data_readdata_stack;

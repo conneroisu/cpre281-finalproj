@@ -124,22 +124,22 @@ https://fpgasoftware.intel.com/eula.
 	)
 	(parameter
 		"INIT_PROGRAM0"
-		"test/data_ram0.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(parameter
 		"INIT_PROGRAM1"
-		"test/data_ram1.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(parameter
 		"INIT_PROGRAM2"
-		"test/data_ram2.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(parameter
 		"INIT_PROGRAM3"
-		"test/data_ram3.memh"
+		"inst_rom.memh"
 		""
 		(type "PARAMETER_STRING")	)
 	(drawing
