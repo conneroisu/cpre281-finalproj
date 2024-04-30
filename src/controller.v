@@ -1,3 +1,24 @@
+/*
+  Func_in O_out                 "Operation"
+  1000 0X (A + B)               ADD
+  1000 1X (A - B)               SUB
+  1001 00 (A & B)               AND
+  1001 01 (A | B)               OR
+  1001 10 (A ^ B)               XOR
+  1001 11 ~(A | B)              NOR
+
+  101 XX0 signed(A) < signed(B) Set-Less-Than signed
+  101 XX1 A < B                 Set-Less-Than unsigned
+
+  111 000 A                     BLTZ
+  111 001 A                     BGEZ
+  111 010 A                     J/AL
+  111 011 A                     JR/AL
+  111 100 A                     BEQ
+  111 101 A                     BNE
+  111 110 A                     BLEZ
+  111 111 A                     BGTZ
+*/
 module controller (
     input      [5:0] opcode,
     input      [5:0] ALU_control,

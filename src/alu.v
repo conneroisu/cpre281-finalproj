@@ -1,13 +1,5 @@
-module alu (
-    input [5:0] Func_in,
-    input [31:0] A_in,
-    input [31:0] B_in,
-    output reg [31:0] O_out,
-    output reg Branch_out,
-    output reg Jump_out
-);
 
-  /*
+/*
   Func_in O_out                 "Operation"
   1000 0X (A + B)               ADD
   1000 1X (A - B)               SUB
@@ -27,20 +19,23 @@ module alu (
   111 101 A                     BNE
   111 110 A                     BLEZ
   111 111 A                     BGTZ
-  */
-
-
+*/
+module alu (
+    input [5:0] Func_in,
+    input [31:0] A_in,
+    input [31:0] B_in,
+    output reg [31:0] O_out,
+    output reg Branch_out,
+    output reg Jump_out
+);
   // ALU Outputs
   reg [31:0] AdderInputB;
   reg AdderCarryIn;
   reg [31:0] AdderOut;
-
   // AND OR XOR NOR Operations
   reg [31:0] LogicOut;
-
   // SLT Operations
   reg [31:0] SltOut;
-
   // Branches
   reg [31:0] BranchOut;
   reg Sign;
@@ -51,7 +46,6 @@ module alu (
   reg GEZ;
   reg Eq;
   reg DoBranch, DoJump;
-
   always @(*) begin
     // Add and Sub Operations
     if (Func_in[1]) begin
@@ -59,10 +53,7 @@ module alu (
     end else begin
       AdderInputB = B_in;
     end
-
     AdderOut = A_in + AdderInputB + Func_in[1];
-
-
     // Logic Out
     case (Func_in[1:0])
       2'b00: LogicOut = A_in & B_in;
@@ -70,18 +61,14 @@ module alu (
       2'b10: LogicOut = A_in ^ B_in;
       2'b11: LogicOut = ~(A_in | B_in);
     endcase
-
-
     // Set Less Than Operations
     if (Func_in[0]) begin
       SltOut = A_in < B_in;
     end else begin
       SltOut = $signed(A_in) < $signed(B_in);
     end
-
     // Branches and Jump Operations
     BranchOut = A_in;
-
     Sign = A_in[31];
     Zero = A_in[31:0] == 32'b0;
     LTZ = Sign;
@@ -89,7 +76,6 @@ module alu (
     GTZ = ~Sign && ~Zero;
     GEZ = ~Sign;
     Eq = A_in == B_in;
-
     DoBranch = 1'b0;
     DoJump = 1'b0;
     case (Func_in[2:0])
@@ -111,8 +97,6 @@ module alu (
       DoBranch = GTZ;
       default: DoBranch = 1'b0;
     endcase
-
-
     // Calculate Final ALU Result
     Branch_out = 1'b0;
     Jump_out   = 1'b0;
