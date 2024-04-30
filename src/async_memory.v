@@ -13,16 +13,16 @@ module async_memory (
 );
   parameter MEM_ADDR = 16'h1000;
   parameter DO_INIT = 0;
-  parameter INIT_PROGRAM0 = "inst_rom.memh";
-  parameter INIT_PROGRAM1 = "inst_rom.memh";
-  parameter INIT_PROGRAM2 = "inst_rom.memh";
-  parameter INIT_PROGRAM3 = "inst_rom.memh";
+  parameter INIT_PROGRAM0 = "ram.memh";
+  parameter INIT_PROGRAM1 = "ram.memh";
+  parameter INIT_PROGRAM2 = "ram.memh";
+  parameter INIT_PROGRAM3 = "ram.memh";
   reg [256*8:1] file_init0, file_init1, file_init2, file_init3;
 
   localparam NUM_WORDS = 1024;
   localparam NUM_WORDS_LOG = 10;
 
-  //memory for 4KB of data
+  // Memory for 4KB of data
   reg [7:0] mem3[0:NUM_WORDS-1];  //31:24
   reg [7:0] mem2[0:NUM_WORDS-1];  //23:16
   reg [7:0] mem1[0:NUM_WORDS-1];  //15:8
@@ -48,15 +48,7 @@ module async_memory (
     rd[7:0]   <= mem0[addr_in[2+NUM_WORDS_LOG-1:2]];
   end
 
-  //alternate version uses negative edge of clock for memory accesses
-  always @(negedge clock) begin
-    rd[31:24] <= mem3[addr_in[2+NUM_WORDS_LOG-1:2]];
-    rd[23:16] <= mem2[addr_in[2+NUM_WORDS_LOG-1:2]];
-    rd[15:8]  <= mem1[addr_in[2+NUM_WORDS_LOG-1:2]];
-    rd[7:0]   <= mem0[addr_in[2+NUM_WORDS_LOG-1:2]];
-  end
-
-  //decode address and size into byte-enables
+  // Decode address and size into byte-enables
   reg [3:0] rowWE;
   always @(*) begin
     case (size_in)
