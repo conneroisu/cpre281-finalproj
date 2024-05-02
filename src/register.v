@@ -1,25 +1,25 @@
 module register (
-  input clock,
-  input reg_write,
-  input [4:0] read_register_1,
-  input [4:0] read_register_2,
-  input [4:0] write_register,
-  input [31:0] write_data,
-  output [31:0] read_data_1,
-  output [31:0] read_data_2
+    input clock,
+    input reg_write,
+    input [4:0] read_register_1,
+    input [4:0] read_register_2,
+    input [4:0] write_register,
+    input [31:0] write_data,
+    output [31:0] read_data_1,
+    output [31:0] read_data_2
 );
-  reg [31:0] registers [31:0];
+  reg [31:0] registers[31:0];
   initial begin
-    registers[0] <= 0;
-    registers[1] <= 0;
-    registers[2] <= 0;
-    registers[3] <= 0;
-    registers[4] <= 0;
-    registers[5] <= 0;
-    registers[6] <= 0;
-    registers[7] <= 0;
-    registers[8] <= 0;
-    registers[9] <= 0;
+    registers[0]  <= 0;
+    registers[1]  <= 0;
+    registers[2]  <= 0;
+    registers[3]  <= 0;
+    registers[4]  <= 0;
+    registers[5]  <= 0;
+    registers[6]  <= 0;
+    registers[7]  <= 0;
+    registers[8]  <= 0;
+    registers[9]  <= 0;
     registers[10] <= 0;
     registers[11] <= 0;
     registers[12] <= 0;

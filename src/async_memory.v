@@ -1,5 +1,3 @@
-`timescale 1ns / 1ps
-
 module async_memory (
     input clock,
     input reset,
