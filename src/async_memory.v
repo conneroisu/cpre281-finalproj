@@ -83,4 +83,3 @@ module async_memory (
 
 
 endmodule
-
