@@ -1,12 +1,16 @@
 m255
 K4
 z2
-Z0 !s12c _opt
-Z1 !s99 nomlopt
+!s12c _opt1
+Z0 !s99 nomlopt
+Z1 !s12c _opt
 R0
 R1
 R0
 R1
+R0
+R1
+R0
 !s11f vlog 2023.2 2023.04, Apr 11 2023
 13
 !s112 1.1
@@ -16,254 +20,267 @@ R1
 cModel Technology
 Z2 dC:/Users/connero/Source/Repos/cpre281-finalproj
 T_opt
-!s110 1714742568
-VReHid?I6D3?c_WSffTc>k2
+!s110 1714738009
+Vf:1^Hi9Vg039_L^g5nRYC1
 04 6 4 work top_tb fast 0
-=1-b07b252d0549-6634e528-329-2044
-R1
-!s12b OEM100
-!s124 OEM100
-o-quiet -auto_acc_if_foreign -work work +acc
-Z3 tCvgOpt 0
+=1-b07b252d0549-6634d358-3d9-39b8
+R0
+Z3 !s12b OEM100
+Z4 !s124 OEM100
+Z5 o-quiet -auto_acc_if_foreign -work work +acc
+Z6 tCvgOpt 0
 n@_opt
-OL;O;2023.2;77
-vALU
-Z4 2ALU.v|ALU_control.v|Control.v|Data_memory.v|Instruction_memory.v|Next_pc.v|Program_counter.v|Register.v|top.v|top_tb.v
-Z5 !s110 1714742567
-!i10b 1
-!s100 ef`4mDUEZ8>lbo]mVYPgH1
-If2`FEaPdC2XA0SVnRnPVQ0
+Z7 OL;O;2023.2;77
 R2
-Z6 w1714741696
+T_opt1
+!s110 1714751389
+V0>kQYfMdRl^eS9a7884^e2
+04 7 4 work mips_tb fast 0
+=1-b07b252d0549-6635079d-177-4c98
+R0
+R3
+R4
+R5
+R6
+n@_opt1
+R7
+vALU
+Z8 2ALU.v|ALU_control.v|Control.v|Data_memory.v|Instruction_memory.v|Next_pc.v|Program_counter.v|Register.v|mips.v|mips_tb.v
+Z9 !s110 1714751381
+!i10b 1
+!s100 SC@@e2X0d3Fgg[lBoa6R12
+IR>3BZ]4ld:minZMA[Ac2<1
+R2
+w1714744666
 8ALU.v
 FALU.v
 !i122 0
-L0 2 45
-Z7 VDg1SIo80bB@j0V0VzS_@n1
-Z8 OL;L;2023.2;77
+L0 2 44
+Z10 VDg1SIo80bB@j0V0VzS_@n1
+Z11 OL;L;2023.2;77
 r1
 !s85 0
 31
-Z9 !s108 1714742567.000000
-Z10 !s107 top_tb.v|top.v|Register.v|Program_counter.v|Next_pc.v|Instruction_memory.v|Data_memory.v|Control.v|ALU_control.v|ALU.v|
-Z11 !s90 -reportprogress|300|ALU.v|ALU_control.v|Control.v|Data_memory.v|Instruction_memory.v|Next_pc.v|Program_counter.v|Register.v|top.v|top_tb.v|
+Z12 !s108 1714751381.000000
+Z13 !s107 mips_tb.v|mips.v|Register.v|Program_counter.v|Next_pc.v|Instruction_memory.v|Data_memory.v|Control.v|ALU_control.v|ALU.v|
+Z14 !s90 -reportprogress|300|ALU.v|ALU_control.v|Control.v|Data_memory.v|Instruction_memory.v|Next_pc.v|Program_counter.v|Register.v|mips.v|mips_tb.v|
 !i113 0
-Z12 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R3
+Z15 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R6
 n@a@l@u
 vALU_control
-R4
-R5
+R8
+R9
 !i10b 1
 !s100 f09dDzXPiU44dUMX_hY6<2
 Ik_kSi8jGR<?L6>a2cc`D]0
 R2
-Z13 w1714742515
+w1714742515
 8ALU_control.v
 FALU_control.v
 !i122 0
 L0 2 41
-R7
-R8
+R10
+R11
 r1
 !s85 0
 31
-R9
-R10
-R11
-!i113 0
 R12
-R3
+R13
+R14
+!i113 0
+R15
+R6
 n@a@l@u_control
 vControl
-R4
-R5
+R8
+R9
 !i10b 1
 !s100 d`fIKdb?B50UEEf[RKiDW3
 ILjf;L_NlDm?l?3Yh1O?6f2
 R2
-w1714742565
+w1714750074
 8Control.v
 FControl.v
 !i122 0
 L0 2 192
-R7
-R8
+R10
+R11
 r1
 !s85 0
 31
-R9
-R10
-R11
-!i113 0
 R12
-R3
+R13
+R14
+!i113 0
+R15
+R6
 n@control
 vData_memory
-R4
-R5
+R8
+R9
 !i10b 1
 !s100 4JlQmB0G=7[bG`LVK6Rlc3
 IQWeZ`ZCR<PdecF=b;B4Q81
 R2
-R6
+Z16 w1714751325
 8Data_memory.v
 FData_memory.v
 !i122 0
 L0 3 35
-R7
-R8
+R10
+R11
 r1
 !s85 0
 31
-R9
-R10
-R11
-!i113 0
 R12
-R3
+R13
+R14
+!i113 0
+R15
+R6
 n@data_memory
 vInstruction_memory
-R4
-R5
-!i10b 1
-!s100 ?i4JoZe]GGX0z<22:Rh=22
-I?jo^amZ^DDnC8zBCoznYg3
-R2
-R6
-Z14 8Instruction_memory.v
-Z15 FInstruction_memory.v
-!i122 0
-L0 3 32
-R7
 R8
+R9
+!i10b 1
+!s100 ^?5c4m93J`FckgJkdoYQi0
+Ia<em?GMAjK_175dJPj5ff0
+R2
+R16
+Z17 8Instruction_memory.v
+Z18 FInstruction_memory.v
+!i122 0
+L0 2 26
+R10
+R11
 r1
 !s85 0
 31
+R12
+R13
+R14
+!i113 0
+R15
+R6
+n@instruction_memory
+vmips
+R8
 R9
+!i10b 1
+!s100 n>8l3Nk;GTOWMI=Bz7f210
+IL`_?=U@zHfY2i]P9:LQNH0
+R2
+R16
+8mips.v
+Fmips.v
+!i122 0
+L0 2 92
 R10
 R11
-!i113 0
+r1
+!s85 0
+31
 R12
-R3
-n@instruction_memory
+R13
+R14
+!i113 0
+R15
+R6
+vmips_tb
+R8
+R9
+!i10b 1
+!s100 865bW:A@3;C2fNi@86PJL0
+ILEBECVR=UN=068XZU2kG80
+R2
+R16
+8mips_tb.v
+Fmips_tb.v
+!i122 0
+L0 3 104
+R10
+R11
+r1
+!s85 0
+31
+R12
+R13
+R14
+!i113 0
+R15
+R6
 vNext_pc
-R4
-R5
+R8
+R9
 !i10b 1
 !s100 J>Ck6Bn?5:h5U<nEMEog>2
 ISi4_<VoOcSI]Z]RNMf]D51
 R2
-w1714741913
+R16
 8Next_pc.v
 FNext_pc.v
-R14
-R15
+R17
+R18
 !i122 0
 L0 1 56
-R7
-R8
+R10
+R11
 r1
 !s85 0
 31
-R9
-R10
-R11
-!i113 0
 R12
-R3
+R13
+R14
+!i113 0
+R15
+R6
 n@next_pc
 vProgram_counter
-R4
-R5
+R8
+R9
 !i10b 1
 !s100 EIzFUNo74Te_4CY6E2nM62
 IiQ=41;>FP<IJlo4>Ii8Yn3
 R2
-R6
+Z19 w1714741696
 8Program_counter.v
 FProgram_counter.v
 !i122 0
 L0 2 12
-R7
-R8
+R10
+R11
 r1
 !s85 0
 31
-R9
-R10
-R11
-!i113 0
 R12
-R3
+R13
+R14
+!i113 0
+R15
+R6
 n@program_counter
 vRegister
-R4
-R5
+R8
+R9
 !i10b 1
 !s100 e3JJ?5<2ic`VD@39CFz8c2
 I=7HzQV3<f9DIiG@N`YYMk1
 R2
-R6
+R19
 8Register.v
 FRegister.v
 !i122 0
 L0 2 30
-R7
-R8
+R10
+R11
 r1
 !s85 0
 31
-R9
-R10
-R11
-!i113 0
 R12
-R3
-n@register
-vtop
-R4
-R5
-!i10b 1
-!s100 ]8[XGJfl`69FOm1R0nK`i3
-Iez=74I8AjPmX=73IZaCQ22
-R2
 R13
-8top.v
-Ftop.v
-!i122 0
-L0 2 91
-R7
-R8
-r1
-!s85 0
-31
-R9
-R10
-R11
+R14
 !i113 0
-R12
-R3
-vtop_tb
-R4
-R5
-!i10b 1
-!s100 T^b:VZ@YQn3G>5HA[YSeK0
-IG9:o^N[WzKZkP0F]LT1ST3
-R2
+R15
 R6
-8top_tb.v
-Ftop_tb.v
-!i122 0
-L0 3 102
-R7
-R8
-r1
-!s85 0
-31
-R9
-R10
-R11
-!i113 0
-R12
-R3
+n@register
