@@ -31,6 +31,7 @@ module ALU_control (
             seg_second = 7'b0111110;  // U
             seg_third  = 7'b1101101;  // B
             seg_fourth = 7'b1111111;  // blank
+            seg_fifth  = 7'b1111111;  // blank
           end
           6'b100100: begin  // and
             ALUcontrol = 4'b0000;
@@ -39,6 +40,7 @@ module ALU_control (
             seg_second = 7'b0111110;  // N
             seg_third  = 7'b1011110;  // D
             seg_fourth = 7'b1111111;  // blank
+            seg_fifth  = 7'b1111111;  // blank
           end
           6'b100101: begin  // or
             ALUcontrol = 4'b0001;
@@ -47,6 +49,7 @@ module ALU_control (
             seg_second = 7'b0111110;  // R
             seg_third  = 7'b1111111;  // blank
             seg_fourth = 7'b1111111;  // blank
+            seg_fifth  = 7'b1111111;  // blank
           end
           6'b101010: begin  // slt
             ALUcontrol = 4'b0111;
@@ -55,8 +58,16 @@ module ALU_control (
             seg_second = 7'b1101101;  // L
             seg_third  = 7'b1101111;  // T
             seg_fourth = 7'b1111111;  // blank
+            seg_fifth  = 7'b1111111;  // blank
           end
-          default: ;
+          default: begin
+            // set 1: blank 2: blank 3: blank 4: blank 5: blank
+            seg_first  = seg_first;  // blank
+            seg_second = seg_second;  // blank
+            seg_third  = seg_third;  // blank
+            seg_fourth = seg_fourth;  // blank
+            seg_fifth  = seg_fifth;  // blank
+          end
         endcase
       end
       2'b11:   ALUcontrol = 4'b0000;
