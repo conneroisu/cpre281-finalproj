@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-
 module top (
     input clk,  // clock signal for PC and RD
     output [6:0] seg_first,
@@ -8,38 +7,28 @@ module top (
     output [6:0] seg_fourth,
     output [6:0] seg_fifth
 );
-
   wire [31:0] pc_in, pc_out;
-
   wire [ 5:0] im_ctr;
   wire [ 5:0] im_funcode;
   wire [31:0] im_instruction;
-
   wire [31:0] r_wbdata,  // dm_out
   r_read1, r_read2;
-
   wire c_RegDst, c_Jump, c_Branch, c_Bne, c_MemRead, c_MemtoReg, c_MemWrite, c_ALUSrc, c_RegWrite;
   wire [1:0] c_ALUOp;
-
   wire [3:0] c_ALUcontrol;
-
   wire c_zero;
   wire [31:0] alu_result;
-
   Program_counter u_Program_counter (
       .clk (clk),
       .next(pc_in),
       .out (pc_out)
   );
-
   Instruction_memory u_Instruction_memory (
       .addr       (pc_out),
       .ctr        (im_ctr),
       .funcode    (im_funcode),
       .instruction(im_instruction)
   );
-
-
   Register u_Register (
       .clk        (clk),
       .instruction(im_instruction),
@@ -49,8 +38,6 @@ module top (
       .ReadData1  (r_read1),
       .ReadData2  (r_read2)
   );
-
-
   ALU u_ALU (
       .data1      (r_read1),
       .read2      (r_read2),
@@ -60,14 +47,11 @@ module top (
       .zero       (c_zero),
       .ALUresult  (alu_result)
   );
-
-
   ALU_control u_ALU_control (
       .ALUOp      (c_ALUOp),
       .instruction(im_funcode),
       .ALUcontrol (c_ALUcontrol)
   );
-
   Control u_Control (
       .instruction(im_instruction),
       .RegDst     (c_RegDst),
@@ -86,8 +70,6 @@ module top (
       .seg_fourth (seg_fourth),
       .seg_fifth  (seg_fifth)
   );
-
-
   Data_memory u_Data_memory (
       .clk      (clk),
       .addr     (alu_result),  // im_instruction
@@ -98,8 +80,6 @@ module top (
       .MemtoReg (c_MemtoReg),
       .rData    (r_wbdata)
   );
-
-
   Next_pc u_Next_pc (
       .old        (pc_out),
       .instruction(im_instruction),
@@ -109,5 +89,4 @@ module top (
       .zero       (c_zero),
       .next       (pc_in)
   );
-
 endmodule

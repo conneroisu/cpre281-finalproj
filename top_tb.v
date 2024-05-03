@@ -5,7 +5,8 @@
 module top_tb;
 
   reg clk;
-  reg [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
+  // segments for the 7-segment displays
+  wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
   integer i;  // integer  counter
 
   always #(`CYCLE_TIME / 2) clk = ~clk;

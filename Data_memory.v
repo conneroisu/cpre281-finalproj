@@ -14,7 +14,7 @@ module Data_memory (
   reg [31:0] Dmem[SIZE_DM-1:0];  // instruction memory
   integer i;
   initial begin
-    for (i = 0; i < SIZE_DM ; i = i + 1) begin
+    for (i = 0; i < SIZE_DM; i = i + 1) begin
       Dmem[i] = 32'b0;
     end
   end
@@ -23,7 +23,7 @@ module Data_memory (
       if (MemtoReg == 1) begin
         rData = Dmem[addr];
       end else begin
-        rData = ALUresult;  
+        rData = ALUresult;
       end
     end else begin
       rData = ALUresult;
