@@ -1,17 +1,13 @@
 `timescale 1ns / 1ps
-
 module Program_counter (
-    input clk,
-    input [31:0] next,  // the input address
-    output reg [31:0] out  // the output address
+    input i_Clk,
+    input [31:0] i_Next,  // the input address
+    output reg [31:0] o_Out  // the output address
 );
-
   initial begin
-    out = -4;
+    o_Out = -4;
   end
-
-  always @(posedge clk) begin
-    out = next;
+  always @(posedge i_Clk) begin
+    o_Out = i_Next;
   end
-
 endmodule

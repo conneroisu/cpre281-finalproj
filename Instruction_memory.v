@@ -2,10 +2,10 @@
 
 module Instruction_memory (
     // input clk,
-    input [31:0] addr,
-    output reg [5:0] ctr,  // [31-26]
-    output reg [5:0] funcode,  // [5-0]
-    output reg [31:0] instruction  // [31-0]
+    input [31:0] i_Addr,
+    output reg [5:0] i_Ctr,  // [31-26]
+    output reg [5:0] i_Funcode,  // [5-0]
+    output reg [31:0] i_Instruction  // [31-0]
 );
 
   parameter SIZE_IM = 128;  // size of this memory, by default 128*32
@@ -18,17 +18,17 @@ module Instruction_memory (
     end
     $readmemb("instructions.mem", Imem);
 
-    instruction = 32'b11111100000000000000000000000000;
+    i_Instruction = 32'b11111100000000000000000000000000;
   end
 
-  always @(addr) begin
-    if (addr == -4) begin  // init
-      instruction = 32'b11111100000000000000000000000000;
+  always @(i_Addr) begin
+    if (i_Addr == -4) begin  // init
+      i_Instruction = 32'b11111100000000000000000000000000;
     end else begin
-      instruction = Imem[addr>>2];
+      i_Instruction = Imem[i_Addr>>2];
     end
-    ctr = instruction[31:26];
-    funcode = instruction[5:0];
+    i_Ctr = i_Instruction[31:26];
+    i_Funcode = i_Instruction[5:0];
   end
 
 endmodule

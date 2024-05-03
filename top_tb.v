@@ -1,41 +1,31 @@
 `timescale 1ns / 1ps
-
 `define CYCLE_TIME 20
-
 module top_tb;
-
   reg clk;
   // segments for the 7-segment displays
   wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
   integer i;  // integer  counter
-
   always #(`CYCLE_TIME / 2) clk = ~clk;
-
   top uut (
-    .clk(clk),
-    .seg_first(seg_first),
-    .seg_second(seg_second),
-    .seg_third(seg_third),
-    .seg_fourth(seg_fourth),
-    .seg_fifth(seg_fifth)
+      .clk(clk),
+      .seg_first(seg_first),
+      .seg_second(seg_second),
+      .seg_third(seg_third),
+      .seg_fourth(seg_fourth),
+      .seg_fifth(seg_fifth)
   );
-
   initial begin
     // Initialize data memory
     for (i = 0; i < 32; i = i + 1) begin
       uut.u_Data_memory.Dmem[i] = 32'b0;
     end
-
     // initialize Register File
     for (i = 0; i < 32; i = i + 1) begin
       uut.u_Register.RegData[i] = 32'b0;
     end
-
     clk = 0;
   end
-
   always @(posedge clk) begin
-
     $display($time,, "PC = ", uut.pc_in);
     $display($time,, "IM = %b", uut.im_instruction);
     $display($time,, "ALU_control = %b", uut.c_ALUcontrol);
@@ -46,10 +36,8 @@ module top_tb;
     $display($time,, "WB = 0x%H", uut.r_wbdata);
     $display($time,, "MemRead = ", uut.c_MemRead);
     $display($time,, "MemWrite = ", uut.c_MemWrite);
-
     $display(
         "========================================================================================================");
-
     ////////////////////////////////////////////////
     $display($time,, "R0(r0) = 0x%H, R8 (t0) = 0x%H, R16(s0) = 0x%H, R24(t8) = 0x%H",
              uut.u_Register.RegData[0], uut.u_Register.RegData[8], uut.u_Register.RegData[16],
@@ -75,10 +63,8 @@ module top_tb;
     $display($time,, "R7(a3) = 0x%H, R15(t7) = 0x%H, R23(s7) = 0x%H, R31(ra) = 0x%H",
              uut.u_Register.RegData[7], uut.u_Register.RegData[15], uut.u_Register.RegData[23],
              uut.u_Register.RegData[31]);
-
     $display(
         "---------------------------------------------------------------------------------------------------------");
-
     // print Data_memory
     $display($time,, "Data_memory: 0x00 = %x", {
              uut.u_Data_memory.Dmem[3], uut.u_Data_memory.Dmem[2], uut.u_Data_memory.Dmem[1],
@@ -104,21 +90,15 @@ module top_tb;
     $display($time,, "Data_memory: 0x1c = %x", {
              uut.u_Data_memory.Dmem[31], uut.u_Data_memory.Dmem[30], uut.u_Data_memory.Dmem[29],
              uut.u_Data_memory.Dmem[28]});
-
     $display(
         "========================================================================================================");
   end
-
   initial begin
     #1800;
     $display("%0dth fibonacci number = %0d\n", uut.u_Register.RegData[16],
              uut.u_Register.RegData[17]);
   end
-
   initial begin
     #1800 $finish;
   end
-
-
 endmodule
-

@@ -7,113 +7,91 @@ module top (
     output [6:0] seg_fourth,
     output [6:0] seg_fifth
 );
-  // start
   wire [31:0] pc_in, pc_out;
   wire [ 5:0] im_ctr;
   wire [ 5:0] im_funcode;
   wire [31:0] im_instruction;
   wire [31:0] r_wbdata, r_read1, r_read2;
   wire c_RegDst, c_Jump, c_Branch, c_Bne, c_MemRead, c_MemtoReg, c_MemWrite, c_ALUSrc, c_RegWrite;
-  wire [6:0] s_seg_first, s_seg_second, s_seg_third, s_seg_fourth, s_seg_fifth;
-  wire [6:0] c_seg_first, c_seg_second, c_seg_third, c_seg_fourth, c_seg_fifth;
   wire [1:0] c_ALUOp;
   wire [3:0] c_ALUcontrol;
   wire c_zero;
   wire [31:0] alu_result;
   Program_counter u_Program_counter (
-      .clk (clk),
-      .next(pc_in),
-      .out (pc_out)
+      .i_Clk (clk),
+      .i_Next(pc_in),
+      .o_Out (pc_out)
   );
   Instruction_memory u_Instruction_memory (
-      .addr       (pc_out),
-      .ctr        (im_ctr),
-      .funcode    (im_funcode),
-      .instruction(im_instruction)
+      .i_Addr       (pc_out),
+      .i_Ctr        (im_ctr),
+      .i_Funcode    (im_funcode),
+      .i_Instruction(im_instruction)
   );
   Register u_Register (
-      .clk        (clk),
-      .instruction(im_instruction),
-      .RegWrite   (c_RegWrite),
-      .RegDst     (c_RegDst),
-      .WriteData  (r_wbdata),
-      .ReadData1  (r_read1),
-      .ReadData2  (r_read2)
+      .i_Clk        (clk),
+      .i_Instruction(im_instruction),
+      .i_RegWrite   (c_RegWrite),
+      .i_RegDst     (c_RegDst),
+      .i_WriteData  (r_wbdata),
+      .o_ReadData1  (r_read1),
+      .o_ReadData2  (r_read2)
   );
   ALU u_ALU (
-      .data1      (r_read1),
-      .read2      (r_read2),
-      .instruction(im_instruction),
-      .ALUSrc     (c_ALUSrc),
-      .ALUcontrol (c_ALUcontrol),
-      .zero       (c_zero),
-      .ALUresult  (alu_result)
+      .i_data1      (r_read1),
+      .i_read2      (r_read2),
+      .i_Instruction(im_instruction),
+      .i_ALUSrc     (c_ALUSrc),
+      .i_ALUcontrol (c_ALUcontrol),
+      .o_Zero       (c_zero),
+      .o_ALUresult  (alu_result)
   );
   ALU_control u_ALU_control (
-      .ALUOp      (c_ALUOp),
-      .instruction(im_funcode),
-      .ALUcontrol (c_ALUcontrol),
-      .seg_first  (s_seg_first),
-      .seg_second (s_seg_second),
-      .seg_third  (s_seg_third),
-      .seg_fourth (s_seg_fourth),
-      .seg_fifth  (s_seg_fifth)
+      .i_ALUOp      (c_ALUOp),
+      .i_Instruction(im_funcode),
+      .o_ALUcontrol (c_ALUcontrol),
+      .o_seg_first  (seg_first),
+      .o_seg_second (seg_second),
+      .o_seg_third  (seg_third),
+      .o_seg_fourth (seg_fourth),
+      .o_seg_fifth  (seg_fifth)
   );
   Control u_Control (
-      .instruction(im_instruction),
-      .RegDst     (c_RegDst),
-      .Jump       (c_Jump),
-      .Branch     (c_Branch),
-      .Bne        (c_Bne),
-      .MemRead    (c_MemRead),
-      .MemtoReg   (c_MemtoReg),
-      .ALUOp      (c_ALUOp),
-      .MemWrite   (c_MemWrite),
-      .ALUSrc     (c_ALUSrc),
-      .RegWrite   (c_RegWrite),
-      .seg_first  (s_seg_first),
-      .seg_second (s_seg_second),
-      .seg_third  (s_seg_third),
-      .seg_fourth (s_seg_fourth),
-      .seg_fifth  (s_seg_fifth)
+      .i_instruction(im_instruction),
+      .o_RegDst     (c_RegDst),
+      .o_Jump       (c_Jump),
+      .o_Branch     (c_Branch),
+      .o_Bne        (c_Bne),
+      .o_MemRead    (c_MemRead),
+      .o_MemtoReg   (c_MemtoReg),
+      .o_ALUOp      (c_ALUOp),
+      .o_MemWrite   (c_MemWrite),
+      .o_ALUSrc     (c_ALUSrc),
+      .o_RegWrite   (c_RegWrite),
+      .o_seg_first  (seg_first),
+      .o_seg_second (seg_second),
+      .o_seg_third  (seg_third),
+      .o_seg_fourth (seg_fourth),
+      .o_seg_fifth  (seg_fifth)
   );
   Data_memory u_Data_memory (
-      .clk      (clk),
-      .addr     (alu_result),  // im_instruction
-      .wData    (r_read2),
-      .ALUresult(alu_result),
-      .MemWrite (c_MemWrite),
-      .MemRead  (c_MemRead),
-      .MemtoReg (c_MemtoReg),
-      .rData    (r_wbdata)
+      .i_clk      (clk),
+      .i_addr     (alu_result),  // im_instruction
+      .i_wData    (r_read2),
+      .i_ALUresult(alu_result),
+      .i_MemWrite (c_MemWrite),
+      .i_MemRead  (c_MemRead),
+      .i_MemtoReg (c_MemtoReg),
+      .o_rData    (r_wbdata)
   );
   Next_pc u_Next_pc (
-      .old        (pc_out),
-      .instruction(im_instruction),
-      .Jump       (c_Jump),
-      .Branch     (c_Branch),
-      .Bne        (c_Bne),
-      .zero       (c_zero),
-      .next       (pc_in)
+      .i_Old        (pc_out),
+      .i_Instruction(im_instruction),
+      .i_Jump       (c_Jump),
+      .i_Branch     (c_Branch),
+      .i_Bne        (c_Bne),
+      .i_Zero       (c_zero),
+      .o_Next       (pc_in)
   );
 
-  Display u_Display (
-      .clk          (clk),
-      .reset        (1'b0),
-      .seg_first_1  (s_seg_first),
-      .seg_first_2  (c_seg_first),
-      .seg_second_1 (s_seg_second),
-      .seg_second_2 (c_seg_second),
-      .seg_third_1  (s_seg_third),
-      .seg_third_2  (c_seg_third),
-      .seg_fourth_1 (s_seg_fourth),
-      .seg_fourth_2 (c_seg_fourth),
-      .seg_fifth_1  (s_seg_fifth),
-      .seg_fifth_2  (c_seg_fifth),
-      .display_out_1(seg_first),
-      .display_out_2(seg_second),
-      .display_out_3(seg_third),
-      .display_out_4(seg_fourth),
-      .display_out_5(seg_fifth)
-  );
 endmodule

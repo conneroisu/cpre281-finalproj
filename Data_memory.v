@@ -1,14 +1,14 @@
 `timescale 1ns / 1ps
 
 module Data_memory (
-    input clk,
-    input [31:0] addr,
-    input [31:0] wData,
-    input [31:0] ALUresult,
-    input MemWrite,
-    input MemRead,
-    input MemtoReg,
-    output reg [31:0] rData
+    input i_clk,
+    input [31:0] i_addr,
+    input [31:0] i_wData,
+    input [31:0] i_ALUresult,
+    input i_MemWrite,
+    input i_MemRead,
+    input i_MemtoReg,
+    output reg [31:0] o_rData
 );
   parameter SIZE_DM = 128;  // size of this memory, by default 128*32
   reg [31:0] Dmem[SIZE_DM-1:0];  // instruction memory
@@ -18,20 +18,20 @@ module Data_memory (
       Dmem[i] = 32'b0;
     end
   end
-  always @(addr or MemRead or MemtoReg or ALUresult) begin
-    if (MemRead == 1) begin
-      if (MemtoReg == 1) begin
-        rData = Dmem[addr];
+  always @(i_addr or i_MemRead or i_MemtoReg or i_ALUresult) begin
+    if (i_MemRead == 1) begin
+      if (i_MemtoReg == 1) begin
+        o_rData = Dmem[i_addr];
       end else begin
-        rData = ALUresult;
+        o_rData = i_ALUresult;
       end
     end else begin
-      rData = ALUresult;
+      o_rData = i_ALUresult;
     end
   end
-  always @(posedge clk) begin  // MemWrite, wData, addr
-    if (MemWrite == 1) begin
-      Dmem[addr] = wData;
+  always @(posedge i_clk) begin  // MemWrite, wData, addr
+    if (i_MemWrite == 1) begin
+      Dmem[i_addr] = i_wData;
     end
   end
 endmodule
