@@ -22,24 +22,6 @@ The current instruction being executed will be displayed on the seven segment di
 
 The processor will be implemented in Verilog and tested using a test-bench.
 
-## Installation
-  
-  Clone the SingleCycle-MIPS-Processor repo:
-
-    $ git clone https://github.com/Lukyth/SingleCycle-MIPS-Processor.git
-    $ cd SingleCycle-MIPS-Processor
-
-  Install requirement:
-
-    $ brew install icarus-verilog
-    $ brew install gtkwave
-
-## Quick Start
-  
-    $ iverilog -o processor testbench.v
-    $ vvp processor -lxt2
-    $ gtkwave testbench.vcd
-    
 ## Introduction
 
 The project is a simple MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on EP4CE115F29C7 FPGA board.
@@ -76,8 +58,8 @@ Supported Instructions:
 
 ADD ADDU ADDI ADDIU SUB SUBU
 AND ANDI OR ORI XOR XORI NOR
-SLT SLTI SLTU SLTIU SLL SRL
-SRA SLLV SRLV SRAV LW SW BEQ
+SLT SLTU SLL
+SRA SRAV LW SW BEQ
 BNE J LUI
 
 # Comparing Verilog vs VHDL 
@@ -93,7 +75,11 @@ Additionally, I think that VHDL is more suited for larger projects and more comp
 
 ## Interesting notes about verilog
 
-The loose typing of Verilog can lead to some useful modules that can be defined in small amounts of code. For example, the following module is the mux module that is used in the processor to select between two inputs based on a control signal.
+The loose typing of Verilog can lead to some useful modules that can be defined in small amounts of code.
+Additionally, in verilog, you do not have to declare your components in the component that uses them which also decreases the amount of code that is needed to be written.
+
+
+For example, the following module is the mux module that is used in the processor to select between two inputs based on a control signal.
 
 ```verilog
 module mux #(parameter size = 1) (
@@ -151,6 +137,9 @@ We are decoding a 5-bit signal to 35 bits.
 | 111 | 110 | A | BLEZ (Branch if Less or Equal to Zero) |
 | 111 | 111 | A | BGTZ (Branch if Greater Than Zero) |
 
+
+
+
 The following is the wave diagram for my testbench of my processor without the addded seven segment displays.
 
 ![[Pasted image 20240503061843.png]]
@@ -161,5 +150,4 @@ below is the waveform with the seven segment ports included:
 
 
 Control Unit Schematic: ![[Pasted image 20240503123506.png]]
-
 
