@@ -21,9 +21,7 @@ module Instruction_memory (
         $readmemb("instructions.mem", Imem);
         i_Instruction = 32'b11111100000000000000000000000000;
     end
-
-    // Always block to handle instruction fetching and resetting
-    always @(i_Rst or i_Addr) begin
+    always @(posedge i_Rst or i_Addr) begin
         if (i_Rst) begin
             // Reload initial memory contents when reset is active
             $readmemb("instructions.mem", Imem);
