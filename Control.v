@@ -46,11 +46,6 @@ module Control (
         Bne = 0;
         ALUOp = 2'b10;
         Jump = 0;
-        seg_first = 7'b0001000;  // A
-        seg_second = 7'b1001100;  // r
-        seg_third = 7'b0110001;  // i
-        seg_fourth = 7'b1111111;  // Blank
-        seg_fifth = 7'b1111111;  // Blank
       end
       6'b001000: begin  // addi
         RegDst = 0;
@@ -182,11 +177,6 @@ module Control (
         Bne = 0;
         ALUOp = 2'b00;
         Jump = 0;
-        seg_first = 7'b1111111;  // Blank
-        seg_second = 7'b1111111;  // Blank
-        seg_third = 7'b1111111;  // Blank
-        seg_fourth = 7'b1111111;  // Blank
-        seg_fifth = 7'b1111111;  // Blank
       end
     endcase
   end
