@@ -27,6 +27,11 @@ module Control (
     MemWrite = 0;
     ALUSrc = 0;
     RegWrite = 0;
+    seg_first = 7'b1111111;  // Blank
+    seg_second = 7'b1111111;  // Blank
+    seg_third = 7'b1111111;  // Blank
+    seg_fourth = 7'b1111111;  // Blank
+    seg_fifth = 7'b1111111;  // Blank
   end
   always @(instruction) begin
     case (instruction[31:26])

@@ -5,11 +5,19 @@
 module top_tb;
 
   reg clk;
+  reg [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
   integer i;  // integer  counter
 
   always #(`CYCLE_TIME / 2) clk = ~clk;
 
-  top uut (.clk(clk));
+  top uut (
+    .clk(clk),
+    .seg_first(seg_first),
+    .seg_second(seg_second),
+    .seg_third(seg_third),
+    .seg_fourth(seg_fourth),
+    .seg_fifth(seg_fifth)
+  );
 
   initial begin
     // Initialize data memory
