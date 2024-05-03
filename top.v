@@ -50,7 +50,12 @@ module top (
   ALU_control u_ALU_control (
       .ALUOp      (c_ALUOp),
       .instruction(im_funcode),
-      .ALUcontrol (c_ALUcontrol)
+      .ALUcontrol (c_ALUcontrol),
+      .seg_first  (seg_first),
+      .seg_second (seg_second),
+      .seg_third  (seg_third),
+      .seg_fourth (seg_fourth),
+      .seg_fifth  (seg_fifth)
   );
   Control u_Control (
       .instruction(im_instruction),
