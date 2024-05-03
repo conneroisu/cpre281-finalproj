@@ -150,3 +150,6 @@ We are decoding a 5-bit signal to 35 bits.
 | 111 | 101 | A | BNE (Branch if Not Equal) |
 | 111 | 110 | A | BLEZ (Branch if Less or Equal to Zero) |
 | 111 | 111 | A | BGTZ (Branch if Greater Than Zero) |
+
+
+![[Pasted image 20240503061843.png]]
