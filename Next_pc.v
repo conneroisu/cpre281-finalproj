@@ -7,28 +7,23 @@ module Next_pc (
     input i_Zero,
     output reg [31:0] o_Next
 );
-
   reg [31:0] sign_ext;
   reg [31:0] old_alter;  // pc+4
   reg [31:0] jump;  // jump addr.
   reg [31:0] jump_update;
   reg zero_alter;
-
   initial begin
     o_Next = 32'b0;
   end
-
   always @(i_Old) begin
     old_alter = i_Old + 4;
   end
-
   always @(i_Zero, i_Bne) begin
     zero_alter = i_Zero;
     if (i_Bne == 1) begin
       zero_alter = !zero_alter;
     end
   end
-
   always @(i_Instruction) begin
     // Calculate the jump address from the instruction
     jump_update = {4'b0, i_Instruction[25:0], 2'b0};
@@ -40,7 +35,6 @@ module Next_pc (
     end
     sign_ext = {sign_ext[29:0], 2'b0};  // shift left
   end
-
   always @(posedge i_Jump or posedge old_alter) begin
     // Update the jump register based on Jump signal
     if (i_Jump) begin
@@ -49,7 +43,6 @@ module Next_pc (
       jump = jump_update;
     end
   end
-
   always @(old_alter, sign_ext, jump, i_Branch, zero_alter, i_Jump) begin
     // assign next program counter value
     if (i_Branch == 1 && zero_alter == 1) begin
@@ -60,5 +53,4 @@ module Next_pc (
       o_Next = old_alter;
     end
   end
-
 endmodule
