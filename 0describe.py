@@ -1,29 +1,32 @@
-
-from groq import Groq
-import os
-import groq
-
-
-SYSTEMS_PROMPT = """ 
-As an expert in computer architecture, you are tasked with describing verilog code components for a single cycle MIPS processor.
+"""Generates descriptions for Verilog files using the Groq API.
 
 
 """
 
 
+from groq import Groq
+import os
+
+SYSTEMS_PROMPT = """
+As an expert in computer architecture, you are tasked with describing verilog code components for a single cycle MIPS processor.
+You are to provide detailed explanations for each of the provided files.
+You are to be a valuable resource to students who are learning about fairly advanced computer architecture and the MIPS processor.
+"""
+
+
 def get_prompt(file_title: str, file_content: str, file_titles: str, file_contents: str):
     return f""" 
-    Explain the following verilog code components for a single cycle MIPS processor
-    within the context of the provided code snippets found below. 
-    YOU MUST USE THE PROVIDED CODE SNIPPETS TO DESCRIBE THE COMPONENTS.
+Explain the following verilog code components for a single cycle MIPS processor
+within the context of the provided code snippets found below. 
+YOU MUST USE THE PROVIDED CODE SNIPPETS TO DESCRIBE THE COMPONENTS.
 
-    YOUR GIVEN CODE TO DESCRIBE/EXPLAIN:
-    ```verilog title="{file_title}"
-    {file_content}
-    ```
-    THE CONTEXT OF THE ABOVE FILE:
-    {f"```verilog title={file_title}\n{file_content}```\n".join([f"```verilog title={file_title}\n{
-                                                                file_content}```\n" for file_title, file_content in zip(file_titles, file_contents)])}
+YOUR GIVEN CODE TO DESCRIBE/EXPLAIN:
+```verilog title="{file_title}"
+{file_content}
+```
+THE CONTEXT OF THE ABOVE FILE WITHIN THE PROCESSOR CODE:
+{f"```verilog title={file_title}\n{file_content}```\n".join([f"```verilog title={file_title}\n{
+        file_content}```\n" for file_title, file_content in zip(file_titles, file_contents)])}
     """
 
 
@@ -78,7 +81,7 @@ def process_verilog_files(directory: str):
             file_titles[i], file_contents[i], file_titles_copy.remove(file_titles[i]), file_contents_copy.remove(file_contents[i]))
         response = generate(prompt)
         with open(f"{file_titles[i].split('.')[0]}_description.txt", 'w') as file:
-            file.write(response)
+            _ = file.write(response)
 
 
 # Replace '.' with the directory you want to search for Verilog files
