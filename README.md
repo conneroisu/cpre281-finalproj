@@ -151,6 +151,10 @@ We are decoding a 5-bit signal to 35 bits.
 | 111 | 110 | A | BLEZ (Branch if Less or Equal to Zero) |
 | 111 | 111 | A | BGTZ (Branch if Greater Than Zero) |
 
-The following is the wave diagram for my testbench of my processor.
+The following is the wave diagram for my testbench of my processor without the addded seven segment displays.
 
 ![[Pasted image 20240503061843.png]]
+
+
+below is the waveform with the seven segment ports included:
+![[Pasted image 20240503065359.png]]
