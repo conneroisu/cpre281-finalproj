@@ -1,11 +1,9 @@
 // Conner Ohnesorge
-// 08-09-2021
 // 3 X 8 Decoder
 module dcd3x8 (
     input      [2:0] sel,
     output reg [7:0] dcdout
 );
-
   always @(sel) begin
     case (sel)
       0: dcdout = 8'b00000001;
@@ -18,7 +16,5 @@ module dcd3x8 (
       7: dcdout = 8'b10000000;
       default: dcdout = 8'b0;
     endcase
-
   end
 endmodule
-

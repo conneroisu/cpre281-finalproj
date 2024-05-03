@@ -8,13 +8,9 @@ module regGen #(
     input clk,
     input wen,
     output [width-1:0] q
-
 );
-
   reg [width-1:0] qAux;
-
   always @(posedge clk) begin
-
     if (rst) begin
       qAux = {width{1'b0}};
     end else begin
@@ -22,8 +18,6 @@ module regGen #(
         qAux = d;
       end else qAux = qAux;
     end
-
   end
   assign q = qAux;
 endmodule
-

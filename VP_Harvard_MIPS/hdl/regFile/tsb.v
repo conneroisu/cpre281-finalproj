@@ -1,7 +1,5 @@
 // Conner Ohnesorge
-//8/9/2021
 // 32-bit tri-state buffer
-
 module tsb (
     input [31:0] d,
     output reg [31:0] q,

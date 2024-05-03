@@ -10,10 +10,10 @@ module ram (
 );
   reg [31:0] ram[2047:0];
   reg [31:0] dataAux;
-  //assign dataAux = ram[addr];
-  // initial begin
-  //     $readmemb("G:/VP/simulation/ZEROS.mem", ram);
-  // end
+  assign dataAux = ram[addr];
+  initial begin
+      $readmemb("ZEROS.mem", ram);
+  end
   always @(posedge clk) begin
     // if (rst) begin
     //     for (i = 0; i<2048 ;i = i + 1 ) begin
