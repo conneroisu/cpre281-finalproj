@@ -177,6 +177,11 @@ module Control (
         Bne = 0;
         ALUOp = 2'b00;
         Jump = 0;
+        seg_first = 7'b1111111;  // Blank
+        seg_second = 7'b1111111;  // Blank
+        seg_third = 7'b1111111;  // Blank
+        seg_fourth = 7'b1111111;  // Blank
+        seg_fifth = 7'b1111111;  // Blank
       end
     endcase
   end

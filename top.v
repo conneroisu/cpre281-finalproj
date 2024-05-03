@@ -7,14 +7,6 @@ module top (
     output [6:0] seg_fourth,
     output [6:0] seg_fifth
 );
-  initial begin
-
-    seg_first  = 7'b1111111;  // Blank
-    seg_second = 7'b1111111;  // Blank
-    seg_third  = 7'b1111111;  // Blank
-    seg_fourth = 7'b1111111;  // Blank
-    seg_fifth  = 7'b1111111;  // Blank
-  end
   wire [31:0] pc_in, pc_out;
   wire [ 5:0] im_ctr;
   wire [ 5:0] im_funcode;
