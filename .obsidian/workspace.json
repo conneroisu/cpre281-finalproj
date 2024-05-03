@@ -148,17 +148,18 @@
   },
   "active": "9037bd75ab5cc5f5",
   "lastOpenFiles": [
-    "README.md",
-    "output_files/mips_processor.done",
-    "output_files/mips_processor.sta.rpt",
-    "db/mips_processor.flow.rpt.tmp",
+    "work/_opt__lock",
+    "db/mips_processor.tmw_info",
     "db/mips_processor.sta.rpt.tmp",
     "db/mips_processor.sta.rdb.wrk",
     "db/mips_processor.cycloneive_io_sim_cache.45um_ii_1200mv_85c_slow.hsd.wrk",
     "db/mips_processor.cycloneive_io_sim_cache.45um_ff_1200mv_0c_fast.hsd.wrk",
     "db/mips_processor.cycloneive_io_sim_cache.45um_ii_1200mv_0c_slow.hsd.wrk",
+    "db/mips_processor.tiscmp.slow_1200mv_0c.ddb",
     "db/mips_processor.tiscmp.slow_1200mv_0c.ddb.wrk",
-    "output_files/mips_processor.sta.summary",
+    "db/mips_processor.sta_cmp.7_slow_1200mv_85c.tdb",
+    "db/mips_processor.flow.rpt.tmp",
+    "README.md",
     "Pasted image 20240503065359.png",
     "Pasted image 20240503061843.png"
   ]
