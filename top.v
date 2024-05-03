@@ -1,7 +1,12 @@
 `timescale 1ns / 1ps
 
 module top (
-    input clk  // clock signal for PC and RD
+    input clk,  // clock signal for PC and RD
+    output [6:0] seg_first,
+    output [6:0] seg_second,
+    output [6:0] seg_third,
+    output [6:0] seg_fourth,
+    output [6:0] seg_fifth
 );
 
   wire [31:0] pc_in, pc_out;
@@ -74,7 +79,12 @@ module top (
       .ALUOp      (c_ALUOp),
       .MemWrite   (c_MemWrite),
       .ALUSrc     (c_ALUSrc),
-      .RegWrite   (c_RegWrite)
+      .RegWrite   (c_RegWrite),
+      .seg_first  (seg_first),
+      .seg_second (seg_second),
+      .seg_third  (seg_third),
+      .seg_fourth (seg_fourth),
+      .seg_fifth  (seg_fifth)
   );
 
 
@@ -101,4 +111,3 @@ module top (
   );
 
 endmodule
-
