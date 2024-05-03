@@ -66,7 +66,7 @@ module Control (
         o_seg_first = 7'b0001000;  // A
         o_seg_second = 7'b1000010;  // d
         o_seg_third = 7'b1000010;  // d
-        o_seg_fourth = 7'b0110000;  // i
+        o_seg_fourth = 7'b1001111;  // i
         o_seg_fifth = 7'b1111111;  // Blank
       end
       6'b001100: begin  // andi
