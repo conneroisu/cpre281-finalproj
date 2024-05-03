@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 module Instruction_memory (
-    input             reset,         // Reset signal added
+    input             i_Rst,         // Reset signal added
     input      [31:0] i_Addr,        // [31-0]  Address input
     output reg [ 5:0] i_Ctr,         // [31-26] Control signals
     output reg [ 5:0] i_Funcode,     // [5-0]   Function code
@@ -21,8 +21,8 @@ module Instruction_memory (
     end
     i_Instruction = 32'b11111100000000000000000000000000;
   end
-  always @(reset or i_Addr) begin
-    if (reset) begin
+  always @(i_Rst or i_Addr) begin
+    if (i_Rst) begin
       for (n = 0; n < SIZE_IM; n = n + 1) begin
         Imem[n] = Imem_backup[n];
       end

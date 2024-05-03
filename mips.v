@@ -24,7 +24,6 @@ module mips (
       .o_Out (pc_out)
   );
   Instruction_memory u_Instruction_memory (
-      .i_Clk        (i_Clk),
       .i_Rst        (i_Rst),
       .i_Addr       (pc_out),
       .i_Ctr        (im_ctr),
