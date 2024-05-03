@@ -46,6 +46,11 @@ module Control (
         o_Bne = 0;
         o_ALUOp = 2'b10;
         o_Jump = 0;
+        o_seg_first = 7'b0001000;  // A
+        o_seg_second = 7'b1110010;  // R
+        o_seg_third = 7'b0100100;  // I
+        o_seg_fourth = 7'b0100100;  // I
+        o_seg_fifth = 7'b0100000;  // T
       end
       6'b001000: begin  // addi
         o_RegDst = 0;
