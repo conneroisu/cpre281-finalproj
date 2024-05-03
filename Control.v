@@ -46,11 +46,11 @@ module Control (
         o_Bne = 0;
         o_ALUOp = 2'b10;
         o_Jump = 0;
-        o_seg_first = 7'b0001000;  // A
-        o_seg_second = 7'b1110010;  // R
-        o_seg_third = 7'b0100100;  // I
-        o_seg_fourth = 7'b0100100;  // I
-        o_seg_fifth = 7'b0100000;  // T
+        o_seg_first =  7'b0001000;  // A
+        o_seg_second = 7'b1111010;  // R
+        o_seg_third =  7'b1111001;  // I
+        o_seg_fourth = 7'b0001111;  // T
+        o_seg_fifth =  7'b0001001;  // H
       end
       6'b001000: begin  // addi
         o_RegDst = 0;
@@ -66,7 +66,7 @@ module Control (
         o_seg_first = 7'b0001000;  // A
         o_seg_second = 7'b1000010;  // d
         o_seg_third = 7'b1000010;  // d
-        o_seg_fourth = 7'b0110000;  // i
+        o_seg_fourth = 7'b1001111;  // i
         o_seg_fifth = 7'b1111111;  // Blank
       end
       6'b001100: begin  // andi
@@ -114,7 +114,7 @@ module Control (
         o_Bne = 0;
         o_ALUOp = 2'b00;
         o_Jump = 0;
-        o_seg_first = 7'b0100100;  // S
+        o_seg_first = 7'b0010010;  // S
         o_seg_second = 7'b1001001;  // w
         o_seg_third = 7'b1111111;  // Blank
         o_seg_fourth = 7'b1111111;  // Blank
@@ -133,7 +133,7 @@ module Control (
         o_Jump = 0;
         o_seg_first = 7'b1100000;  // b
         o_seg_second = 7'b0110000;  // e
-        o_seg_third = 7'b0011000;  // q
+        o_seg_third = 7'b0001100;  // q
         o_seg_fourth = 7'b1111111;  // Blank
         o_seg_fifth = 7'b1111111;  // Blank
       end
@@ -165,7 +165,7 @@ module Control (
         o_Bne = 0;
         o_ALUOp = 2'b01;
         o_Jump = 1;
-        o_seg_first = 7'b1001111;  // J
+        o_seg_first = 7'b1100001;  // J
         o_seg_second = 7'b1111111;  // Blank
         o_seg_third = 7'b1111111;  // Blank
         o_seg_fourth = 7'b1111111;  // Blank

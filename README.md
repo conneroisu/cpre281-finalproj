@@ -158,3 +158,8 @@ The following is the wave diagram for my testbench of my processor without the a
 
 below is the waveform with the seven segment ports included:
 ![[Pasted image 20240503065359.png]]
+
+
+Control Unit Schematic: ![[Pasted image 20240503123506.png]]
+
+
