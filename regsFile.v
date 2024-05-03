@@ -16,60 +16,47 @@ $29	$sp	Stack Pointer
 $30	$fp	Frame Pointer
 $31	$ra	Return Address
 */
-module regsFile( 
+module regsFile (
     rgr1,
     rgr2,
     write,
     rgw1,
     rgw1data,
-//    clk,
-//    reset,
+    //    clk,
+    //    reset,
     rg1data,
     rg2data
 );
-
-    input [4:0] rgr1;
-    input [4:0] rgr2;
-    input [4:0]     rgw1;
-    input [31:0]  rgw1data;
-//    input clk;
-//    input reset;
-    input write;
-    output reg [31:0] rg1data;
-    output reg [31:0] rg2data;
-    
-    reg [31:0] regMem [31:0]; // register memory
-    
-
-/*
+  input [4:0] rgr1;
+  input [4:0] rgr2;
+  input [4:0] rgw1;
+  input [31:0] rgw1data;
+  //    input clk;
+  //    input reset;
+  input write;
+  output reg [31:0] rg1data;
+  output reg [31:0] rg2data;
+  reg [31:0] regMem[31:0];  // register memory
+  /*
     assign rg1data = regMem[rgr1];
     assign rg2data = regMem[rgr2];
 */
-
-  always @(rgr1 or rgr2)
-  begin
+  always @(rgr1 or rgr2) begin
     rg1data = regMem[rgr1];
     rg2data = regMem[rgr2];
   end
-
-  always @(posedge write)
-  begin
-    if(rgw1 == 5'b0) regMem[0] = 5'b0;
+  always @(posedge write) begin
+    if (rgw1 == 5'b0) regMem[0] = 5'b0;
     else regMem[rgw1] = rgw1data;
   end
-
-    ///write to register
-    integer i;
-
-    initial 
-    begin
-      //  $monitor("%d %d %d %d ", regMem[0],regMem[1],regMem[2],regMem[3]);
-        //set all register values to reg number 
-        for( i = 0; i < 32; i = i + 1 )
-            regMem[i] = i;
-    end
-
-/*
+  ///write to register
+  integer i;
+  initial begin
+    //  $monitor("%d %d %d %d ", regMem[0],regMem[1],regMem[2],regMem[3]);
+    //set all register values to reg number 
+    for (i = 0; i < 32; i = i + 1) regMem[i] = i;
+  end
+  /*
   always @(posedge clk or negedge reset)
     begin
         regMem[0] = 32'b0; //register 0 is hardwired to zero;
