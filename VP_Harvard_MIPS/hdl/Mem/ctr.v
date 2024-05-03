@@ -1,6 +1,5 @@
 // Conner Ohnesorge
 // Counter
-
 module ctr #(
     parameter width = 10
 ) (
@@ -12,12 +11,7 @@ module ctr #(
     input jmp,
     input [width-1:0] jmpLoc
 );
-
-
-
   reg [width-1:0] ctrOutAux;
-
-
   always @(posedge clk) begin
     if (rst) ctrOutAux <= {(width) {1'b1}};
     else if (en) begin
@@ -25,12 +19,8 @@ module ctr #(
         ctrOutAux = ctrOutAux + {{(width - 1) {1'b0}}, 1'b1};
       else if (dir == 0)  // Decrement
         ctrOutAux = ctrOutAux - {{(width - 1) {1'b0}}, 1'b1};
-
       if (jmp) ctrOutAux = jmpLoc;
     end
   end
-
   assign ctrOut = ctrOutAux;
-
 endmodule
-
