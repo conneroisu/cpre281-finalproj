@@ -2,10 +2,8 @@ module ctr_tb();
 wire  [9:0]ctrOut;
 reg clk, rst, en, dir, jmp;
 reg [9:0] jmpLoc;
-
 ctr UUT (.clk(clk), .en(en), .dir(dir), .jmp(jmp),
 .jmpLoc(jmpLoc), .rst(rst), .ctrOut(ctrOut));
-
 initial begin
     clk = 0;
     en = 1;
@@ -19,7 +17,6 @@ initial begin
     #200
     dir = 0;
     $display("Direction Changed");
-
     #200
     dir = 1;
     $display("NOW JUMPING");
@@ -29,16 +26,11 @@ initial begin
     #200
     $finish;
 end
-
 always begin
     #10 clk = ~clk;
    
 end
-
-
 always begin
     #20 $display(ctrOut);
 end
-
-
 endmodule
