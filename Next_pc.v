@@ -45,7 +45,7 @@ module Next_pc (
     sign_ext = {sign_ext[29:0], 2'b0};  // shift left
   end
 
-  always @(instruction or old_alter or jump) begin
+  always @(instruction or old_alter or jump) begin     // error: Error (10028): Can't resolve multiple constant drivers for net "jump[30]" at next_pc.v(48)
     jump = {old_alter[31:28], jump[27:0]};
   end
 
