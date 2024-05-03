@@ -7,7 +7,7 @@ module Program_counter (
 );
 
   initial begin
-    out = -4;  // NEVER REACHED ADDRESS
+    out = -4;
   end
 
   always @(posedge clk) begin
@@ -15,4 +15,3 @@ module Program_counter (
   end
 
 endmodule
-

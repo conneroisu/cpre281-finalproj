@@ -1,10 +1,8 @@
 m255
 K4
 z2
-!s12c _opt1
-Z0 !s99 nomlopt
 !s12c _opt
-R0
+Z0 !s99 nomlopt
 !s11f MIXED_VERSIONS
 13
 !s112 1.1
@@ -16,1048 +14,826 @@ Z1 dC:/Users/connero/source/repos/cpre281-finalproj
 T_opt
 !s110 1714734173
 VK8fSddFnKiD1RAT6MN[h;1
-Z2 04 6 4 work top_tb fast 0
+04 6 4 work top_tb fast 0
 =1-b07b252d0549-6634c45d-e2-2b38
 R0
-Z3 !s12b OEM100
-Z4 !s124 OEM100
+!s12b OEM100
+!s124 OEM100
 o-quiet -auto_acc_if_foreign -work work
-Z5 tCvgOpt 0
+Z2 tCvgOpt 0
 n@_opt
-Z6 OL;O;2023.2;77
-R1
-T_opt1
-!s110 1714734188
-V;V=3]^<1;hHF;YE1`Fo6[2
-R2
-=1-b07b252d0549-6634c46c-2fa-6b8
-R0
-R3
-R4
-o-quiet -auto_acc_if_foreign -work work +acc
-R5
-n@_opt1
-R6
+OL;O;2023.2;77
 vadder
-Z7 !s110 1714731259
+Z3 !s110 1714731259
 !i10b 1
 !s100 MVZ<gPO];02LT_5koi85U2
 I9FCJ3m5^Aj^C4LXO`Z]nC1
 R1
-Z8 w1714731256
-Z9 8dp_parts.v
-Z10 Fdp_parts.v
+Z4 w1714731256
+Z5 8dp_parts.v
+Z6 Fdp_parts.v
 !i122 1
 L0 33 7
-Z11 VDg1SIo80bB@j0V0VzS_@n1
-Z12 OL;L;2023.2;77
+Z7 VDg1SIo80bB@j0V0VzS_@n1
+Z8 OL;L;2023.2;77
 r1
 !s85 0
 31
-Z13 !s108 1714731258.000000
-Z14 !s107 tb_SoC.v|tb_MIPS.v|system_top.v|memory.v|glbl.v|fpga_parts.v|fact.v|dp_parts.v|datapath.v|cu_parts.v|control_unit.v|SoC.v|MIPS_fpga.v|MIPS.v|GPIO.v|FA.v|AD.v|
-Z15 !s90 -reportprogress|300|AD.v|FA.v|GPIO.v|MIPS.v|MIPS_fpga.v|SoC.v|control_unit.v|cu_parts.v|datapath.v|dp_parts.v|fact.v|fpga_parts.v|glbl.v|memory.v|system_top.v|tb_MIPS.v|tb_SoC.v|
 !i113 0
-Z16 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R5
-valu
-R7
-!i10b 1
-!s100 khKmoM74ZZn>`hUDz3PbK3
-Imcclgnf0i7k74>L9bVc?e0
-R1
-R8
-R9
-R10
-!i122 1
-L0 41 20
-R11
-R12
-r1
-!s85 0
-31
-R13
-R14
-R15
-!i113 0
-R16
-R5
+Z9 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
 vALU
 2C:/Users/connero/source/repos/cpre281-finalproj/ALU.v
-Z17 !s110 1714734161
+Z10 !s110 1714734161
 !i10b 1
 !s100 =D5?2a7J[@;]`3Y8f?P^H0
 Ij42zom`XHDM:bz=O77HAa2
 R1
-Z18 w1714733854
+Z11 w1714733854
 8C:/Users/connero/source/repos/cpre281-finalproj/ALU.v
 FC:/Users/connero/source/repos/cpre281-finalproj/ALU.v
 !i122 2
 L0 2 45
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-Z19 !s108 1714734161.000000
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/ALU.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/ALU.v|
 !i113 0
-Z20 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R5
+Z12 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R2
 n@a@l@u
+valu
+R3
+!i10b 1
+!s100 khKmoM74ZZn>`hUDz3PbK3
+Imcclgnf0i7k74>L9bVc?e0
+R1
+R4
+R5
+R6
+!i122 1
+L0 41 20
+R7
+R8
+r1
+!s85 0
+31
+!i113 0
+R9
+R2
 vALU_control
 2C:/Users/connero/source/repos/cpre281-finalproj/ALU_control.v
-R17
+R10
 !i10b 1
 !s100 odjQKY]`8e9bEcZ4:MOjm1
 I8>>7ne_CQJKOmGU2_h98^0
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/ALU_control.v
 FC:/Users/connero/source/repos/cpre281-finalproj/ALU_control.v
 !i122 3
 L0 2 29
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/ALU_control.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/ALU_control.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@a@l@u_control
 vauxdec
-R7
+R3
 !i10b 1
 !s100 Z2QUIR<Hzaza<f]LncF^@3
 I]n=n`<0lX>e5Mco_Mce@Q2
 R1
-Z21 w1714730998
-Z22 8cu_parts.v
-Z23 Fcu_parts.v
+Z13 w1714730998
+Z14 8cu_parts.v
+Z15 Fcu_parts.v
 !i122 1
 L0 41 22
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vbcd_to_7seg
-R7
+R3
 !i10b 1
 !s100 6V`LhF^hYC0UBT1`K3F?13
 I6=:fcA6fgI@L3b[nP4YhS2
 R1
-R21
-Z24 8fpga_parts.v
-Z25 Ffpga_parts.v
+R13
+Z16 8fpga_parts.v
+Z17 Ffpga_parts.v
 !i122 1
 L0 49 25
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vbdebouncer
-R7
+R3
 !i10b 1
 !s100 okZkC:dA`nl=iklZ[Vc@Y3
 INC=_^EfYY_?Hc7HYoU7a@0
 R1
-R21
-R24
-R25
+R13
+R16
+R17
 !i122 1
 L0 100 10
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vclk_gen
-R7
+R3
 !i10b 1
 !s100 R<:S9Q:zSjheUXbAWY4Hd1
 ID=>i@;;T^G?5O:P?mc;Ia3
 R1
-R21
-R24
-R25
+R13
+R16
+R17
 !i122 1
 L0 3 27
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vControl
 2C:/Users/connero/source/repos/cpre281-finalproj/Control.v
-R17
+R10
 !i10b 1
 !s100 ndKbVQY205GN[jPm_b;8J1
 I2@:e7612C9SG9QAjfF;EM2
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/Control.v
 FC:/Users/connero/source/repos/cpre281-finalproj/Control.v
 !i122 4
 L0 2 137
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/Control.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/Control.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@control
 vcounter
-R7
+R3
 !i10b 1
 !s100 LIfaVXA7GfhH:dclaan171
 IZ:>ZN3oW:nLT6kQOiB3a>3
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 127 12
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vData_memory
 2C:/Users/connero/source/repos/cpre281-finalproj/Data_memory.v
-R17
+R10
 !i10b 1
 !s100 bf;OdbX0oK?e^4[fPZWC40
 Ia4koAj6D<=MHbH7oUziF]3
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/Data_memory.v
 FC:/Users/connero/source/repos/cpre281-finalproj/Data_memory.v
 !i122 5
 L0 3 41
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/Data_memory.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/Data_memory.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@data_memory
 vdatapath
-R7
+R3
 !i10b 1
 !s100 NJ[V@S[z]aZRXmh:3MBc=3
 I4zh7185GGOn2ao<;@=>BP1
 R1
-R21
+R13
 8datapath.v
 Fdatapath.v
 !i122 1
 L0 2 60
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vdmem
-R7
+R3
 !i10b 1
 !s100 _?iTenJ?``:a7UId:R>DY1
 I`Yh_cDTS5iX76i6=EhX2M1
 R1
-R21
-Z26 8memory.v
-Z27 Fmemory.v
+R13
+Z18 8memory.v
+Z19 Fmemory.v
 !i122 1
 L0 16 17
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vdreg
-R7
+R3
 !i10b 1
 !s100 PG8oR;i`hYeTzWChNTQ;f0
 I`IenbekzQ98acb;5l;GUL3
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 70 12
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vdreg_en
-R7
+R3
 !i10b 1
 !s100 >a0d[JNGNdKGIzj@^T7J80
 IITX8`mbPFiZWcebTdZzOA1
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 83 11
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vFA
-R7
+R3
 !i10b 1
 !s100 >9nkS^4_>RgoHGSVc3FeD2
 IJA0<U>?C2zOHW9Hi?hzlL2
 R1
-R21
+R13
 8FA.v
 FFA.v
 !i122 1
 L0 3 40
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@f@a
 vFA_AD
-R7
+R3
 !i10b 1
 !s100 eHeQzB3lhK7:fPOKNQG?l1
 I5Ia=LiEX:;_J]HaLE0@VU0
 R1
-R21
-Z28 8AD.v
-Z29 FAD.v
+R13
+Z20 8AD.v
+Z21 FAD.v
 !i122 1
 L0 1 18
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@f@a_@a@d
 vfact
-R7
+R3
 !i10b 1
 !s100 2gSW:Je3KFb:j<CNTR;iB2
 Ib5SkI9==_F;5[zjJ]jGEN1
 R1
-R21
-Z30 8fact.v
-Z31 Ffact.v
+R13
+Z22 8fact.v
+Z23 Ffact.v
 !i122 1
 L0 3 21
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vfact_CU
-R7
+R3
 !i10b 1
 !s100 547H8oRdI>TSiAZMEEAAa2
 IkK7Y[kCVTebL[9fEIbHfT2
 R1
-R21
-R30
-R31
+R13
+R22
+R23
 !i122 1
 L0 25 41
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 nfact_@c@u
 vfact_DP
-R7
+R3
 !i10b 1
 !s100 iX76IVN5_ZgYC@5CcJjZ20
 IQ1fWimhhHgbCUY2YIR9B21
 R1
-R21
-R30
-R31
+R13
+R22
+R23
 !i122 1
 L0 67 28
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 nfact_@d@p
 vglbl
-R7
+R3
 !i10b 1
 !s100 ogOe=PbPLNAO;H9aJiX<52
 IPR8HFQYa4>bm<HW9U9<L92
 R1
-R21
+R13
 8glbl.v
 Fglbl.v
 !i122 1
 L0 6 65
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vGPIO
-R7
+R3
 !i10b 1
 !s100 YfO963nXc50?f0Yaoz2E62
 I;0F@RRVVWFaoe5@TIS>O31
 R1
-R21
+R13
 8GPIO.v
 FGPIO.v
 !i122 1
 L0 2 26
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@g@p@i@o
 vGPIO_AD
-R7
+R3
 !i10b 1
 !s100 j5VDZi@IO=UUncYbY1^kW0
 I4C?j>FB9ehcQaY[TVF;Hj1
 R1
+R13
+R20
 R21
-R28
-R29
 !i122 1
 L0 20 18
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@g@p@i@o_@a@d
 vimem
-R7
+R3
 !i10b 1
 !s100 Uc?2UnVQI:2FDdXO3CoYI2
 IZ<d>[Ok7B0H`jRCm]UjlJ0
 R1
-R21
-R26
-R27
+R13
+R18
+R19
 !i122 1
 L0 4 10
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vInstruction_memory
 2C:/Users/connero/source/repos/cpre281-finalproj/Instruction_memory.v
-R17
+R10
 !i10b 1
 !s100 mDHXkR4X5C3=OikEPlcnI3
 IjUTBI69NfXU[bf2^^>Ti53
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/Instruction_memory.v
 FC:/Users/connero/source/repos/cpre281-finalproj/Instruction_memory.v
 !i122 6
 L0 3 32
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R19
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/Instruction_memory.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/Instruction_memory.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@instruction_memory
 vled_mux
-R7
+R3
 !i10b 1
 !s100 JATkVBhmdLJ;?0eB_kIHQ1
 IY1ecQ7=Dc@lIdab1:5Gh93
 R1
-R21
-R24
-R25
+R13
+R16
+R17
 !i122 1
 L0 75 24
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vmaindec
-R7
+R3
 !i10b 1
 !s100 FKoAaP]R^BC@[HALGIEm41
 II0gG_4]fAc9KX8l2MgS6>1
 R1
-R21
-R22
-R23
-!i122 1
-L0 2 38
-R11
-R12
-r1
-!s85 0
-31
 R13
 R14
 R15
-!i113 0
-R16
-R5
-vMIPS
+!i122 1
+L0 2 38
 R7
+R8
+r1
+!s85 0
+31
+!i113 0
+R9
+R2
+vMIPS
+R3
 !i10b 1
 !s100 ;<:ZWZUkZfiT5O;2eLTBa1
 IA7PDCld:Z;6M:0dfgE@;@2
 R1
-R21
+R13
 8MIPS.v
 FMIPS.v
 !i122 1
 L0 2 24
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@m@i@p@s
 vMIPS_fpga
-R7
+R3
 !i10b 1
 !s100 hLmIZDB6c`VZfJe1>?5:62
 I]Qg93HRd12YN@OaNRDRaU0
 R1
-R21
+R13
 8MIPS_fpga.v
 FMIPS_fpga.v
 !i122 1
 L0 1 38
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@m@i@p@s_fpga
 vmul
-R7
+R3
 !i10b 1
 !s100 lK=;YAkUjjBB3ZmNVeUWG3
 I@g0f3G<jgPoHbYN[GW1fQ3
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 62 7
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vmux2
-R7
+R3
 !i10b 1
 !s100 :70ZZ>Vicd4kNmR6B_>A`2
 IkTT^JXggcIOmY3@[[3>Ac1
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 3 8
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vmux4
-R7
+R3
 !i10b 1
 !s100 fGNTWUPLWRLDNA8FA7N7a1
 IZo]A2hmIN2=HeGjX<7NVQ3
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 13 14
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vNext_pc
 2C:/Users/connero/source/repos/cpre281-finalproj/Next_pc.v
-Z32 !s110 1714734162
+Z24 !s110 1714734162
 !i10b 1
 !s100 d1X37QEjiAKH@Szz?Dk:32
 IkhB9E`I=44m[ROM8]4;4f1
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/Next_pc.v
 FC:/Users/connero/source/repos/cpre281-finalproj/Next_pc.v
 !i122 7
 L0 3 62
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-Z33 !s108 1714734162.000000
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/Next_pc.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/Next_pc.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@next_pc
 vProgram_counter
 2C:/Users/connero/source/repos/cpre281-finalproj/Program_counter.v
-R32
+R24
 !i10b 1
 !s100 [FNOAm?i4P;==BV__dZ;H0
 IZS0TC_d7[clIc6_;AYGH>3
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/Program_counter.v
 FC:/Users/connero/source/repos/cpre281-finalproj/Program_counter.v
 !i122 8
 L0 3 15
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R33
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/Program_counter.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/Program_counter.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@program_counter
 vregfile
-R7
+R3
 !i10b 1
 !s100 7YBo02BWh7h3QeLNTJ58R3
 IEB6MdcjYNA<H[8zK2hQ1z1
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 106 20
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vRegister
 2C:/Users/connero/source/repos/cpre281-finalproj/Register.v
-R32
+R24
 !i10b 1
 !s100 zOzQFNbSaaA;b?84E;]FC2
 IFS765ah[Tme4V_WdY99M82
 R1
-R18
+R11
 8C:/Users/connero/source/repos/cpre281-finalproj/Register.v
 FC:/Users/connero/source/repos/cpre281-finalproj/Register.v
 !i122 9
 L0 3 35
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R33
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/Register.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/Register.v|
 !i113 0
-R20
-R5
+R12
+R2
 n@register
 vsignext
-R7
+R3
 !i10b 1
 !s100 fUW`hjNn[:^XCe__Xh`@]0
 ITCE[VL`g0[_R4V_3TT01I3
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 28 4
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vSoC
-R7
+R3
 !i10b 1
 !s100 cm4khS@[V=`bm5Ed`[8?A0
 IcfNImM3nU@DXoOA4KU8XW2
 R1
-R21
+R13
 8SoC.v
 FSoC.v
 !i122 1
 L0 2 41
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@so@c
 vSoC_AD
-R7
+R3
 !i10b 1
 !s100 bD@cOdQiKEm=ThA4QZ=TQ3
 I_S=DYKgfAbF[0hfamPfcL3
 R1
+R13
+R20
 R21
-R28
-R29
 !i122 1
 L0 39 21
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@so@c_@a@d
 vSoC_fpga
-R7
+R3
 !i10b 1
 !s100 2?dCHh;z_SDKSNe^Z6z_j2
 ILJEHQgD:gg3GmcmNa?jVB3
 R1
-R21
+R13
 8system_top.v
 Fsystem_top.v
-R26
-R27
+R18
+R19
 !i122 1
 L0 2 43
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 n@so@c_fpga
 vsr_reg
-R7
+R3
 !i10b 1
 !s100 iYQFnLW9d9gGgTcFiaTjj1
 IPI60m6VPKdlGegVHn4S^c3
 R1
-R8
-R9
-R10
+R4
+R5
+R6
 !i122 1
 L0 95 10
-R11
-R12
+R7
+R8
 r1
 !s85 0
 31
-R13
-R14
-R15
 !i113 0
-R16
-R5
+R9
+R2
 vtb_MIPS
-R7
+R3
 !i10b 1
 !s100 zVOR>1W?Q_XJd1J8Xkh@H0
 IjgK9Sn>oAf3Vg8`O7CiNg1
 R1
-R21
-8tb_MIPS.v
-Ftb_MIPS.v
-!i122 1
-L0 3 23
-R11
-R12
-r1
-!s85 0
-31
-R13
-R14
-R15
-!i113 0
-R16
-R5
-ntb_@m@i@p@s
-vtb_SoC
-R7
-!i10b 1
-!s100 6?aMFN5D4L8gOb4@`VF1?2
-I4`42iR]kffZYhFkT3k3920
-R1
-R21
-8tb_SoC.v
-Ftb_SoC.v
-!i122 1
-L0 3 65
-R11
-R12
-r1
-!s85 0
-31
-R13
-R14
-R15
-!i113 0
-R16
-R5
-ntb_@so@c
-vtop
-2C:/Users/connero/source/repos/cpre281-finalproj/top.v
-R32
-!i10b 1
-!s100 a^71QMkoBJfVW5S63o<bX3
-IDjn89AmD[[9jE>B=i[R5i1
-R1
-R18
-8C:/Users/connero/source/repos/cpre281-finalproj/top.v
-FC:/Users/connero/source/repos/cpre281-finalproj/top.v
-!i122 10
-L0 3 101
-R11
-R12
-r1
-!s85 0
-31
-R33
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/top.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/top.v|
-!i113 0
-R20
-R5
-vtop_tb
-2C:/Users/connero/source/repos/cpre281-finalproj/top_tb.v
-R32
-!i10b 1
-!s100 [=I@_C4zZ6lb3N[i1H2kd1
-IgCfKoW@_gkMYo0C3NKYM51
-R1
-R18
-8C:/Users/connero/source/repos/cpre281-finalproj/top_tb.v
-FC:/Users/connero/source/repos/cpre281-finalproj/top_tb.v
-!i122 11
-L0 5 110
-R11
-R12
-r1
-!s85 0
-31
-R33
-!s107 C:/Users/connero/source/repos/cpre281-finalproj/top_tb.v|
-!s90 -reportprogress|300|-work|work|C:/Users/connero/source/repos/cpre281-finalproj/top_tb.v|
-!i113 0
-R20
-R5
