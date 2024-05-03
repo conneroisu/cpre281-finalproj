@@ -4,7 +4,7 @@ module Control (
     output reg RegDst,
     output reg Jump,
     output reg Branch,
-    output reg Bne,  // 1 indicates bne
+    output reg Bne,
     output reg MemRead,
     output reg MemtoReg,
     output reg [1:0] ALUOp,

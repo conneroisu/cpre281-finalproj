@@ -7,13 +7,15 @@ module top (
     output [6:0] seg_fourth,
     output [6:0] seg_fifth
 );
+  // start
   wire [31:0] pc_in, pc_out;
   wire [ 5:0] im_ctr;
   wire [ 5:0] im_funcode;
   wire [31:0] im_instruction;
-  wire [31:0] r_wbdata,  // dm_out
-  r_read1, r_read2;
+  wire [31:0] r_wbdata, r_read1, r_read2;
   wire c_RegDst, c_Jump, c_Branch, c_Bne, c_MemRead, c_MemtoReg, c_MemWrite, c_ALUSrc, c_RegWrite;
+  wire [6:0] s_seg_first, s_seg_second, s_seg_third, s_seg_fourth, s_seg_fifth;
+  wire [6:0] c_seg_first, c_seg_second, c_seg_third, c_seg_fourth, c_seg_fifth;
   wire [1:0] c_ALUOp;
   wire [3:0] c_ALUcontrol;
   wire c_zero;
@@ -51,11 +53,11 @@ module top (
       .ALUOp      (c_ALUOp),
       .instruction(im_funcode),
       .ALUcontrol (c_ALUcontrol),
-      .seg_first  (seg_first),
-      .seg_second (seg_second),
-      .seg_third  (seg_third),
-      .seg_fourth (seg_fourth),
-      .seg_fifth  (seg_fifth)
+      .seg_first  (s_seg_first),
+      .seg_second (s_seg_second),
+      .seg_third  (s_seg_third),
+      .seg_fourth (s_seg_fourth),
+      .seg_fifth  (s_seg_fifth)
   );
   Control u_Control (
       .instruction(im_instruction),
@@ -69,11 +71,11 @@ module top (
       .MemWrite   (c_MemWrite),
       .ALUSrc     (c_ALUSrc),
       .RegWrite   (c_RegWrite),
-      .seg_first  (seg_first),
-      .seg_second (seg_second),
-      .seg_third  (seg_third),
-      .seg_fourth (seg_fourth),
-      .seg_fifth  (seg_fifth)
+      .seg_first  (s_seg_first),
+      .seg_second (s_seg_second),
+      .seg_third  (s_seg_third),
+      .seg_fourth (s_seg_fourth),
+      .seg_fifth  (s_seg_fifth)
   );
   Data_memory u_Data_memory (
       .clk      (clk),
@@ -93,5 +95,25 @@ module top (
       .Bne        (c_Bne),
       .zero       (c_zero),
       .next       (pc_in)
+  );
+
+  Display u_Display (
+      .clk          (clk),
+      .reset        (1'b0),
+      .seg_first_1  (s_seg_first),
+      .seg_first_2  (c_seg_first),
+      .seg_second_1 (s_seg_second),
+      .seg_second_2 (c_seg_second),
+      .seg_third_1  (s_seg_third),
+      .seg_third_2  (c_seg_third),
+      .seg_fourth_1 (s_seg_fourth),
+      .seg_fourth_2 (c_seg_fourth),
+      .seg_fifth_1  (s_seg_fifth),
+      .seg_fifth_2  (c_seg_fifth),
+      .display_out_1(seg_first),
+      .display_out_2(seg_second),
+      .display_out_3(seg_third),
+      .display_out_4(seg_fourth),
+      .display_out_5(seg_fifth)
   );
 endmodule
