@@ -40,9 +40,8 @@ module alu (
         6: sll
         7: srl
         8: slt
-    //    9: lw , sw
-    10  9: beq
-    11  10: bne
+        10  9: beq
+        11  10: bne
     */
   /*
     Quoting from "MIPS32 Architecture For Programmers Volume II":
