@@ -13,7 +13,6 @@ module ALU (
     if (i_ALUSrc == 0) begin
       data2 = i_read2;
     end else begin
-      // SignExt[instruction[15:0]]
       if (i_Instruction[15] == 1'b0) begin
         data2 = {16'b0, i_Instruction[15:0]};
       end else begin

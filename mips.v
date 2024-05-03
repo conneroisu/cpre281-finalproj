@@ -1,11 +1,12 @@
 `timescale 1ns / 1ps
-module top (
-    input clk,  // clock signal for PC and RD
-    output [6:0] seg_first,
-    output [6:0] seg_second,
-    output [6:0] seg_third,
-    output [6:0] seg_fourth,
-    output [6:0] seg_fifth
+module mips (
+    input i_Clk,  // clock signal for PC and RD
+    input i_Rst,
+    output [6:0] o_Seg_first,
+    output [6:0] o_Seg_second,
+    output [6:0] o_Seg_third,
+    output [6:0] o_Seg_fourth,
+    output [6:0] o_Seg_fifth
 );
   wire [31:0] pc_in, pc_out;
   wire [ 5:0] im_ctr;
@@ -18,18 +19,20 @@ module top (
   wire c_zero;
   wire [31:0] alu_result;
   Program_counter u_Program_counter (
-      .i_Clk (clk),
+      .i_Clk (i_Clk),
       .i_Next(pc_in),
       .o_Out (pc_out)
   );
   Instruction_memory u_Instruction_memory (
+      .i_Clk        (i_Clk),
+      .i_Rst        (i_Rst),
       .i_Addr       (pc_out),
       .i_Ctr        (im_ctr),
       .i_Funcode    (im_funcode),
       .i_Instruction(im_instruction)
   );
   Register u_Register (
-      .i_Clk        (clk),
+      .i_Clk        (i_Clk),
       .i_Instruction(im_instruction),
       .i_RegWrite   (c_RegWrite),
       .i_RegDst     (c_RegDst),
@@ -63,14 +66,14 @@ module top (
       .o_MemWrite   (c_MemWrite),
       .o_ALUSrc     (c_ALUSrc),
       .o_RegWrite   (c_RegWrite),
-      .o_seg_first  (seg_first),
-      .o_seg_second (seg_second),
-      .o_seg_third  (seg_third),
-      .o_seg_fourth (seg_fourth),
-      .o_seg_fifth  (seg_fifth)
+      .o_seg_first  (o_Seg_first),
+      .o_seg_second (o_Seg_second),
+      .o_seg_third  (o_Seg_third),
+      .o_seg_fourth (o_Seg_fourth),
+      .o_seg_fifth  (o_Seg_fifth)
   );
   Data_memory u_Data_memory (
-      .i_clk      (clk),
+      .i_clk      (i_Clk),
       .i_addr     (alu_result),  // im_instruction
       .i_wData    (r_read2),
       .i_ALUresult(alu_result),
