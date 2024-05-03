@@ -9,5 +9,6 @@ if { [file exists "work"] } {
 vlog *.v
 
 vsim -voptargs=+acc $target
+force -freeze sim:/top_tb/clk 1 0, 0 {5 ps} -r 10
 add wave -position insertpoint \ ../$target/*
 run 1200

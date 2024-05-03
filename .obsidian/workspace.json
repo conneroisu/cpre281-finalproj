@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "Assignment.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "Assignment.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "Assignment.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "Assignment.md"
               }
             }
           }
@@ -148,17 +148,17 @@
   },
   "active": "9037bd75ab5cc5f5",
   "lastOpenFiles": [
-    "db/prev_cmp_mips_processor.qmsg",
-    "db/mips_processor_partition_pins.json",
-    "db/mips_processor.vpr.ammdb",
-    "db/mips_processor.tmw_info",
-    "db/mips_processor.tis_db_list.ddb",
-    "db/mips_processor.tiscmp.slow_1200mv_85c.ddb",
-    "db/mips_processor.tiscmp.slow_1200mv_0c.ddb",
-    "db/mips_processor.tiscmp.fast_1200mv_0c.ddb",
-    "db/mips_processor.sta_cmp.7_slow_1200mv_85c.tdb",
-    "db/mips_processor.sta.rdb",
-    "db/mips_processor.sta.qmsg",
+    "README.md",
+    "output_files/mips_processor.done",
+    "output_files/mips_processor.sta.rpt",
+    "db/mips_processor.flow.rpt.tmp",
+    "db/mips_processor.sta.rpt.tmp",
+    "db/mips_processor.sta.rdb.wrk",
+    "db/mips_processor.cycloneive_io_sim_cache.45um_ii_1200mv_85c_slow.hsd.wrk",
+    "db/mips_processor.cycloneive_io_sim_cache.45um_ff_1200mv_0c_fast.hsd.wrk",
+    "db/mips_processor.cycloneive_io_sim_cache.45um_ii_1200mv_0c_slow.hsd.wrk",
+    "db/mips_processor.tiscmp.slow_1200mv_0c.ddb.wrk",
+    "output_files/mips_processor.sta.summary",
     "Pasted image 20240503065359.png",
     "Pasted image 20240503061843.png"
   ]

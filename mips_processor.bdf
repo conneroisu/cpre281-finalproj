@@ -22,7 +22,7 @@ https://fpgasoftware.intel.com/eula.
 (header "graphic" (version "1.4"))
 (pin
 	(input)
-	(rect 176 136 344 152)
+	(rect 88 144 256 160)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "clk" (rect 5 0 19 12)(font "Arial" ))
 	(pt 168 8)
@@ -35,6 +35,7 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 32 160 88 184))
 )
 (pin
 	(output)
@@ -51,6 +52,7 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 808 160 880 184))
 )
 (pin
 	(output)
@@ -67,6 +69,7 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 808 176 880 200))
 )
 (pin
 	(output)
@@ -83,6 +86,7 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 808 192 880 216))
 )
 (pin
 	(output)
@@ -99,6 +103,7 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+	(annotation_block (location)(rect 808 208 880 232))
 )
 (pin
 	(output)
@@ -114,6 +119,29 @@ https://fpgasoftware.intel.com/eula.
 		(line (pt 78 4)(pt 82 8))
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
+	)
+	(annotation_block (location)(rect 808 224 872 248))
+)
+(symbol
+	(rect 280 120 432 184)
+	(text "clock_generator" (rect 5 0 98 19)(font "Intel Clear" (font_size 8)))
+	(text "inst1" (rect 8 40 30 57)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "CLK_IN" (rect 0 0 43 19)(font "Intel Clear" (font_size 8)))
+		(text "CLK_IN" (rect 24 16 67 35)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 152 32)
+		(output)
+		(text "CLK_OUT" (rect 0 0 57 19)(font "Intel Clear" (font_size 8)))
+		(text "CLK_OUT" (rect 72 16 129 35)(font "Intel Clear" (font_size 8)))
+		(line (pt 152 32)(pt 136 32))
+	)
+	(drawing
+		(rectangle (rect 16 16 136 40))
 	)
 )
 (symbol
@@ -167,14 +195,10 @@ https://fpgasoftware.intel.com/eula.
 	)
 )
 (connector
-	(pt 440 152)
-	(pt 440 144)
-)
-(connector
+	(pt 432 152)
 	(pt 448 152)
-	(pt 440 152)
 )
 (connector
-	(pt 440 144)
-	(pt 344 144)
+	(pt 256 152)
+	(pt 280 152)
 )
