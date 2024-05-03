@@ -26,10 +26,7 @@ module Instruction_memory (
   always @(posedge i_Clk) begin
     if (i_Rst) begin
       for (n = 0; n < SIZE_IM; n = n + 1) begin
-        // Imem[n] = Imem_backup[n];
-        if (Imem[n] != Imem_backup[n]) begin
-            Imem[n] = Imem_backup[n];
-        end
+        Imem[n] = Imem_backup[n];
       end
       i_Instruction = 32'b11111100000000000000000000000000;
     end else begin
