@@ -23,6 +23,12 @@ module Next_pc (
       zero_alter = !zero_alter;
     end
   end
+    always @(instruction) begin
+Error (10028): Can't resolve multiple constant drivers for net "jump[31]" at next_pc.v(26)
+Error (10029): Constant driver at next_pc.v(38)
+Error (10028): Can't resolve multiple constant drivers for net "jump[30]" at next_pc.v(26)
+Error (10028): Can't resolve multiple constant drivers for net "jump[29]" at next_pc.v(26)
+
   always @(instruction) begin
     // jump-shift-left
     jump = {4'b0, instruction[25:0], 2'b0};
