@@ -1,0 +1,207 @@
+[
+    {
+        "label": "typing",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "typing",
+        "description": "typing",
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TextIO",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "randint",
+        "importPath": "random",
+        "description": "random",
+        "isExtraImport": true,
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "instruction",
+        "kind": 6,
+        "importPath": "VP_Harvard_MIPS.chasm.chasm",
+        "description": "VP_Harvard_MIPS.chasm.chasm",
+        "peekOfCode": "class instruction():\n    mnemonic: str = None\n    op1: str = None\n    op2: str = None\n    valid: bool = True  # Assume all instructions are already valid\n    type: int = None  # Could be NOP, one op, or two op.\n    # The number here shows the number of operands in the instruction.\n    op2Imm: int = None\n    def __init__(self, mnemonic, op1=None, op2=None, valid=True) -> None:\n        self.mnemonic = mnemonic",
+        "detail": "VP_Harvard_MIPS.chasm.chasm",
+        "documentation": {}
+    },
+    {
+        "label": "validator",
+        "kind": 6,
+        "importPath": "VP_Harvard_MIPS.chasm.chasm",
+        "description": "VP_Harvard_MIPS.chasm.chasm",
+        "peekOfCode": "class validator():\n    opCodesOneOp = [\"NOT\", \"OUT\", \"PUSH\", \"POP\", \"SRL\", \"SLL\"]\n    opCodesTwoOp = [\"MOV\", \"CMP\", \"AND\", \"OR\", \"XOR\",\n                    \"XNOR\", \"NOR\", \"NAND\", \"ADD\", \"SUB\", \"MUL\", \"DIV\"]\n    opCodesJMP = [\"JMP\", \"JZ\", \"JNZ\", \"JEQ\", \"JNEQ\", \"JG\", \"JL\", \"JGE\", \"JLE\"]\n    opCodesTwoOpImm = [\"MOVI\", \"CMPI\", \"ANDI\", \"ORI\", \"XORI\",\n                       \"XNORI\", \"NORI\", \"NANDI\", \"ADDI\", \"SUBI\", \"MULI\", \"DIVI\", \"ST\", \"LD\"]\n    registers = [\"AX\", \"BX\", \"CX\", \"DX\", \"SX\", \"EX\", \"EY\", \"EZ\"]\n    labelDict = {}\n    def __init__(self, labelDict) -> None:",
+        "detail": "VP_Harvard_MIPS.chasm.chasm",
+        "documentation": {}
+    },
+    {
+        "label": "program",
+        "kind": 6,
+        "importPath": "VP_Harvard_MIPS.chasm.chasm",
+        "description": "VP_Harvard_MIPS.chasm.chasm",
+        "peekOfCode": "class program():\n    instList = []  # Each line is an instruction as written by the user.\n    binInstList = []  # Each line is an instruction in binary\n    labelDict = {} # This keeps track of labels and thier line numbers to be replaced with jump operations\n                   # in preprocessing.\n    postProcessed = []\n    hasError: bool = False\n    file: typing.TextIO = None\n    post: typing.TextIO = None\n    def __init__(self, file: typing.TextIO) -> None:",
+        "detail": "VP_Harvard_MIPS.chasm.chasm",
+        "documentation": {}
+    },
+    {
+        "label": "printFile",
+        "kind": 2,
+        "importPath": "VP_Harvard_MIPS.chasm.chasm",
+        "description": "VP_Harvard_MIPS.chasm.chasm",
+        "peekOfCode": "def printFile(file):\n    lines = file.readlines()\n    for line in lines:\n        print(line)\ndef main():\n    IN_FILENAME = 'goodisa'\n    file = open('G:/VP/chasm/goodisa.asm')\n    prog = program(file)\n    labels = prog.preProcess()\n    prog.lex()",
+        "detail": "VP_Harvard_MIPS.chasm.chasm",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "VP_Harvard_MIPS.chasm.chasm",
+        "description": "VP_Harvard_MIPS.chasm.chasm",
+        "peekOfCode": "def main():\n    IN_FILENAME = 'goodisa'\n    file = open('G:/VP/chasm/goodisa.asm')\n    prog = program(file)\n    labels = prog.preProcess()\n    prog.lex()\n    prog.syntaxCheck()\n    prog.assemble()\n    prog.readmembExport(IN_FILENAME)\nif __name__ == \"__main__\":",
+        "detail": "VP_Harvard_MIPS.chasm.chasm",
+        "documentation": {}
+    },
+    {
+        "label": "prev",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.chasm.testfib",
+        "description": "VP_Harvard_MIPS.chasm.testfib",
+        "peekOfCode": "prev = 1\nprevPrev = 1\nresult = 1 \nctr = 2\nwhile ctr < 5:\n    result = prev + prevPrev\n    prevPrev = prev\n    prev = result\n    ctr += 1\nprint(result)",
+        "detail": "VP_Harvard_MIPS.chasm.testfib",
+        "documentation": {}
+    },
+    {
+        "label": "prevPrev",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.chasm.testfib",
+        "description": "VP_Harvard_MIPS.chasm.testfib",
+        "peekOfCode": "prevPrev = 1\nresult = 1 \nctr = 2\nwhile ctr < 5:\n    result = prev + prevPrev\n    prevPrev = prev\n    prev = result\n    ctr += 1\nprint(result)",
+        "detail": "VP_Harvard_MIPS.chasm.testfib",
+        "documentation": {}
+    },
+    {
+        "label": "result",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.chasm.testfib",
+        "description": "VP_Harvard_MIPS.chasm.testfib",
+        "peekOfCode": "result = 1 \nctr = 2\nwhile ctr < 5:\n    result = prev + prevPrev\n    prevPrev = prev\n    prev = result\n    ctr += 1\nprint(result)",
+        "detail": "VP_Harvard_MIPS.chasm.testfib",
+        "documentation": {}
+    },
+    {
+        "label": "ctr",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.chasm.testfib",
+        "description": "VP_Harvard_MIPS.chasm.testfib",
+        "peekOfCode": "ctr = 2\nwhile ctr < 5:\n    result = prev + prevPrev\n    prevPrev = prev\n    prev = result\n    ctr += 1\nprint(result)",
+        "detail": "VP_Harvard_MIPS.chasm.testfib",
+        "documentation": {}
+    },
+    {
+        "label": "makeTestVector",
+        "kind": 2,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "peekOfCode": "def makeTestVector(opA :int, opB: int, opSel:int) -> str:\n    vector = hex(opA)[2:].zfill(8) +\"_\"+ hex(opB)[2:].zfill(8)+\"_\" + hex(opSel)[2:]\n    return vector\ndef makeResultVector(opA :int, opB: int, opSel:int) -> str:\n    result = 0\n    carryOut = 0\n    sign = 0\n    zero = 0\n    resultEXT = 0\n    if opSel == 0:",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "documentation": {}
+    },
+    {
+        "label": "makeResultVector",
+        "kind": 2,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "peekOfCode": "def makeResultVector(opA :int, opB: int, opSel:int) -> str:\n    result = 0\n    carryOut = 0\n    sign = 0\n    zero = 0\n    resultEXT = 0\n    if opSel == 0:\n        result = ~opA\n    elif opSel == 1:\n        result = opA & opB",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "peekOfCode": "def main():\n    testVector: str = \"\"\n    resultVector: str = \"\"\n    opA = 0\n    opB = 0\n    opSel = 0\n    for i in range(0,32):\n        for j in range(32,64):\n            for k in range(0,15):\n                opA = randint(0,0xFFFFFFFF)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluTestVectorGenerator",
+        "documentation": {}
+    },
+    {
+        "label": "testVector",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "testVector = pd.read_csv(\"G:\\VP\\hdl\\ALU/testVector.txt\", sep=\"_\",header=None)\nfromALU = pd.read_csv(\"G:\\VP\\hdl\\ALU/aluOut.txt\", sep=\"_\",header=None)\nfromCode = pd.read_csv(\"G:\\VP\\hdl\\ALU/resultVectorPY.txt\", sep=\"_\",header=None)\nview = pd.concat([testVector, fromALU, fromCode], axis=1)\nview.columns = ['A', 'B', 'OP', 'ALU_RES', 'ALU_CARRY','ALU_SIGN', 'ALU_ZERO','ALU_RESX', 'CODE_RES', 'CODE_CARRY', 'CODE_SIGN', 'CODE_ZERO', 'CODE_RESX']\nmul = view[view.OP == 'b']\ndetMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    },
+    {
+        "label": "fromALU",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "fromALU = pd.read_csv(\"G:\\VP\\hdl\\ALU/aluOut.txt\", sep=\"_\",header=None)\nfromCode = pd.read_csv(\"G:\\VP\\hdl\\ALU/resultVectorPY.txt\", sep=\"_\",header=None)\nview = pd.concat([testVector, fromALU, fromCode], axis=1)\nview.columns = ['A', 'B', 'OP', 'ALU_RES', 'ALU_CARRY','ALU_SIGN', 'ALU_ZERO','ALU_RESX', 'CODE_RES', 'CODE_CARRY', 'CODE_SIGN', 'CODE_ZERO', 'CODE_RESX']\nmul = view[view.OP == 'b']\ndetMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    },
+    {
+        "label": "fromCode",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "fromCode = pd.read_csv(\"G:\\VP\\hdl\\ALU/resultVectorPY.txt\", sep=\"_\",header=None)\nview = pd.concat([testVector, fromALU, fromCode], axis=1)\nview.columns = ['A', 'B', 'OP', 'ALU_RES', 'ALU_CARRY','ALU_SIGN', 'ALU_ZERO','ALU_RESX', 'CODE_RES', 'CODE_CARRY', 'CODE_SIGN', 'CODE_ZERO', 'CODE_RESX']\nmul = view[view.OP == 'b']\ndetMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    },
+    {
+        "label": "view",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "view = pd.concat([testVector, fromALU, fromCode], axis=1)\nview.columns = ['A', 'B', 'OP', 'ALU_RES', 'ALU_CARRY','ALU_SIGN', 'ALU_ZERO','ALU_RESX', 'CODE_RES', 'CODE_CARRY', 'CODE_SIGN', 'CODE_ZERO', 'CODE_RESX']\nmul = view[view.OP == 'b']\ndetMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    },
+    {
+        "label": "view.columns",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "view.columns = ['A', 'B', 'OP', 'ALU_RES', 'ALU_CARRY','ALU_SIGN', 'ALU_ZERO','ALU_RESX', 'CODE_RES', 'CODE_CARRY', 'CODE_SIGN', 'CODE_ZERO', 'CODE_RESX']\nmul = view[view.OP == 'b']\ndetMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    },
+    {
+        "label": "mul",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "mul = view[view.OP == 'b']\ndetMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    },
+    {
+        "label": "detMul",
+        "kind": 5,
+        "importPath": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "description": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "peekOfCode": "detMul = pd.merge(mul['ALU_RES'], mul['ALU_RESX'],mul['CODE_RES'], mul['CODE_RESX'])\nprint(mul)",
+        "detail": "VP_Harvard_MIPS.hdl.ALU.aluVerify",
+        "documentation": {}
+    }
+]
