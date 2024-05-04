@@ -7,3 +7,4 @@ ADDU
 LW
 ADDI
 Ohnesorge
+ARITH

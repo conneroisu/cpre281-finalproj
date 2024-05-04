@@ -294,7 +294,7 @@ BEGIN
     
 ## Breaking down decoding a signal to 7-segment displays
 
-As the signal representing the instruction is 5 bits long inside of the `controller.v` file, we need to decode this signal to display the current instruction on the 7-segment displays.
+As the signal representing the instruction is 5 bits long inside the `controller.v` file, we need to decode this signal to display the current instruction on the 7-segment displays.
 
 This means that we need to decode a 5-bit signal to a 35-bit signal that will be used to display the current instruction on the 7-segment displays.
 
@@ -323,7 +323,7 @@ We are decoding a 5-bit signal to 35 bits.
 | 111 | 110 | A | BLEZ (Branch if Less or Equal to Zero) |
 | 111 | 111 | A | BGTZ (Branch if Greater Than Zero) |
 
-The following is the wave diagram for my testbench of my processor without the addded seven segment displays.
+The following is the wave diagram for my test-bench of my processor without the added seven segment displays.
 
 ![[Pasted image 20240503061843.png]]
 
@@ -368,9 +368,9 @@ module mips_tb;
   end
 endmodule
 ```
-The given Verilog code represents a testbench module for a single-cycle MIPS processor. Here's a detailed explanation of the code:
+The given Verilog code represents a test-bench module for a single-cycle MIPS processor. Here's a detailed explanation of the code:
 
-1. The testbench module is named `mips_tb` and it operates on a timescale of 1ns/1ps.
+1. The test-bench module is named `mips_tb` and it operates on a timescale of 1ns/1ps.
 
 2. The module declares two reg variables:
    - `clk`: Represents the clock signal for the processor.
@@ -385,7 +385,7 @@ The given Verilog code represents a testbench module for a single-cycle MIPS pro
 6. The `mips` module (the actual MIPS processor) is instantiated as `uut` (unit under test) with the following connections:
    - `i_Clk` is connected to the `clk` signal.
    - `i_Rst` is connected to the `rst` signal.
-   - The 7-segment display outputs (`o_Seg_first`, `o_Seg_second`, `o_Seg_third`, `o_Seg_fourth`, `o_Seg_fifth`) are connected to the corresponding wires in the testbench.
+   - The 7-segment display outputs (`o_Seg_first`, `o_Seg_second`, `o_Seg_third`, `o_Seg_fourth`, `o_Seg_fifth`) are connected to the corresponding wires in the test-bench.
 
 7. The first `initial` block is used to initialize the data memory and the register file of the MIPS processor:
    - It uses a `for` loop to iterate over the first 32 locations of the data memory (`Dmem`) and initializes each location to zero.
@@ -394,11 +394,11 @@ The given Verilog code represents a testbench module for a single-cycle MIPS pro
 
 8. The second `initial` block is used to specify the duration of the simulation. It uses the `$finish` system task to terminate the simulation after 1800 time units.
 
-The purpose of this testbench is to provide a simulation environment for the MIPS processor. It initializes the necessary components (data memory and register file), generates the clock signal, and instantiates the MIPS processor module. The testbench also specifies the duration of the simulation.
+The purpose of this test-bench is to provide a simulation environment for the MIPS processor. It initializes the necessary components (data memory and register file), generates the clock signal, and instantiates the MIPS processor module. The testbench also specifies the duration of the simulation.
 
-The testbench interacts with other components of the processor through the instantiated `mips` module (`uut`). It provides the clock and reset signals to the processor and observes the output signals for the 7-segment displays.
+The test-bench interacts with other components of the processor through the instantiated `mips` module (`uut`). It provides the clock and reset signals to the processor and observes the output signals for the 7-segment displays.
 
-Overall, this testbench serves as a framework to verify the functionality of the single-cycle MIPS processor by providing the necessary inputs, initializing the memory, and specifying the simulation duration.
+Overall, this test-bench serves as a framework to verify the functionality of the single-cycle MIPS processor by providing the necessary inputs, initializing the memory, and specifying the simulation duration.
 
 ## Schematics
 
@@ -581,7 +581,7 @@ Functionality:
    - If the result is zero, the `o_Zero` flag is set to 1; otherwise, it is set to 0.
 
 Significance in the MIPS Processor:
-- The ALU is a crucial component in the MIPS processor's datapath.
+- The ALU is a crucial component in the MIPS processor's data-path.
 - It performs arithmetic and logical operations on the input data based on the instructions being executed.
 - The ALU receives input data from the register file or the immediate value in the instruction, depending on the `i_ALUSrc` control signal.
 - The ALU control signal (`i_ALUcontrol`) determines the specific operation to be performed, which is decoded by the ALU control module based on the instruction opcode and function code.
@@ -593,7 +593,7 @@ Interaction with Other Components:
 - The ALU result (`o_ALUresult`) is used by other components, such as the data memory for memory operations or the register file for storing the result.
 - The zero flag (`o_Zero`) is used by the control unit to make branching decisions based on the comparison result.
 
-Overall, the ALU module performs the necessary arithmetic and logical operations in the MIPS processor based on the instruction being executed. It plays a crucial role in the datapath of the processor, interacting with other components to execute instructions and produce the desired results.
+Overall, the ALU module performs the necessary arithmetic and logical operations in the MIPS processor based on the instruction being executed. It plays a crucial role in the data-path of the processor, interacting with other components to execute instructions and produce the desired results.
 
 #### Control Unit
 
@@ -833,12 +833,12 @@ Functionality:
 4. If the instruction does not match any of the defined cases, the Control Unit sets all control signals to their default values and displays blank on the 7-segment displays.
 
 Significance in the processor:
-The Control Unit plays a crucial role in orchestrating the operation of the single-cycle MIPS processor. It interprets the instruction and generates the necessary control signals to control the datapath components, such as the ALU, Register File, and Data Memory. The control signals determine the flow of data and the operations performed in each stage of the processor pipeline.
+The Control Unit plays a crucial role in orchestrating the operation of the single-cycle MIPS processor. It interprets the instruction and generates the necessary control signals to control the data-path components, such as the ALU, Register File, and Data Memory. The control signals determine the flow of data and the operations performed in each stage of the processor pipeline.
 
 Interaction with other components:
 - The Control Unit receives the instruction from the Instruction Memory.
 - It sends control signals to various components, such as the ALU, Register File, and Data Memory, to control their behavior based on the instruction being executed.
-- The control signals generated by the Control Unit are used by the datapath components to perform the required operations and route the data accordingly.
+- The control signals generated by the Control Unit are used by the data-path components to perform the required operations and route the data accordingly.
 
 #### Data Memory
 
@@ -990,11 +990,11 @@ Inputs and Outputs:
 Interaction with Other Components:
 - The Program Counter (PC) module provides the memory address (`i_Addr`) to the Instruction Memory module to fetch the instruction at that address.
 - The fetched instruction (`i_Instruction`) is then passed to other components of the processor, such as the Control Unit and the Register File, for further processing and execution.
-- The control bits (`i_Ctr`) and function code (`i_Funcode`) are used by the Control Unit to generate appropriate control signals for the processor's datapath.
+- The control bits (`i_Ctr`) and function code (`i_Funcode`) are used by the Control Unit to generate appropriate control signals for the processor's data-path.
 
 ##### Significance
 
-The Instruction Memory module is a crucial component of the MIPS processor as it holds the program instructions that the processor executes. It provides the instructions to the processor's datapath, enabling the processor to perform the desired operations and execute the program stored in the memory.
+The Instruction Memory module is a crucial component of the MIPS processor as it holds the program instructions that the processor executes. It provides the instructions to the processor's data-path, enabling the processor to perform the desired operations and execute the program stored in the memory.
 
 ##### Summary
 
