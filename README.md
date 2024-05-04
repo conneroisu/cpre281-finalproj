@@ -595,6 +595,9 @@ Overall, the ALU module performs the necessary arithmetic and logical operations
 
 #### Control Unit
 
+The following is the code for the control unit of the MIPS processor.
+
+As named, the `ControlUnit` is responsible for decoding the instruction and generating the control signals for the various components of the processor.
 
 ```verilog title=ControlUnit.v
 `timescale 1ns / 1ps
@@ -791,6 +794,7 @@ module ControlUnit (
   end
 endmodule
 ```
+
 The above Verilog code represents the Control Unit component of the single-cycle MIPS processor.
 
 The Control Unit is responsible for generating control signals based on the input instruction, which determine the behavior of various components within the processor. Let's analyze the code in detail:
@@ -878,7 +882,7 @@ The provided code snippet is the implementation of the Data Memory module (`Data
 
 The Data Memory module serves as the main memory for storing and retrieving data in the processor. Here's a detailed explanation of the module:
 
-1. Inputs and Outputs:
+##### IO
    - `i_clk`: Input clock signal.
    - `i_addr`: Input address for reading or writing data.
    - `i_wData`: Input write data to be stored in memory.
@@ -888,32 +892,37 @@ The Data Memory module serves as the main memory for storing and retrieving data
    - `i_MemtoReg`: Input control signal indicating whether to pass the memory read data or ALU result to the output.
    - `o_rData`: Output read data from the memory.
 
-2. Memory Initialization:
+##### Functionality
+
+Memory Initialization:
    - The module defines a parameter `SIZE_DM` representing the size of the data memory (default is 128 words).
    - It declares a register array `Dmem` of size `SIZE_DM` to store the memory contents.
    - In the initial block, all memory locations are initialized to zero using a loop.
 
-3. Memory Read Operation:
+Memory Read Operation:
    - The first always block is triggered whenever the input signals `i_addr`, `i_MemRead`, `i_MemtoReg`, or `i_ALUresult` change.
    - If `i_MemRead` is asserted (equals 1), it indicates a memory read operation.
      - If `i_MemtoReg` is also asserted, the data at memory location `i_addr` is assigned to the output `o_rData`.
      - Otherwise, the ALU result `i_ALUresult` is assigned to `o_rData`.
    - If `i_MemRead` is not asserted, the ALU result `i_ALUresult` is directly assigned to `o_rData`.
 
-4. Memory Write Operation:
+Memory Write Operation:
    - The second always block is triggered on the positive edge of the clock signal `i_clk`.
    - If `i_MemWrite` is asserted (equals 1), it indicates a memory write operation.
    - The data `i_wData` is written to the memory location specified by `i_addr`.
 
-5. Interaction with Other Components:
+##### Significance in the Processor
+
+Interaction with Other Components:
    - The Data Memory module interacts with the ALU and the Control Unit in the processor.
    - The ALU provides the address (`i_ALUresult`) for memory read or write operations.
    - The Control Unit generates the control signals (`i_MemWrite`, `i_MemRead`, `i_MemtoReg`) to control the behavior of the Data Memory module.
    - The Register File provides the data to be written to memory (`i_wData`) during a memory write operation.
    - The output read data (`o_rData`) is passed back to the Register File or used as needed in subsequent stages of the processor pipeline.
 
-Simply put, the Data Memory module plays a crucial role in storing and retrieving data in the MIPS processor. It responds to memory read and write requests based on the provided address and control signals, and it interacts with other components such as the ALU, Control Unit, and Register File to facilitate data storage and retrieval operations.
+Simply put, the Data Memory module plays a crucial role in storing and retrieving data in the MIPS processor.
 
+It responds to memory read and write requests based on the provided address and control signals, and it interacts with other components such as the ALU, Control Unit, and Register File to facilitate data storage and retrieval operations.
 
 #### Instruction Memory
 
@@ -953,6 +962,7 @@ The provided code represents the Instruction Memory module (Instruction_memory.v
 The Instruction Memory module is responsible for storing the processor's instructions and providing them to the other components of the processor. It acts as a read-only memory (ROM) that holds the program instructions.
 
 ##### IO
+
 Inputs and Outputs:
 - `i_Addr` (input, 32-bit): Represents the memory address from which the instruction should be fetched.
 - `i_Ctr` (output, 6-bit): Outputs the control bits of the fetched instruction (bits [31:26]).
@@ -980,9 +990,10 @@ Interaction with Other Components:
 - The fetched instruction (`i_Instruction`) is then passed to other components of the processor, such as the Control Unit and the Register File, for further processing and execution.
 - The control bits (`i_Ctr`) and function code (`i_Funcode`) are used by the Control Unit to generate appropriate control signals for the processor's datapath.
 
-Significance:
+##### Significance
+
 The Instruction Memory module is a crucial component of the MIPS processor as it holds the program instructions that the processor executes. It provides the instructions to the processor's datapath, enabling the processor to perform the desired operations and execute the program stored in the memory.
 
-To summarize, the Instruction Memory module in the single-cycle MIPS processor acts as a read-only memory that stores the program instructions. It fetches instructions based on the provided memory address and outputs the complete instruction along with its control bits and function code for further processing by other components of the processor.
+##### Summary
 
-
+Esssentially, the Instruction Memory module in the single-cycle MIPS processor acts as a read-only memory that stores the program instructions. It fetches instructions based on the provided memory address and outputs the complete instruction along with its control bits and function code for further processing by other components of the processor.
