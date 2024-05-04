@@ -1411,7 +1411,7 @@ The NOR instruction in the MIPS architecture performs a bitwise NOR operation on
 3. **Execute (EX) Stage:**
    - The ALU performs the bitwise NOR operation on the values of the source registers (rs and rt).
    - The ALU control unit generates the appropriate control signal (4'b1100) for the NOR operation based on the ALUOp bits from the control unit.
-   
+
    ```verilog
    // Inside the ALU module
    always @(i_data1, data2, i_ALUcontrol) begin
@@ -1556,6 +1556,8 @@ Otherwise, `PC_next` is set to the next sequential instruction address (`PC + 4`
 
 # Comparing Verilog vs VHDL 
 
+The following section will compare the experience of developing a single-cycle processor in Verilog vs VHDL.
+
 ## Interesting notes about verilog
 
 The loose typing of Verilog can lead to some useful modules that can be defined in small amounts of code.
@@ -1674,6 +1676,24 @@ While the language is more verbose because you must reinstantiate a component wi
 
 Verilog is more concise and easier to read, but I think that VHDL is more powerful and allows for more control over the design of the processor because of it's type-safety.
 
+To support this, I present the result of the actual lines of code that were written for the processor in VHDL and Verilog.
+
+VHDL Single Cycle MIPS Processor:
+```
+Language                         files          blank        comment           code
+-----------------------------------------------------------------------------------
+VHDL                                65            694           1085           4677
+```
+
+Verilog Single Cycle MIPS Processor:
+```
+Language                         files          blank        comment           code
+-----------------------------------------------------------------------------------
+Verilog-SystemVerilog               10              0              9            555
+```
+
+As you can see, the VHDL processor has almost **10** times the amount of code as the Verilog processor.
+
 Furthermore, I think that the fact that the name of a file in verilog must match the module name is a limitation that VHDL does not have (atleast in our Quartus simulator).
 
 To summarize, I think that VHDL is more suited for larger projects and more complex designs where the type-safety and , while Verilog is more suited for smaller projects and simpler designs.
@@ -1783,6 +1803,8 @@ The test-bench interacts with other components of the processor through the inst
 Overall, this test-bench serves as a framework to verify the functionality of the single-cycle MIPS processor by providing the necessary inputs, initializing the memory, and specifying the simulation duration.
 
 ## Schematics
+
+The following section will include the schematics for the various components of the MIPS processor as written in verilog.
 
 ### Control Unit Schematic
 
