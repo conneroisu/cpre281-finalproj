@@ -291,11 +291,9 @@ As the signal representing the instruction is 5 bits long inside the `controller
 
 This means that we need to decode a 5-bit signal to a 35-bit signal that will be used to display the current instruction on the 7-segment displays.
 
-5 bits = signal
-7 bits needed per 7-segment display
-the longest word = 5 characters
-thus, 5 * 7 = 35 bits needed for 5 7-segment displays
-We are decoding a 5-bit signal to 35 bits.
+If 5-bits are used to represent the instruction, and 7-bits are needed to represent a character on a 7-segment display, then 35-bits are needed to represent the current instruction on 5 7-segment displays as 7 * 5 = 35.
+
+Furthermore, the longest word that can be displayed on the 7-segment displays is 5 characters long, so 5 * 7 = 35 bits are needed to represent the current instruction on the 7-segment displays.
 
 | Func_in | O_out | Operation | Description |
 | :---: | :---: | :---: | :---: |
@@ -313,8 +311,6 @@ We are decoding a 5-bit signal to 35 bits.
 | 111 | 011 | A | JR/AL (Jump Register and Link) |
 | 111 | 100 | A | $\mathrm{BEQ}($ (Branch if Equal) |
 | 111 | 101 | A | BNE (Branch if Not Equal) |
-| 111 | 110 | A | BLEZ (Branch if Less or Equal to Zero) |
-| 111 | 111 | A | BGTZ (Branch if Greater Than Zero) |
 
 The following is the wave-diagram from modelsim/questasim for my test-bench of my processor without the added seven segment displays.
 
@@ -510,6 +506,8 @@ I think that using these language servers and tools in combination with NeoVim (
 
 #### ALU
 
+The following is the code for the ALU module of the MIPS processor called `ALU.v`. (It can be found in the `./proj/` directory)
+
 ```verilog title=ALU.v
 `timescale 1ns / 1ps
 module ALU (
@@ -604,9 +602,10 @@ Overall, the ALU module performs the necessary arithmetic and logical operations
 
 #### Control Unit
 
-The following is the code for the control unit of the MIPS processor.
+The following is the code for the control unit of the MIPS processor called `ControlUnit.v`. (It can be found in the `./proj/` directory)
 
-As named, the `ControlUnit` is responsible for decoding the instruction and generating the control signals for the various components of the processor.
+As named, the `ControlUnit` is responsible for decoding the instruction and generating the control signals for the various components of the processor. 
+
 
 ```verilog title=ControlUnit.v
 `timescale 1ns / 1ps
@@ -849,6 +848,8 @@ Interaction with other components:
 
 #### Data Memory
 
+The following is the code for the Data Memory module in the MIPS processor called `DataMemory.v`. (It can be found in the `./proj/` directory)
+
 ```verilog title=DataMemory.v
 `timescale 1ns / 1ps
 module DataMemory (
@@ -892,6 +893,8 @@ The provided code snippet is the implementation of the Data Memory module (`Data
 The Data Memory module serves as the main memory for storing and retrieving data in the processor. 
 
 ##### IO
+
+The following are the detailed input and output ports of the Data Memory module, `DataMemory.v`:
    - `i_clk`: Input clock signal.
    - `i_addr`: Input address for reading or writing data.
    - `i_wData`: Input write data to be stored in memory.
@@ -904,11 +907,13 @@ The Data Memory module serves as the main memory for storing and retrieving data
 ##### Functionality
 
 Memory Initialization:
+
    - The module defines a parameter `SIZE_DM` representing the size of the data memory (default is 128 words).
    - It declares a register array `Dmem` of size `SIZE_DM` to store the memory contents.
    - In the initial block, all memory locations are initialized to zero using a loop.
 
 Memory Read Operation:
+
    - The first always block is triggered whenever the input signals `i_addr`, `i_MemRead`, `i_MemtoReg`, or `i_ALUresult` change.
    - If `i_MemRead` is asserted (equals 1), it indicates a memory read operation.
      - If `i_MemtoReg` is also asserted, the data at memory location `i_addr` is assigned to the output `o_rData`.
@@ -916,6 +921,7 @@ Memory Read Operation:
    - If `i_MemRead` is not asserted, the ALU result `i_ALUresult` is directly assigned to `o_rData`.
 
 Memory Write Operation:
+
    - The second always block is triggered on the positive edge of the clock signal `i_clk`.
    - If `i_MemWrite` is asserted (equals 1), it indicates a memory write operation.
    - The data `i_wData` is written to the memory location specified by `i_addr`.
@@ -934,6 +940,8 @@ Simply put, the Data Memory module plays a crucial role in storing and retrievin
 It responds to memory read and write requests based on the provided address and control signals, and it interacts with other components such as the ALU, Control Unit, and Register File to facilitate data storage and retrieval operations.
 
 #### Instruction Memory
+
+The following is the code for the Instruction Memory module in the MIPS processor called `InstructionMemory.v`. (It can be found in the `./proj/` directory)
 
 ```verilog title=Instruction_memory.v
 `timescale 1ns / 1ps
@@ -964,7 +972,7 @@ module InstructionMemory (
   end
 endmodule
 ```
-The provided code represents the Instruction Memory module (Instruction_memory.v) for the single-cycle MIPS processor.
+The provided code represents the Instruction Memory module `Instruction_memory.v` for the single-cycle MIPS processor.
 
 ##### Purpose:
 
