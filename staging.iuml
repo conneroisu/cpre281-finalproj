@@ -1,0 +1,60 @@
+@startuml
+scale 450 width
+
+' Define the main stages of the MIPS pipeline
+state Fetch {
+    [*] --> InstructionFetch
+    InstructionFetch: Fetch instruction from\nmemory using PC
+    InstructionFetch --> PCUpdate : Increment PC
+    PCUpdate: Update PC to point to the next instruction
+}
+
+state Decode {
+    [*] --> RegisterRead
+    RegisterRead: Read registers and decode the\ninstruction to determine the operation
+    RegisterRead --> SendToExecution
+}
+
+state Execution {
+    [*] --> ALUOperation
+    ALUOperation: Perform arithmetic or logic operation\nbased on the function code or opcode
+    ALUOperation --> DecideNextStage
+    DecideNextStage: Decide whether to go to Memory\nor Write Back stage
+}
+
+state Memory {
+    [*] --> MemoryAccess
+    MemoryAccess: Access memory if required (load or store)
+    MemoryAccess --> SendToWriteBack
+    MemoryAccess --> UpdatePC : If branch or jump
+}
+
+state WriteBack {
+    [*] --> RegisterWrite
+    RegisterWrite: Write results back to register file
+    RegisterWrite --> NextInstruction : Update PC and get next instruction
+}
+
+' Define transitions between the main stages
+Fetch --> Decode : Fetch complete
+Decode --> Execution : Decode complete
+Execution --> Memory : Execution complete
+Execution --> WriteBack : For R-type instructions
+Memory --> WriteBack : Memory read/write complete
+WriteBack --> Fetch : Start next cycle
+
+' Control Unit affecting all stages
+state ControlUnit {
+    [*] --> GenerateSignals
+    GenerateSignals: Generate control signals based on\ninstruction type and operation
+    GenerateSignals --> AffectStages
+    AffectStages: Send signals to appropriate stages
+}
+
+' Connections from Control Unit to other stages
+ControlUnit --> Fetch : Control fetch stage
+ControlUnit --> Decode : Control decode stage
+ControlUnit --> Execution : Control execution stage
+ControlUnit --> Memory : Control memory stage
+ControlUnit --> WriteBack : Control write back stage
+@enduml

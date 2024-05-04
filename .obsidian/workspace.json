@@ -18,20 +18,14 @@
                 "source": false
               }
             }
-          }
-        ]
-      },
-      {
-        "id": "0135f079d5c6b79b",
-        "type": "tabs",
-        "children": [
+          },
           {
-            "id": "a4dad25623480351",
+            "id": "382342a9aa870a72",
             "type": "leaf",
             "state": {
-              "type": "excalidraw",
+              "type": "image",
               "state": {
-                "file": "Excalidraw/README 2024-05-04 13.56.46.excalidraw.md"
+                "file": "Circuit Diagram.png"
               }
             }
           }
@@ -102,7 +96,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Excalidraw/README 2024-05-04 13.56.46.excalidraw.md",
+                "file": "docs/Pasted image 20240503061843.png",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -119,7 +113,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Excalidraw/README 2024-05-04 13.56.46.excalidraw.md",
+                "file": "docs/Pasted image 20240503061843.png",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -142,7 +136,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Excalidraw/README 2024-05-04 13.56.46.excalidraw.md"
+                "file": "docs/Pasted image 20240503061843.png"
               }
             }
           }
@@ -164,23 +158,66 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "a4dad25623480351",
+  "floating": {
+    "id": "d61a868b32d32485",
+    "type": "floating",
+    "children": [
+      {
+        "id": "1286d25df7d4ab5c",
+        "type": "window",
+        "children": [
+          {
+            "id": "565edcb549459849",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "f12236acde587daa",
+                "type": "leaf",
+                "state": {
+                  "type": "image",
+                  "state": {
+                    "file": "docs/Pasted image 20240503061843.png"
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 1927,
+        "y": 31,
+        "width": 946,
+        "height": 1042,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "f12236acde587daa",
   "lastOpenFiles": [
     "README.md",
+    "docs/SevenSegmentWaveDiagram.png",
+    "Circuit Diagram.png",
+    "README.md~",
+    "sedTmQ4KL",
+    "README2.md",
+    "sedAIc6K0",
+    "sedwTnchv",
+    "sednlUaD3",
+    "README2.html~",
+    "sedVSARAm",
+    "sed7UvRYr",
+    "run.sh~",
+    "Makefile~",
+    "whole-uml.md",
+    "uml.md",
+    "response.md",
+    "claude.md",
+    "whole2.md",
+    "whole.md",
     "Excalidraw/README 2024-05-04 13.56.46.excalidraw.md",
-    "Excalidraw",
-    "a.drawio (1).png",
     "docs/RTL.png",
     "docs/single-cycle.drawio.png",
-    "db/mips_processor.cycloneive_io_sim_cache.45um_ii_1200mv_85c_slow.hsd.wrk",
-    "db/mips_processor.cycloneive_io_sim_cache.45um_ff_1200mv_0c_fast.hsd.wrk",
-    "db/mips_processor.fit.qmsg",
-    "db/mips_processor.cmp.logdb",
-    "db/mips_processor.map.rdb",
-    "db/mips_processor.map.bpm",
-    "db/mips_processor.map.logdb",
-    "db/mips_processor.map.hdb",
-    "db/mips_processor.map.hdb.wrk",
     "Pasted image 20240503065359.png",
     "Pasted image 20240503061843.png"
   ]

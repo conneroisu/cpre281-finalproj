@@ -1,0 +1,7 @@
+h2#toc-title {
+    text-align: center;
+}
+h2#toc-title {
+	align: center !important;
+	text-align: center !important;
+} 
