@@ -66,6 +66,8 @@ Operation: `reg(rd) := reg(rs) + reg(rt);`
 
 #### Operation Overview:
 
+The following is an overview of the operation of the `add` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
+
 - **IF:** The instruction is fetched from memory using the program counter (PC).
 - **ID:** The instruction bits are decoded to determine it is an ADD operation. Registers specified by the source register fields (`rs` and `rt`) are read.
 - **EX:** The ALU performs the addition of the two register values.
@@ -73,6 +75,8 @@ Operation: `reg(rd) := reg(rs) + reg(rt);`
 - **WB:** The result from the ALU is written back to the destination register (`rd`).
 
 #### Operation Breakdown:
+
+The following provides a detailed breakdown of the operation of the `add` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
 
 ##### Stages of the `add` Instruction:
 
@@ -84,7 +88,7 @@ Operation: `reg(rd) := reg(rs) + reg(rt);`
    ```
 
 2. **Instruction Decode (ID):**
-   - The fetched instruction is decoded to determine it is an `add` operation. 
+   - The fetched instruction is decoded to determine it is a `add` operation. 
    - The opcode part of the instruction (which is `000000` for R-type instructions) is identified, and the source register identifiers (`rs` and `rt`) are used to read the respective registers.
    ```verilog
    rs = i_instruction[25:21];
@@ -129,9 +133,9 @@ module MIPS_Processor(input clk, input reset, ...);
             InstructionRegister <= Imem[PC>>2];
             PC <= PC + 4;
             // Decode Instruction
-            rs = InstructionRegister[25:21];
-            rt = InstructionRegister[20:16];
-            rd = InstructionRegister[15:11];
+            rs = InstructionRegister[25:21]; // Extract source register indices
+            rt = InstructionRegister[20:16]; // Extract target register indices
+            rd = InstructionRegister[15:11]; // Extract destination register index
             ReadData1 <= Reg[rs];
             ReadData2 <= Reg[rt];
             // Execute
@@ -163,6 +167,8 @@ Operation: `reg(rt) := reg(rs) + signext(imm);`
 
 #### Operation Breakdown:
 
+The following further breaks down the operation of the `ADDI` instruction in a MIPS processor across the various stages of the processor pipeline.
+
 ##### Stages of the `ADDI` Instruction
 
 1. **Instruction Fetch (IF):**
@@ -170,7 +176,7 @@ Operation: `reg(rt) := reg(rs) + signext(imm);`
    - The instruction is then forwarded to the next stage for decoding.
 
 2. **Instruction Decode (ID):**
-   - The instruction is decoded to identify that it is an `ADDI` operation.
+   - The instruction is decoded to identify that it is a `ADDI` operation.
    - The source register (`rs`) is read to obtain its value. The immediate value (`imm`) is also extracted from the instruction during this phase.
 
 3. **Execute (EX):**
@@ -225,6 +231,7 @@ Operation: `reg(rt) := mem[reg(rs) + signext(imm)];`
 
 #### Operation Breakdown:
 
+The following provides a detailed breakdown of the operation of the `lw` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
 ##### Breakdown of `lw` Instruction Execution
 1. **Instruction Fetch (IF)**:
    - The processor fetches the `lw` instruction from instruction memory using the program counter (PC).
@@ -410,6 +417,8 @@ Operation: if reg(rs) == reg(rt) then PC = BTA else NOP;
 
 #### Operation Breakdown:
 
+The following provides a detailed breakdown of the operation of the `BEQ` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
+
 The `BEQ` (Branch if Equal) instruction in the MIPS architecture follows a specific flow through the processor stages. Here's a step-by-step walkthrough of each stage using Verilog code examples to illustrate how each part of the instruction's lifecycle is handled in hardware.
 
 ##### Instruction Stages for `BEQ`
@@ -543,6 +552,7 @@ Operation: `PC := JTA;`
 
 #### Operation Breakdown:
 
+The following provides a detailed breakdown of the operation of the `J` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
 The J instruction in MIPS is a jump instruction that allows the program to continue execution from a specified address. It is used to alter the flow of control unconditionally.
 
 ##### Instruction Format and Operation:
@@ -596,7 +606,7 @@ endmodule
 
 ##### Verilog Module for Jump Address Calculation:
 
-While in this project, this function is done by `NextProgramCounter` module, here is a simplified version of a module that calculates the jump address in a MIPS processor:
+While in this project, this function is done by `NextProgramCounter` module, here is a simplified version of a module that calculates the jump address in a MIPS processor to further illustrate the concept of jump address calculation:
 
 ```verilog
 module JumpAddressCalculator(
@@ -607,6 +617,7 @@ module JumpAddressCalculator(
     assign jump_address = {pc_plus_4[31:28], address_field << 2};
 endmodule
 ```
+
 - The `ProgramCounter` module handles updating the PC based on whether a jump is taken. If a jump is taken, it sets the PC to the jump address; otherwise, it simply increments the PC.
 - The `JumpAddressCalculator` module calculates the full 32-bit jump address by concatenating the upper 4 bits of the incremented PC (PC+4) with the left-shifted 26-bit address from the jump instruction.
 
@@ -629,6 +640,10 @@ These modules collectively illustrate how the J instruction's effect on the prog
 - **WB (Write Back):** The result from the ALU is written back to the destination register rd.
 
 #### Operation Breakdown:
+
+The following provides a detailed breakdown of the operation of the `ADDU` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
+
+The `ADDU` instruction in MIPS is an unsigned addition operation that does not raise exceptions on overflow. Here's a detailed breakdown of how the `ADDU` instruction is executed across the various stages of the processor pipeline.
 
 ##### IF (Instruction Fetch)
 
@@ -734,6 +749,8 @@ endmodule
 
 
 #### Operation Breakdown:
+
+The following provides a detailed breakdown of the operation of the `SUB` instruction in a MIPS processor, focusing on the key stages of the processor pipeline.
 
 1. **Instruction Fetch (IF) Stage:**
    In this stage, the processor fetches the instruction from instruction memory using the Program Counter (PC).
@@ -992,17 +1009,17 @@ Here's an example of how the AND instruction flows through the different stages 
 always @(i_instruction) begin
   case (i_instruction[31:26])
     // ...
-    6'b001100: begin  // andi
-      o_RegDst = 0;
-      o_ALUSrc = 1;
-      o_MemtoReg = 0;
-      o_RegWrite = 1;
-      o_MemRead = 0;
-      o_MemWrite = 0;
-      o_Branch = 0;
-      o_Bne = 0;
-      o_ALUOp = 2'b11;
-      o_Jump = 0;
+    6'b001100: begin   // andi
+      o_RegDst = 0;    // Destination register is rt
+      o_ALUSrc = 1;    // Second operand is immediate value
+      o_MemtoReg = 0;  // ALU result is written to register
+      o_RegWrite = 1;  // Write to register file
+      o_MemRead = 0;   // No memory read
+      o_MemWrite = 0;  // No memory write
+      o_Branch = 0;    // No branch
+      o_Bne = 0;       // No branch if not equal
+      o_ALUOp = 2'b11; // ALU operation is AND
+      o_Jump = 0;      // No jump
       // ...
     end
     // ...
@@ -1047,7 +1064,7 @@ In the ALU module, when the `ALUcontrol` signal matches the AND operation (4'b00
 
 The ANDI (AND Immediate) instruction performs a bitwise AND operation between a register value and an immediate value.
 
-Here's a explanation of how the ANDI instruction goes through each stage of the MIPS processor pipeline:
+Here's an explanation of how the ANDI instruction goes through each stage of the MIPS processor pipeline:
 
 1. **Instruction Fetch (IF):**
    - The Program Counter (PC) contains the address of the ANDI instruction in the Instruction Memory.
@@ -1437,23 +1454,7 @@ If rs and rt are not equal (`ALU_zero` is 0), `PC_next` is set to the branch tar
 
 Otherwise, `PC_next` is set to the next sequential instruction address (`PC + 4`).
 
-### Conclusion
-
-Each instruction type (R-type, I-type, J-type) generally follows a similar flow with variations primarily in the Execute and Memory Access stages depending on whether the instruction involves arithmetic, memory access, or control flow.
-
-This model provides a consistent framework for understanding how different instructions are processed in the single-cycle MIPS architecture.
-
 # Comparing Verilog vs VHDL 
-
-I think that VHDL actually provides more flexibility within the development of the processor.
-
-The language is more verbose, more type-safe, and allows for more control over the design of the processor.
-
-Verilog is more concise and easier to read, but I think that VHDL is more powerful and allows for more control over the design of the processor.
-
-Furthermore, I think that the fact that the name of a file in verilog must match the module name is a limitation that VHDL does not have (atleast in our Quartus simulator).
-
-Additionally, I think that VHDL is more suited for larger projects and more complex designs, while Verilog is more suited for smaller projects and simpler designs.
 
 ## Interesting notes about verilog
 
@@ -1491,7 +1492,9 @@ Another nice feature of Verilog (specifically VerilogHDL) is the ability to prin
 
 This is a feature that is not present in VHDL and is very useful for debugging and understanding the behavior of the processor.
 
-While you can do this in VHDL, it is not as easy as it is in Verilog because in VHDL you must deal with the typings of the signals and the fact that you must declare the signals before you can use them.
+## Interesting notes about VHDL
+
+While you can do this "print debugging" in VHDL, it is not as easy as it is in Verilog because in VHDL you must deal with the typings of the signals and the fact that you must declare the signals before you can use them.
 
 As an example, the following is the code in VHDL that prints out the values of the signals in the waveform viewer for an n-bit register which was used in a project for CPRE381.
 
@@ -1559,10 +1562,23 @@ BEGIN
     ELSE
       REPORT "TEST 1 PASSED - STORE '1'";
     END IF;
-...
+      // ...
+END behavior;
 ```
+
+## Conclusion
+
+I think that VHDL actually provides more flexibility within the development of the processor.
+
+While the language is more verbose because you must reinstantiate a component within another component to use it, it is more type-safe, and allows for more control over the design of the processor.
+
+Verilog is more concise and easier to read, but I think that VHDL is more powerful and allows for more control over the design of the processor because of it's type-safety.
+
+Furthermore, I think that the fact that the name of a file in verilog must match the module name is a limitation that VHDL does not have (atleast in our Quartus simulator).
+
+To summarize, I think that VHDL is more suited for larger projects and more complex designs where the type-safety and , while Verilog is more suited for smaller projects and simpler designs.
     
-## Breaking down decoding a signal to 7-segment displays
+# Breaking down decoding a signal to 7-segment displays
 
 As the signal representing the instruction is 5 bits long inside the `controller.v` file, we need to decode this signal to display the current instruction on the 7-segment displays.
 
@@ -1572,21 +1588,21 @@ If 5-bits are used to represent the instruction, and 7-bits are needed to repres
 
 Furthermore, the longest word that can be displayed on the 7-segment displays is 5 characters long, so 5 * 7 = 35 bits are needed to represent the current instruction on the 7-segment displays.
 
-| Func_in | O_out | Operation | Description |
-| :---: | :---: | :---: | :---: |
-| 1000 | ox | $(A+B)$ | ADD |
-| 1000 | $1 \mathrm{X}$ | $(\mathrm{A}-\mathrm{B})$ | SuB |
-| 1001 | 00 | $(A \& B)$ | AND |
-| 1001 | 01 | $(A \mid B)$ | OR |
-| 1001 | $\pi$ | $\sim(\mathrm{A} \mid \mathrm{B})$ | NOR |
-| 101 | $\mathrm{xx0}$ | signed $(A)<\operatorname{signed}(B)$ | Set-Less-Than signed |
-| 101 | $x x 1$ | $A<B$ | Set-Less-Than unsigned |
-| 111 | 000 | A | BLTZ (Branch if Less Than Zero) |
-| 111 | 001 | A | BGEZ (Branch if Greater or Equal to Zero) |
-| 111 | 010 | A | J/AL (Jump and Link) |
-| 111 | 011 | A | JR/AL (Jump Register and Link) |
-| 111 | 100 | A | $\mathrm{BEQ}($ (Branch if Equal) |
-| 111 | 101 | A | BNE (Branch if Not Equal) |
+| Func_in | O_out          | Operation                             | Description                               |
+| :---:   | :---:          | :---:                                 | :---:                                     |
+| 1000    | ox             | $(A+B)$                               | ADD                                       |
+| 1000    | $1 \mathrm{X}$ | $(\mathrm{A}-\mathrm{B})$             | SuB                                       |
+| 1001    | 00             | $(A \& B)$                            | AND                                       |
+| 1001    | 01             | $(A \mid B)$                          | OR                                        |
+| 1001    | $\pi$          | $\sim(\mathrm{A} \mid \mathrm{B})$    | NOR                                       |
+| 101     | $\mathrm{xx0}$ | signed $(A)<\operatorname{signed}(B)$ | Set-Less-Than signed                      |
+| 101     | $x x 1$        | $A<B$                                 | Set-Less-Than unsigned                    |
+| 111     | 000            | A                                     | BLTZ (Branch if Less Than Zero)           |
+| 111     | 001            | A                                     | BGEZ (Branch if Greater or Equal to Zero) |
+| 111     | 010            | A                                     | J/AL (Jump and Link)                      |
+| 111     | 011            | A                                     | JR/AL (Jump Register and Link)            |
+| 111     | 100            | A                                     | $\mathrm{BEQ}($ (Branch if Equal)         |
+| 111     | 101            | A                                     | BNE (Branch if Not Equal)                 |
 
 The following is the wave-diagram from modelsim/questasim for my test-bench of my processor without the added seven segment displays.
 
@@ -1668,43 +1684,60 @@ Overall, this test-bench serves as a framework to verify the functionality of th
 
 ## Schematics
 
-Control Unit Schematic: 
+### Control Unit Schematic
+
+The following is the schematic for the control unit of the MIPS processor.
 
 ![[Pasted image 20240503123506.png]]
 
-Register File:
+### Register File
+
+The following is the schematic for the register file of the MIPS processor.
 
 ![[Pasted image 20240503124247.png]]
 
-Data Memory:
+### Data Memory
+
+The following is the schematic for the data memory of the MIPS processor.
 
 ![[Pasted image 20240503124336.png]]
 
-ALU Control:
+### ALU Control
+
+The following is the schematic for the ALU control of the MIPS processor.
 
 ![[Pasted image 20240503124621.png]]
 
-Program Counter Control:
+### Program Counter Control
+
+The following is the schematic for the program counter control of the MIPS processor.
 
 ![[Pasted image 20240503124717.png]]
 
-ALU:
+### ALU
+
+The following is the schematic for the ALU of the MIPS processor.
 
 ![[Pasted image 20240503124838.png]]
 
-Instruction Memory:
+### Instruction Memory
+
+The following is the schematic for the instruction memory of the MIPS processor.
 
 ![[Pasted image 20240503124956.png]]
 
-Program Counter:
+### Program Counter
 
+The following is the schematic for the program counter of the MIPS processor.
 ![[Pasted image 20240503125021.png]]
 
-Waveform of the Processor from modelsim/questasim:
+### Waveform 
+
+The following is the wave form of the Processor from modelsim/questasim:
 
 ![[Pasted image 20240503131222.png]]
 
-## Tooling 
+# Tooling 
 
 First, as learned in CPRE381, I enjoy having test-benches for my code.
 
@@ -2330,9 +2363,7 @@ The following is the commented code for the Data Memory module in the MIPS proce
 // Purpose: The data memory stores data values and provides read and write access to the processor.
 //          It is responsible for handling memory read and write operations based on the control signals
 //          received from the control unit.
-
 `timescale 1ns / 1ps
-
 module DataMemory (
     input i_clk,                    // Clock input
     input [31:0] i_addr,            // Address input for memory access
@@ -2343,12 +2374,9 @@ module DataMemory (
     input i_MemtoReg,               // Control signal for selecting memory or ALU result as the output
     output reg [31:0] o_rData       // Read data output
 );
-
   parameter SIZE_DM = 128;           // Size of the data memory (default: 128 * 32 bits)
   reg [31:0] Dmem[SIZE_DM-1:0];      // Data memory array
-
   integer i;
-
   // Initialize the data memory
   initial begin
     // Fill the data memory with zeros
@@ -2356,7 +2384,6 @@ module DataMemory (
       Dmem[i] = 32'b0;
     end
   end
-
   // Memory read operation
   always @(i_addr or i_MemRead or i_MemtoReg or i_ALUresult) begin
     if (i_MemRead == 1) begin                  // If memory read is enabled
@@ -2369,14 +2396,12 @@ module DataMemory (
       o_rData = i_ALUresult;                   // If memory read is not enabled, select ALU result as output
     end
   end
-
   // Memory write operation
   always @(posedge i_clk) begin                // Triggered on the positive edge of the clock
     if (i_MemWrite == 1) begin                 // If memory write is enabled
       Dmem[i_addr] = i_wData;                  // Write data to the memory array
     end
   end
-
 endmodule
 ```
 
@@ -2402,25 +2427,20 @@ Here the `ProgramCounter.v` file with detailed code comments explaining its purp
 // Purpose: The program counter keeps track of the current instruction address and updates it
 //          to the next instruction address on each clock cycle. It is responsible for providing
 //          the address of the instruction to be fetched from the instruction memory.
-
 `timescale 1ns / 1ps
-
 module ProgramCounter (
     input i_Clk,                // Input clock signal
     input [31:0] i_Next,        // Input next instruction address
     output reg [31:0] o_Out     // Output current instruction address
 );
-
   // Initialize the program counter
   initial begin
     o_Out = -4;                 // Set the initial address to -4 (used for reset or initialization)
   end
-
   // Update the program counter on the positive edge of the clock
   always @(posedge i_Clk) begin
     o_Out = i_Next;             // Update the current address with the next address
   end
-
 endmodule
 ```
 
@@ -2441,9 +2461,7 @@ Here the `ProgramCounter.v` file with detailed code comments explaining its purp
 // Purpose: The program counter keeps track of the current instruction address and updates it to the next address.
 //          It is responsible for providing the current instruction address to the instruction memory and updating
 //          the address based on the next address input.
-
 `timescale 1ns / 1ps
-
 module ProgramCounter (
     input i_Clk,                   // Input clock signal
     input [31:0] i_Next,           // Input next instruction address
@@ -2472,7 +2490,9 @@ Interactions with other components:
 - It provides the current instruction address (`o_Out`) to the `InstructionMemory` module to fetch the corresponding instruction.
 - The `ProgramCounter` is updated on the positive edge of the clock signal (`i_Clk`), which is typically connected to the main processor clock.
 
-The `ProgramCounter` module is to manages the flow of execution by keeping track of the current instruction address. It ensures that instructions are fetched and executed in the correct order by updating the address on each clock cycle based on the next address input provided by the `NextProgramCounter` module.
+The `ProgramCounter` module is to manage the flow of execution by keeping track of the current instruction address.
+
+It ensures that instructions are fetched and executed in the correct order by updating the address on each clock cycle based on the next address input provided by the `NextProgramCounter` module.
 
 ### ALU
 
@@ -2496,9 +2516,7 @@ module ALU (
     output reg        o_Zero,         // Output zero flag (1 if the ALU result is zero, 0 otherwise)
     output reg [31:0] o_ALUresult     // Output ALU result
 );
-
   reg [31:0] data2;
-
   // Determine the second operand based on the ALUSrc control signal
   always @(i_ALUSrc, i_read2, i_Instruction) begin
     if (i_ALUSrc == 0) begin
@@ -2512,7 +2530,6 @@ module ALU (
       end
     end
   end
-
   // Perform the ALU operation based on the ALUcontrol signal
   always @(i_data1, data2, i_ALUcontrol) begin
     case (i_ALUcontrol)
@@ -2530,7 +2547,6 @@ module ALU (
         o_ALUresult = ~(i_data1 | data2);
       default: ;
     endcase
-
     // Set the zero flag if the ALU result is zero
     o_Zero = (o_ALUresult == 0) ? 1 : 0;
   end
@@ -2547,6 +2563,213 @@ Interactions with other components:
 
 ### Control Unit
 
+Certainly! Here's a detailed explanation of the Verilog module provided for a Control Unit in a single cycle MIPS processor. Each line of the module is annotated to explain its function and relevance.
+
+```verilog
+`timescale 1ns / 1ps
+// Defines the time unit as 1 nanosecond and the simulation time precision as 1 picosecond.
+module ControlUnit (
+    input [31:0] i_instruction,     // 32-bit input for the instruction.
+    output reg o_RegDst,            // Determines if rd (1) or rt (0) should be the destination register.
+    output reg o_Jump,              // Control signal for jumping to an instruction address.
+    output reg o_Branch,            // Control signal for branching (beq).
+    output reg o_Bne,               // Control signal for branching not equal (bne).
+    output reg o_MemRead,           // Enables reading from memory (used by lw).
+    output reg o_MemtoReg,          // Determines if the value should come from memory (1) or ALU (0).
+    output reg [1:0] o_ALUOp,       // Control signal for ALU operation type.
+    output reg o_MemWrite,          // Enables writing to memory (used by sw).
+    output reg o_ALUSrc,            // Determines if the second ALU operand is an immediate (1) or register (0).
+    output reg o_RegWrite,          // Enables writing to the register file.
+    output reg [6:0] o_seg_first,   // Segment display outputs to visually represent instruction types or states.
+    output reg [6:0] o_seg_second,  // Each segment holds a 7-segment representation.
+    output reg [6:0] o_seg_third,
+    output reg [6:0] o_seg_fourth,
+    output reg [6:0] o_seg_fifth
+);
+initial begin
+    // Initialize all control signals and display outputs to their default (usually disabled) states.
+    o_RegDst = 0;
+    o_Jump = 0;
+    o_Branch = 0;
+    o_MemRead = 0;
+    o_MemtoReg = 0;
+    o_ALUOp = 2'b00; // Default ALU operation, no operation specified.
+    o_MemWrite = 0;
+    o_ALUSrc = 0;
+    o_RegWrite = 0;
+    o_seg_first = 7'b1111111;  // All segments off (blank).
+    o_seg_second = 7'b1111111;
+    o_seg_third = 7'b1111111;
+    o_seg_fourth = 7'b1111111;
+    o_seg_fifth = 7'b1111111;
+end
+always @(i_instruction) begin
+    // Control logic triggered by any change in the instruction input.
+    case (i_instruction[31:26]) // Decode the opcode part of the instruction.
+      6'b000000: begin  // ARITHMETIC (R-type instructions)
+        o_RegDst = 1;
+        o_ALUSrc = 0;
+        o_MemtoReg = 0;
+        o_RegWrite = 1;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b10; // Specific ALU operation for arithmetic.
+        o_Jump = 0;
+        // Display setup for ARITHMETIC.
+        o_seg_first =  7'b0001000;  // A
+        o_seg_second = 7'b1111010;  // R
+        o_seg_third =  7'b1111001;  // I
+        o_seg_fourth = 7'b0001111;  // T
+        o_seg_fifth =  7'b0001001;  // H
+      end
+      6'b001000: begin  // addi
+        o_RegDst = 0;
+        o_ALUSrc = 1;
+        o_MemtoReg = 0;
+        o_RegWrite = 1;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b00;
+        o_Jump = 0;
+        o_seg_first = 7'b0001000;  // A
+        o_seg_second = 7'b1000010; // d
+        o_seg_third = 7'b1000010;  // d
+        o_seg_fourth = 7'b1001111; // i
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      6'b001100: begin  // andi
+        o_RegDst = 0;
+        o_ALUSrc = 1;
+        o_MemtoReg = 0;
+        o_RegWrite = 1;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b11;
+        o_Jump = 0;
+        o_seg_first = 7'b0001000;  // A
+        o_seg_second = 7'b0101011;  // n
+        o_seg_third = 7'b1000010;  // d
+        o_seg_fourth = 7'b1001111;  // i
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      6'b100011: begin  // lw
+        o_RegDst = 0;
+        o_ALUSrc = 1;
+        o_MemtoReg = 1;
+        o_RegWrite = 1;
+        o_MemRead = 1;
+        o_MemWrite = 0;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b00;
+        o_Jump = 0;
+        o_seg_first = 7'b1000111;  // L
+        o_seg_second = 7'b1001001;  // w
+        o_seg_third = 7'b1111111;  // Blank
+        o_seg_fourth = 7'b1111111;  // Blank
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      6'b101011: begin  // sw
+        o_RegDst = 0;  // X
+        o_ALUSrc = 1;
+        o_MemtoReg = 0;  // X
+        o_RegWrite = 0;
+        o_MemRead = 0;
+        o_MemWrite = 1;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b00;
+        o_Jump = 0;
+        o_seg_first = 7'b0010010;  // S
+        o_seg_second = 7'b1001001;  // w
+        o_seg_third = 7'b1111111;  // Blank
+        o_seg_fourth = 7'b1111111;  // Blank
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      6'b000100: begin  // beq
+        o_RegDst = 0;  // X
+        o_ALUSrc = 0;
+        o_MemtoReg = 0;  // X
+        o_RegWrite = 0;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 1;
+        o_Bne = 0;
+        o_ALUOp = 2'b01;
+        o_Jump = 0;
+        o_seg_first = 7'b1100000;  // b
+        o_seg_second = 7'b0110000;  // e
+        o_seg_third = 7'b0001100;  // q
+        o_seg_fourth = 7'b1111111;  // Blank
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      6'b000101: begin  // bne
+        o_RegDst = 0;  // X
+        o_ALUSrc = 0;
+        o_MemtoReg = 0;  // X
+        o_RegWrite = 0;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 1;
+        o_Bne = 1;
+        o_ALUOp = 2'b01;
+        o_Jump = 0;
+        o_seg_first = 7'b1100000;  // b
+        o_seg_second = 7'b0101011; // n
+        o_seg_third = 7'b0110000;  // e
+        o_seg_fourth = 7'b1111111; // Blank
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      6'b000010: begin  // j
+        o_RegDst = 0;  // X
+        o_ALUSrc = 0;
+        o_MemtoReg = 0;  // X
+        o_RegWrite = 0;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b01;
+        o_Jump = 1;
+        o_seg_first = 7'b1100001;  // J
+        o_seg_second = 7'b1111111; // Blank
+        o_seg_third = 7'b1111111;  // Blank
+        o_seg_fourth = 7'b1111111; // Blank
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+      default: begin
+        // Default case sets all outputs to zero or disables them, providing a safe default state.
+        o_RegDst = 0;
+        o_ALUSrc = 0;
+        o_MemtoReg = 0;
+        o_RegWrite = 0;
+        o_MemRead = 0;
+        o_MemWrite = 0;
+        o_Branch = 0;
+        o_Bne = 0;
+        o_ALUOp = 2'b00;
+        o_Jump = 0;
+        // Display all segments off for undefined instructions.
+        o_seg_first = 7'b1111111;  // Blank
+        o_seg_second = 7'b1111111; // Blank
+        o_seg_third = 7'b1111111;  // Blank
+        o_seg_fourth = 7'b1111111; // Blank
+        o_seg_fifth = 7'b1111111;  // Blank
+      end
+    endcase
+end
+
+endmodule
+```
+
+This code serves as the control logic for a single cycle MIPS processor, managing the routing and operations of data based on the instruction being executed. It adjusts the path and operation of the data in various parts of the processor according to the opcode of the instruction, with added visual output for debugging or educational purposes through a 7-segment display configuration.
+
 ### Testbench
 
 Here is the `mips_tb.v` file with detailed code comments explaining its purpose, functionality, and interactions with other components in the MIPS processor:
@@ -2561,10 +2784,8 @@ Here is the `mips_tb.v` file with detailed code comments explaining its purpose,
 module mips_tb;
   reg clk;                 // Clock signal
   reg rst;                 // Reset signal
-  
   // Segments for the 7-segment displays
   wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
-  
   integer i;               // Loop variable
   // Generate clock signal
   always #(`CYCLE_TIME / 2) clk = ~clk;
@@ -2584,15 +2805,12 @@ module mips_tb;
     for (i = 0; i < 32; i = i + 1) begin
       uut.inst_DataMemory.Dmem[i] = 32'b0;
     end
-    
     // Initialize register file
     for (i = 0; i < 32; i = i + 1) begin
       uut.inst_RegisterFile.RegData[i] = 32'b0;
     end
-    
     clk = 0;                // Initialize clock signal
   end
-  // End the simulation after a certain time
   initial begin
     #1800 $finish;
   end
@@ -2609,4 +2827,12 @@ Interactions with other components:
 
 The `mips_tb` module serves as a testbench to simulate and verify the functionality of the MIPS processor.
 
-It provides the necessary inputs (clock and reset) and initializes the memory and registers. The testbench can be modified to apply different test cases and monitor the processor's behavior through the 7-segment display outputs.
+It provides the necessary inputs (clock and reset) and initializes the memory and registers. The testbench can be modified to apply different test cases through loading different binary converted assembly files and allows one to monitor the processor's behavior through the 7-segment display outputs.
+
+## Conclusion
+
+### Conclusion
+
+Each instruction type (R-type, I-type, J-type) generally follows a similar flow with variations primarily in the Execute and Memory Access stages depending on whether the instruction involves arithmetic, memory access, or control flow.
+
+This model provides a consistent framework for understanding how different instructions are processed in the single-cycle MIPS architecture.
