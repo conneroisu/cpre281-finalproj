@@ -1,3 +1,7 @@
 [
-  "vim-toggle"
+  "vim-toggle",
+  "wikilinks-to-mdlinks-obsidian",
+  "obsidian-plugin-toc",
+  "obsidian-excalidraw-plugin",
+  "automatic-table-of-contents"
 ]

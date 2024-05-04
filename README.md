@@ -1,4 +1,107 @@
+1. [[#Table of Contents|Table of Contents]]
+1. [[#Proposal|Proposal]]
+1. [[#Introduction|Introduction]]
+1. [[#State sequences for each instruction|State sequences for each instruction]]
+	1. [[#State sequences for each instruction#ADD (R-type instruction)|ADD (R-type instruction)]]
+		1. [[#ADD (R-type instruction)#Instruction Overview:|Instruction Overview:]]
+		1. [[#ADD (R-type instruction)#Operation Breakdown:|Operation Breakdown:]]
+			1. [[#Operation Breakdown:#Stages of the `add` Instruction:|Stages of the `add` Instruction:]]
+			1. [[#Operation Breakdown:#Example Code Snippet:|Example Code Snippet:]]
+	1. [[#State sequences for each instruction#ADDI (I-type instruction)|ADDI (I-type instruction)]]
+		1. [[#ADDI (I-type instruction)#Instruction Overview:|Instruction Overview:]]
+		1. [[#ADDI (I-type instruction)#Operation Breakdown:|Operation Breakdown:]]
+			1. [[#Operation Breakdown:#Stages of the `ADDI` Instruction|Stages of the `ADDI` Instruction]]
+			1. [[#Operation Breakdown:#Explanation of the Code Implementation|Explanation of the Code Implementation]]
+	1. [[#State sequences for each instruction#LW (Load Word)|LW (Load Word)]]
+		1. [[#LW (Load Word)#Instruction Overview:|Instruction Overview:]]
+		1. [[#LW (Load Word)#Operation Breakdown:|Operation Breakdown:]]
+			1. [[#Operation Breakdown:#Breakdown of `lw` Instruction Execution|Breakdown of `lw` Instruction Execution]]
+		1. [[#LW (Load Word)#SW (Store Word)|SW (Store Word)]]
+		1. [[#LW (Load Word)#Instruction Overview:|Instruction Overview:]]
+		1. [[#LW (Load Word)#Operation Breakdown:|Operation Breakdown:]]
+		1. [[#LW (Load Word)#Instruction Stages:|Instruction Stages:]]
+			1. [[#Instruction Stages:#Verilog Implementation:|Verilog Implementation:]]
+	1. [[#State sequences for each instruction#BEQ (Branch if Equal)|BEQ (Branch if Equal)]]
+		1. [[#BEQ (Branch if Equal)#Instruction Overview:|Instruction Overview:]]
+		1. [[#BEQ (Branch if Equal)#Operation Breakdown:|Operation Breakdown:]]
+			1. [[#Operation Breakdown:#Instruction Stages for `BEQ`|Instruction Stages for `BEQ`]]
+			1. [[#Operation Breakdown:#Example Verilog for Complete BEQ Control|Example Verilog for Complete BEQ Control]]
+	1. [[#State sequences for each instruction#J (Jump)|J (Jump)]]
+		1. [[#J (Jump)#Instruction Overview:|Instruction Overview:]]
+		1. [[#J (Jump)#Operation Breakdown:|Operation Breakdown:]]
+			1. [[#Operation Breakdown:#Instruction Format and Operation:|Instruction Format and Operation:]]
+			1. [[#Operation Breakdown:#Stages of J Instruction Execution|Stages of J Instruction Execution]]
+			1. [[#Operation Breakdown:#Verilog Module for Jump Address Calculation:|Verilog Module for Jump Address Calculation:]]
+	1. [[#State sequences for each instruction#ADDU (Add Unsigned)|ADDU (Add Unsigned)]]
+		1. [[#ADDU (Add Unsigned)#Instruction Overview:|Instruction Overview:]]
+		1. [[#ADDU (Add Unsigned)#Operation Breakdown:|Operation Breakdown:]]
+			1. [[#Operation Breakdown:#IF (Instruction Fetch)|IF (Instruction Fetch)]]
+			1. [[#Operation Breakdown:#ID (Instruction Decode)|ID (Instruction Decode)]]
+			1. [[#Operation Breakdown:#EX (Execute)|EX (Execute)]]
+		1. [[#ADDU (Add Unsigned)#MEM (Memory Access)|MEM (Memory Access)]]
+		1. [[#ADDU (Add Unsigned)#WB (Write Back)|WB (Write Back)]]
+	1. [[#State sequences for each instruction#SUB (Subtract)|SUB (Subtract)]]
+		1. [[#SUB (Subtract)#Instruction Overview:|Instruction Overview:]]
+		1. [[#SUB (Subtract)#Operation Breakdown:|Operation Breakdown:]]
+	1. [[#State sequences for each instruction#SUBU (Subtract Unsigned)|SUBU (Subtract Unsigned)]]
+		1. [[#SUBU (Subtract Unsigned)#Instruction Overview:|Instruction Overview:]]
+		1. [[#SUBU (Subtract Unsigned)#Operation Breakdown:|Operation Breakdown:]]
+	1. [[#State sequences for each instruction#AND|AND]]
+		1. [[#AND#Instruction Breakdown|Instruction Breakdown]]
+	1. [[#State sequences for each instruction#ANDI (AND Immediate)|ANDI (AND Immediate)]]
+		1. [[#ANDI (AND Immediate)#Instruction Overview:|Instruction Overview:]]
+		1. [[#ANDI (AND Immediate)#Instruction Breakdown|Instruction Breakdown]]
+	1. [[#State sequences for each instruction#OR|OR]]
+		1. [[#OR#Instruction Breakdown|Instruction Breakdown]]
+	1. [[#State sequences for each instruction#ORI (OR Immediate)|ORI (OR Immediate)]]
+		1. [[#ORI (OR Immediate)#Instruction Breakdown|Instruction Breakdown]]
+	1. [[#State sequences for each instruction#NOR|NOR]]
+		1. [[#NOR#Intruction Overview|Intruction Overview]]
+		1. [[#NOR#Instruction Breakdown|Instruction Breakdown]]
+		1. [[#NOR#Instruction Breakdown|Instruction Breakdown]]
+1. [[#Comparing Verilog vs VHDL|Comparing Verilog vs VHDL]]
+1. [[#Comparing Verilog vs VHDL#Interesting notes about verilog|Interesting notes about verilog]]
+1. [[#Comparing Verilog vs VHDL#Interesting notes about VHDL|Interesting notes about VHDL]]
+1. [[#Breaking down decoding a signal to 7-segment displays|Breaking down decoding a signal to 7-segment displays]]
+1. [[#Breaking down decoding a signal to 7-segment displays#Schematics|Schematics]]
+	1. [[#Schematics#Control Unit Schematic|Control Unit Schematic]]
+	1. [[#Schematics#Register File|Register File]]
+	1. [[#Schematics#Data Memory|Data Memory]]
+	1. [[#Schematics#ALU Control|ALU Control]]
+	1. [[#Schematics#Program Counter Control|Program Counter Control]]
+	1. [[#Schematics#ALU|ALU]]
+	1. [[#Schematics#Instruction Memory|Instruction Memory]]
+	1. [[#Schematics#Program Counter|Program Counter]]
+	1. [[#Schematics#Waveform|Waveform]]
+1. [[#Tooling|Tooling]]
+1. [[#Tooling#Components and Explanations|Components and Explanations]]
+		1. [[#Waveform#ALU|ALU]]
+		1. [[#Waveform#Control Unit|Control Unit]]
+			1. [[#Control Unit#IO|IO]]
+				1. [[#IO#Processor Context:|Processor Context:]]
+		1. [[#Waveform#Data Memory|Data Memory]]
+			1. [[#Data Memory#IO|IO]]
+			1. [[#Data Memory#Functionality|Functionality]]
+			1. [[#Data Memory#Significance in the Processor|Significance in the Processor]]
+		1. [[#Waveform#Instruction Memory|Instruction Memory]]
+			1. [[#Instruction Memory#Purpose:|Purpose:]]
+			1. [[#Instruction Memory#IO|IO]]
+			1. [[#Instruction Memory#Functionality|Functionality]]
+			1. [[#Instruction Memory#Processor Context|Processor Context]]
+			1. [[#Instruction Memory#Significance|Significance]]
+			1. [[#Instruction Memory#Summary|Summary]]
+1. [[#Tooling#Verbose Components Code|Verbose Components Code]]
+	1. [[#Verbose Components Code#Data Memory|Data Memory]]
+	1. [[#Verbose Components Code#Instruction Memory|Instruction Memory]]
+	1. [[#Verbose Components Code#Program Counter|Program Counter]]
+	1. [[#Verbose Components Code#ALU|ALU]]
+	1. [[#Verbose Components Code#Control Unit|Control Unit]]
+	1. [[#Verbose Components Code#Testbench|Testbench]]
+1. [[#Tooling#Conclusion|Conclusion]]
+	1. [[#Conclusion#Conclusion|Conclusion]]
+	
 # cpre281-finalproj
+
 
 This is the final project for CPRE281 taught at Iowa State University By Conner Ohnesorge.
 
@@ -10,7 +113,9 @@ Name: **Conner Ohnesorge**
 
 Date: **4/10/2024**
 
+![a.drawio (1).png](a.drawio%20(1).png)
 ## Table of Contents
+
 
 ## Proposal
 
@@ -18,27 +123,15 @@ A MIPS processor that can execute a subset of the MIPS instruction set with addi
 
 More specifically, the processor will be able to execute the following instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI SUB NOR BNE SLT
 
-The frequency of execution for the processor will be variable and will be controlled by a clock divider that divides the 50MHz clock signal by a value set by the divider that will be used to divide the clock signal.
-
-The current instruction being executed will be displayed on the seven segment displays present on the FPGA board.
-
-The processor will be implemented in Verilog and tested using a test-bench.
+The frequency of execution for the processor will be controlled by a clock divider. The current instruction being executed will be displayed on the seven segment displays present on the FPGA board. The processor will be implemented in Verilog and tested using a test-bench.
 
 ## Introduction
 
-The project is a simple MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on EP4CE115F29C7 FPGA board.
+The project is a simple MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on **EP4CE115F29C7** FPGA board.
 
-As a result of this desired function (and it's actualation into reality), the processor can technically be used to do all the other projects from other students in the class.
+As a result of this desired function (and it's actualation into reality), the processor can technically be used to do **all** the other projects from other students in the class. As I took this class whilst also taking CPRE381, I additionally decided to compare and contrast the experience writing the same processor in both Verilog and VHDL.
 
-![[Pasted image 20240415105047.png]]
-
-As I took this class whilst also taking CPRE381, I additionally decided to compare and contrast the experience writing the same processor in both Verilog and VHDL.
-
-A basic single-cycle MIPS processor:
-
-![[Pasted image 20240415102706.png]]
-
-The main processor state machine has five states:
+While each instruction state machine will be broken down below, the main processor state machine has **five** states:
 
 **Fetch**: In this state, the processor fetches the next instruction from memory.
 **Decode**: In this state, the processor decodes the instruction to determine what operation to perform.
@@ -46,9 +139,6 @@ The main processor state machine has five states:
 **Memory**: In this state, the processor accesses memory to read or write data.
 **Write-back**: In this state, the processor writes the results of the instruction to a register.
 
-4 bit adder
-
-![[Pasted image 20240423092137.png]]
 
 Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI SUB NOR BNE
 
@@ -149,6 +239,7 @@ endmodule
 
 The `add` instruction demonstrates the typical use of the R-type format in MIPS instruction set architecture, involving fetching the instruction, decoding it, executing the operation in the ALU, skipping memory access, and finally writing back the result to the register file.
 
+![[README 2024-05-04 13.56.46.excalidraw]]
 ### ADDI (I-type instruction)
 
 Name (format, op, function): `add immediate (I,8,na)`
