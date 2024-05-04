@@ -16,7 +16,7 @@ Date: **4/10/2024**
 
 A MIPS processor that can execute a subset of the MIPS instruction set with additional features such as a clock divider, displaying the current instruction on the seven segment displays present on the FPGA board, and the ability to change the frequency of execution of the processor.
 
-More specifically, the processor will be able to execute the following instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB XORI NOR BNE SLT
+More specifically, the processor will be able to execute the following instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI SUB NOR BNE SLT
 
 The frequency of execution for the processor will be variable and will be controlled by a clock divider that divides the 50MHz clock signal by a value set by the divider that will be used to divide the clock signal.
 
@@ -50,11 +50,21 @@ The main processor state machine has five states:
 
 ![[Pasted image 20240423092137.png]]
 
-Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB XORI NOR BNE
+Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI SUB NOR BNE
 
 ## State sequences for each instruction
 
- ADD (R-type instruction)
+The following is the state sequence for each instruction that are supported by the processor.
+
+### ADD (R-type instruction)
+
+Name (format, op, function): `add (R,0,32)`
+ 
+Syntax: `add rd,rs,rt`
+
+Operation: `reg(rd) := reg(rs) + reg(rt);`
+
+#### Operation Overview:
 
 - **IF:** The instruction is fetched from memory using the program counter (PC).
 - **ID:** The instruction bits are decoded to determine it is an ADD operation. Registers specified by the source register fields (`rs` and `rt`) are read.
@@ -62,7 +72,88 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No action (not used by ADD).
 - **WB:** The result from the ALU is written back to the destination register (`rd`).
 
- ADDI (I-type instruction)
+#### Operation Breakdown:
+
+##### Stages of the `add` Instruction:
+
+1. **Instruction Fetch (IF):**
+   - The instruction is fetched from memory using the Program Counter (PC).
+   - This stage corresponds to reading the instruction code from the instruction memory. The address comes from the PC which points to the location of the next instruction to execute.
+   ```verilog
+   i_Instruction = Imem[i_Addr>>2];
+   ```
+
+2. **Instruction Decode (ID):**
+   - The fetched instruction is decoded to determine it is an `add` operation. 
+   - The opcode part of the instruction (which is `000000` for R-type instructions) is identified, and the source register identifiers (`rs` and `rt`) are used to read the respective registers.
+   ```verilog
+   rs = i_instruction[25:21];
+   rt = i_instruction[20:16];
+   ```
+
+3. **Execute (EX):**
+   - The ALU (Arithmetic Logic Unit) performs the addition of the values in the source registers (`rs` and `rt`). 
+   - The values from these registers are fed into the ALU where the addition is performed based on the control signal (`ALUOp`) from the control unit.
+   ```verilog
+   o_ALUresult = i_data1 + i_data2;
+   ```
+
+4. **Memory Access (MEM):**
+   - For the `add` instruction, this stage is not utilized as no memory access is required (i.e., no data is read from or written to the memory).
+   ```verilog
+   // No memory operation required for 'add'
+   ```
+
+5. **Write Back (WB):**
+   - The result from the ALU is written back into the destination register (`rd`). 
+   - This is where the output of the ALU operation is stored back into the register file, specifically into the register indicated by the `rd` field of the instruction.
+   ```verilog
+   Reg[rd] = o_ALUresult;
+   ```
+
+##### Example Code Snippet:
+
+Here is a simplified Verilog snippet that captures the essence of the `add` instruction's operation in a MIPS processor, focusing on the key stages of the mips architecture (IF, ID, EX, MEM, WB).
+
+```verilog
+module MIPS_Processor(input clk, input reset, ...);
+    // Registers and other declarations here
+    reg [31:0] PC, ALUResult, Reg[31:0];
+    reg [31:0] InstructionRegister, ReadData1, ReadData2;
+    integer rd, rs, rt;
+    always @(posedge clk) begin
+        if (reset) begin
+            PC <= 0;  // Reset PC
+        end else begin
+            // Fetch Instruction
+            InstructionRegister <= Imem[PC>>2];
+            PC <= PC + 4;
+            // Decode Instruction
+            rs = InstructionRegister[25:21];
+            rt = InstructionRegister[20:16];
+            rd = InstructionRegister[15:11];
+            ReadData1 <= Reg[rs];
+            ReadData2 <= Reg[rt];
+            // Execute
+            ALUResult <= ReadData1 + ReadData2;
+            // Write Back
+            Reg[rd] <= ALUResult;
+        end
+    end
+endmodule
+```
+
+The `add` instruction demonstrates the typical use of the R-type format in MIPS instruction set architecture, involving fetching the instruction, decoding it, executing the operation in the ALU, skipping memory access, and finally writing back the result to the register file.
+
+### ADDI (I-type instruction)
+
+Name (format, op, function): `add immediate (I,8,na)`
+
+Syntax: `addi rt,rs,imm`
+
+Operation: `reg(rt) := reg(rs) + signext(imm);`
+
+#### Operation Overview:
 
 - **IF:** Fetch the instruction from memory.
 - **ID:** Decode the instruction; read the source register (`rs`).
@@ -70,7 +161,61 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No action.
 - **WB:** The result is written back to the target register (`rt`).
 
- LW (Load Word)
+#### Operation Breakdown:
+
+##### Stages of the `ADDI` Instruction
+
+1. **Instruction Fetch (IF):**
+   - The processor retrieves the `ADDI` instruction from memory based on the current Program Counter (PC) value.
+   - The instruction is then forwarded to the next stage for decoding.
+
+2. **Instruction Decode (ID):**
+   - The instruction is decoded to identify that it is an `ADDI` operation.
+   - The source register (`rs`) is read to obtain its value. The immediate value (`imm`) is also extracted from the instruction during this phase.
+
+3. **Execute (EX):**
+   - The Arithmetic Logic Unit (ALU) performs the addition operation. It adds the value retrieved from the source register (`reg(rs)`) to the sign-extended immediate value (`signext(imm)`).
+   - This computation involves extending the immediate value to match the register size (typically 32 bits in MIPS), preserving its sign to handle negative numbers correctly.
+
+4. **Memory Access (MEM):**
+   - The `ADDI` instruction does not involve any memory access, so this stage is effectively a no-op (no operation) for this instruction.
+
+5. **Write Back (WB):**
+   - The result of the addition from the ALU is written back to the destination register (`reg(rt)`).
+   - This step updates the target register with the computed value, completing the execution of the instruction.
+
+##### Explanation of the Code Implementation
+
+The operation of `ADDI` can be modeled in a simulated or actual MIPS processor using the following Verilog-like pseudocode:
+
+```verilog
+module addi_instruction(rs, rt, imm, output rt_value);
+    input [4:0] rs, rt;       // Source and target register indices (5 bits each)
+    input [15:0] imm;         // 16-bit immediate value
+    output [31:0] rt_value;   // Output to target register
+    wire [31:0] rs_value;     // Value from source register
+    wire [31:0] extended_imm; // Sign-extended immediate value
+    assign extended_imm = {
+      {16{imm[15]}}, imm      // Sign-extend the immediate value
+    }; 
+    assign rt_value = rs_value + extended_imm;
+endmodule
+```
+
+- `rs` and `rt` are inputs representing the source and destination register indices.
+- `imm` is the 16-bit immediate value input.
+- The immediate value is sign-extended to 32 bits using Verilog's bit replication and concatenation (`{{16{imm[15]}}, imm}`), where `imm[15]` is the most significant bit (MSB) of the immediate value, replicated 16 times to fill the upper half of a 32-bit word.
+- The sum of the sign-extended immediate and the source register value is computed and assigned to `rt_value`, which would be written back to the register file in the actual processor hardware.
+
+###  LW (Load Word)
+
+Name (format, op, function): `load word (I,35,na)`  
+
+Syntax: `lw rt,imm(rs)`  
+
+Operation: `reg(rt) := mem[reg(rs) + signext(imm)];`
+
+#### Operation Overview:
 
 - **IF:** Fetch the instruction.
 - **ID:** Decode the instruction; read the base address register (`rs`).
@@ -78,7 +223,60 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** Access the memory at the computed address and read the word.
 - **WB:** Write the loaded word into the target register (`rt`).
 
- SW (Store Word)
+#### Operation Breakdown:
+
+##### Breakdown of `lw` Instruction Execution
+1. **Instruction Fetch (IF)**:
+   - The processor fetches the `lw` instruction from instruction memory using the program counter (PC).
+   - Code snippet showing fetching the instruction from memory:
+     ```verilog
+     i_Instruction = Imem[i_Addr>>2];
+     ```
+
+2. **Instruction Decode (ID)**:
+   - The fetched instruction is decoded to extract the opcode, source register (`rs`), target register (`rt`), and the immediate value.
+   - The base address (content of `rs`) is read from the register file during this phase.
+   - Code snippet showing the decoding and reading of the base address:
+     ```verilog
+     read_data1 = RegData[i_rs];  // Assume i_rs is the source register index
+     ```
+
+3. **Execute (EX)**:
+   - The effective memory address is calculated by adding the sign-extended immediate value to the base address read from `rs`.
+   - This calculation typically happens in the ALU.
+   - Code snippet that could represent the address calculation in ALU (not specifically shown in your snippets):
+     ```verilog
+     address = read_data1 + sign_extend(imm);  // Conceptual code
+     ```
+
+4. **Memory Access (MEM)**:
+   - The processor accesses the memory location computed in the Execute stage.
+   - The word at this memory address is read.
+   - Code snippet showing memory access to read data:
+     ```verilog
+     if (i_MemRead == 1) {
+       o_rData = Dmem[i_addr];  // Read memory at calculated address
+     }
+     ```
+
+5. **Write Back (WB)**:
+   - The data retrieved from memory is written into the target register (`rt`).
+   - Code snippet showing the write-back to the register:
+     ```verilog
+     RegData[i_rt] <= i_wData;  // Assume i_rt is the target register index and i_wData is data read from memory
+     ```
+
+
+
+#### SW (Store Word)
+
+Name (format, op, function): store word (I,43,na)  
+
+Syntax: `sw rt,imm(rs)`  
+
+Operation: `mem[reg(rs) + signext(imm)] := reg(rt);` 
+
+#### Operation Overview:
 
 - **IF:** Fetch the instruction.
 - **ID:** Decode the instruction; read the base address register (`rs`) and the register to be stored (`rt`).
@@ -86,7 +284,123 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** Write the value from `rt` into the calculated memory address.
 - **WB:** No write-back step for store instructions.
 
- BEQ (Branch if Equal)
+#### Operation Breakdown:
+
+The `SW` instruction in the MIPS architecture is used to store a 32-bit word from a register into memory. Here's an in-depth breakdown of how the `SW` instruction is executed across the various stages in a MIPS processor.
+
+#### Instruction Stages:
+
+1. **IF (Instruction Fetch):**
+   - The instruction is fetched from the instruction memory using the current Program Counter (PC).
+
+2. **ID (Instruction Decode):**
+   - The instruction is decoded to identify it as a `SW` instruction.
+   - The base address register (`rs`) and the register containing data to be stored (`rt`) are identified and read.
+
+3. **EX (Execute):**
+   - The effective memory address is calculated by adding the sign-extended immediate (offset) to the value in the base register (`rs`).
+
+4. **MEM (Memory Access):**
+   - The data in register `rt` is written to the calculated memory address.
+
+5. **WB (Write Back):**
+   - No write-back is performed for the `SW` instruction, as this instruction does not modify any register contents.
+
+##### Verilog Implementation:
+
+**Data Memory Module (`DataMemory.v`):**
+
+Below is a simplified Verilog module for a data memory component that can be used to store and retrieve data in a MIPS processor. This module includes logic for both read and write operations.
+
+```verilog
+module DataMemory (
+    input clk,
+    input memWrite,
+    input [31:0] address,
+    input [31:0] writeData,
+    output reg [31:0] readData
+);
+    reg [31:0] memory [0:1023];
+    always @(posedge clk) begin
+        if (memWrite) begin
+            memory[address >> 2] <= writeData;  // Write operation
+        end else begin
+            readData <= memory[address >> 2];   // Read operation
+        end
+    end
+endmodule
+```
+
+**Processor Control Logic (`ProcessorControl.v`):**
+
+Below is an extract from the ProcessorControl module that controls the behavior of the processor based on the opcode of the instruction being executed. This snippet shows how the control signals are set for the `SW` instruction.
+
+```verilog
+module ProcessorControl (
+    input [5:0] opcode,
+    output reg memWrite,
+    output reg aluSrc,
+    output reg regDst,
+    output reg memToReg,
+    output reg regWrite
+);
+    always @(*) begin
+        case (opcode)
+            6'b101011: begin  // Opcode for SW
+                memWrite = 1'b1;
+                aluSrc = 1'b1;
+                regDst = 1'b0;
+                memToReg = 1'b0;
+                regWrite = 1'b0;
+            end
+            default: begin
+                memWrite = 1'b0;
+                aluSrc = 1'b0;
+                regDst = 1'b0;
+                memToReg = 1'b0;
+                regWrite = 1'b0;
+            end
+        endcase
+    end
+endmodule
+```
+
+**Simplified Top-Level MIPS Module:**
+```verilog
+module MIPSProcessor (
+    input clk,
+    input reset,
+    output [31:0] pc,
+    input [31:0] instruction,
+    output [31:0] aluResult,
+    output [31:0] writeData,
+    output [31:0] readData
+);
+    wire [5:0] opcode = instruction[31:26];
+    wire [4:0] rs = instruction[25:21];
+    wire [4:0] rt = instruction[20:16];
+    wire [15:0] imm = instruction[15:0];
+    wire [31:0] signExtImm = {{16{imm[15]}}, imm};
+    wire [31:0] regDataRs, regDataRt;
+    wire memWrite, aluSrc, regDst, memToReg, regWrite;
+    // Instantiate control logic
+    ProcessorControl control(opcode, memWrite, aluSrc, regDst, memToReg, regWrite);
+    // ALU operation (assuming already instantiated and connected)
+    // Data memory operation
+    DataMemory dataMem(clk, memWrite, aluResult, regDataRt, readData);
+    // Register file operations and other connections would be defined here
+endmodule
+```
+
+### BEQ (Branch if Equal)
+
+Name (format, op, function): `branch on equal (I,4,na)`
+
+Syntax: `beq rs,rt,label`  
+
+Operation: if reg(rs) == reg(rt) then PC = BTA else NOP; 
+
+#### Operation Overview:
 
 - **IF:** Fetch the instruction.
 - **ID:** Decode the instruction; read the two registers (`rs` and `rt`) and compare them.
@@ -94,7 +408,132 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No memory access.
 - **WB:** No write-back; update the PC to the branch address if the condition is met, otherwise increment the PC as usual.
 
- J (Jump)
+#### Operation Breakdown:
+
+The `BEQ` (Branch if Equal) instruction in the MIPS architecture follows a specific flow through the processor stages. Here's a step-by-step walkthrough of each stage using Verilog code examples to illustrate how each part of the instruction's lifecycle is handled in hardware.
+
+##### Instruction Stages for `BEQ`
+
+1. **IF (Instruction Fetch) Stage**:
+   - The instruction is fetched from the instruction memory using the current Program Counter (PC).
+   - The PC is incremented to point to the next instruction (PC = PC + 4).
+
+   ```verilog
+   module InstructionFetch(
+       input clk,
+       input reset,
+       input [31:0] next_pc,
+       output reg [31:0] instr,
+       output reg [31:0] pc
+   );
+       always @(posedge clk or posedge reset) begin
+           if (reset) begin
+               pc <= 32'h00000000; // Reset PC to start
+           end else begin
+               pc <= next_pc; // Update PC to next PC
+               instr <= instruction_memory[pc >> 2]; // Fetch instruction from memory
+           end
+       end
+   endmodule
+   ```
+
+2. **ID (Instruction Decode) Stage**:
+   - Decode the fetched instruction to identify it as `BEQ`.
+   - Read the two source registers (`rs` and `rt`) based on the instruction fields.
+   - Set up the control signals for the ALU to perform a subtraction (`rs - rt`).
+
+   ```verilog
+   module InstructionDecode(
+       input [31:0] instr,
+       output reg [4:0] rs,
+       output reg [4:0] rt,
+       output reg [15:0] immediate
+   );
+       always @(*) begin
+           rs = instr[25:21];
+           rt = instr[20:16];
+           immediate = instr[15:0]; // For branch offset
+       end
+   endmodule
+   ```
+
+3. **EX (Execute) Stage**:
+   - Compute the target address for branching by sign-extending the immediate field and shifting left by 2 bits (since it's word-aligned), then adding this to the PC + 4 (already incremented PC from IF stage).
+   - ALU checks if `rs` and `rt` are equal by subtracting and checking if the result is zero.
+
+   ```verilog
+   module ALU(
+       input [31:0] rs_val,
+       input [31:0] rt_val,
+       input [31:0] sign_ext_imm,
+       input [2:0] alu_control,
+       output reg zero,
+       output reg [31:0] alu_result
+   );
+       wire [31:0] branch_target = (sign_ext_imm << 2) + pc_plus_4;
+       always @(*) begin
+           case(alu_control)
+               3'b010: begin // Subtract for BEQ
+                   alu_result = rs_val - rt_val;
+                   zero = (alu_result == 0) ? 1'b1 : 1'b0;
+               end
+           endcase
+       end
+   endmodule
+   ```
+
+4. **MEM (Memory Access) Stage**:
+   - For `BEQ`, there is no memory access or data memory operation.
+
+5. **WB (Write-Back) Stage**:
+   - Update the PC to the branch target if `rs` == `rt` (if zero flag from ALU is true).
+   - If `rs` != `rt`, increment the PC to the next instruction (already done in IF).
+
+   ```verilog
+   always @(posedge clk) begin
+       if (branch_taken) begin
+           pc <= branch_target; // Update PC if branch is taken
+       end
+   endmodule
+   ```
+
+##### Example Verilog for Complete BEQ Control
+
+Here's how a simpler control unit might orchestrate these stages just for the `BEQ` instruction in a MIPS processor:
+
+```verilog
+module ControlUnit(
+    input [5:0] opcode,
+    output reg branch,
+    output reg alu_src,
+    output reg [2:0] alu_control
+);
+    always @(*) begin
+        case(opcode)
+            6'b000100: begin // BEQ
+                branch = 1'b1;
+                alu_src = 1'b0; // Use rs, rt directly
+                alu_control = 3'b010; // Set ALU to subtract
+            end
+            default: begin
+                branch = 1'b0;
+                alu_src = 1'b0;
+                alu_control = 3'b000;
+            end
+        endcase
+    end
+endmodule
+```
+
+### J (Jump)
+
+Name (format, op, function): `jump (J,2,na)`
+
+Syntax: `j`
+
+Operation: `PC := JTA;`   
+
+#### Operation Overview:
 
 - **IF:** Fetch the instruction.
 - **ID:** Decode the instruction.
@@ -102,7 +541,86 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No memory access.
 - **WB:** Update the PC to the jump address.
 
- ADDU (Add Unsigned)
+#### Operation Breakdown:
+
+The J instruction in MIPS is a jump instruction that allows the program to continue execution from a specified address. It is used to alter the flow of control unconditionally.
+
+##### Instruction Format and Operation:
+- **Name (format, op, function):** `jump (J,2,na)`
+- **Syntax:** `j target`
+- **Operation:** `PC := JTA;` where JTA (Jump Target Address) is calculated from the instruction itself.
+
+##### Stages of J Instruction Execution
+
+Here's a breakdown of how the J instruction progresses through each stage of the MIPS pipeline:
+
+1. **IF (Instruction Fetch):**
+   - The instruction is fetched from the instruction memory at the current program counter (PC) address.
+   - The PC is then incremented by 4 to point to the next sequential instruction (though this increment will be overridden by the jump).
+
+2. **ID (Instruction Decode):**
+   - The opcode of the instruction is decoded to identify it as a jump instruction.
+   - No registers are read in this stage because the jump instruction does not involve any registers.
+
+3. **EX (Execute):**
+   - The jump target address (JTA) is calculated from the address field of the instruction.
+   - JTA is formed by taking the upper 4 bits of the PC (from the incremented value that points to the next instruction) and concatenating them with the 26-bit address field from the instruction, shifted left by 2 bits (to word-align the address).
+
+4. **MEM (Memory Access):**
+   - There is no memory access for the jump instruction.
+
+5. **WB (Write Back):**
+   - The PC is updated to the new address calculated in the Execute stage. This is the jump target address where the program will continue executing.
+
+Verilog Module for Program Counter with just Jump:
+
+```verilog
+module ProgramCounter(
+    input clk,
+    input reset,
+    input [31:0] jump_address,  // Jump target address input
+    input jump,                // Control signal to indicate a jump
+    output reg [31:0] pc       // Program counter output
+);
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            pc <= 32'b0;  // Reset the PC to 0 on reset
+        end else if (jump) begin
+            pc <= jump_address;  // Update PC to the jump address if jump is asserted
+        end else begin
+            pc <= pc + 4;  // Increment PC by 4 on each clock cycle otherwise
+        end
+    end
+endmodule
+```
+
+##### Verilog Module for Jump Address Calculation:
+
+While in this project, this function is done by `NextProgramCounter` module, here is a simplified version of a module that calculates the jump address in a MIPS processor:
+
+```verilog
+module JumpAddressCalculator(
+    input [25:0] address_field,  // Address field from the jump instruction
+    input [31:0] pc_plus_4,      // PC + 4 (the incremented PC pointing to the next instruction)
+    output [31:0] jump_address   // Calculated jump target address
+);
+    assign jump_address = {pc_plus_4[31:28], address_field << 2};
+endmodule
+```
+- The `ProgramCounter` module handles updating the PC based on whether a jump is taken. If a jump is taken, it sets the PC to the jump address; otherwise, it simply increments the PC.
+- The `JumpAddressCalculator` module calculates the full 32-bit jump address by concatenating the upper 4 bits of the incremented PC (PC+4) with the left-shifted 26-bit address from the jump instruction.
+
+These modules collectively illustrate how the J instruction's effect on the program counter can be implemented in hardware using Verilog.
+
+### ADDU (Add Unsigned)
+
+`add unsigned (R,0,33)` 
+
+`addu rd,rs,rt`
+
+`reg(rd) := reg(rs) + reg(rt);` 
+
+#### Operation Overview:
 
 - **IF (Instruction Fetch):** The instruction is fetched from memory using the program counter (PC).
 - **ID (Instruction Decode):** The opcode is decoded; registers rs and rt are read.
@@ -110,7 +628,103 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM (Memory Access):** No action needed (pass-through).
 - **WB (Write Back):** The result from the ALU is written back to the destination register rd.
 
- SUB, SUBU (Subtract, Subtract Unsigned)
+#### Operation Breakdown:
+
+##### IF (Instruction Fetch)
+
+In this stage, the instruction is fetched from the instruction memory based on the current value of the Program Counter (PC). Here's how you might see this operation in Verilog:
+
+```verilog
+// Instruction Fetch module
+module InstructionFetch(
+    input [31:0] i_PC,            // Program Counter
+    output [31:0] o_Instruction   // Fetched instruction
+);
+    reg [31:0] instruction_memory[255:0]; // Memory array
+    
+    // Fetch the instruction
+    assign o_Instruction = instruction_memory[i_PC >> 2]; // Word aligned access
+endmodule
+```
+
+##### ID (Instruction Decode)
+
+During this stage, the opcode of the fetched instruction is decoded, and the register file is accessed to read the contents of registers `rs` and `rt`.
+
+```verilog
+// Instruction Decode module
+module InstructionDecode(
+    input [31:0] i_Instruction,   // Input from IF stage
+    output [4:0] o_rs, o_rt, o_rd // Register specifiers
+);
+    // Decode the instruction
+    assign o_rs = i_Instruction[25:21];
+    assign o_rt = i_Instruction[20:16];
+    assign o_rd = i_Instruction[15:11];
+endmodule
+```
+
+##### EX (Execute)
+
+The ALU adds the values from registers `rs` and `rt`. Here's a snippet of the ALU performing this addition:
+
+```verilog
+// Arithmetic Logic Unit (ALU) module
+module ALU(
+    input [31:0] i_data1, i_data2,    // Data from registers rs and rt
+    input [3:0] i_ALUControl,         // Control signals
+    output reg [31:0] o_result        // Result of the ALU operation
+);
+    always @(i_data1, i_data2, i_ALUControl) begin
+        case (i_ALUControl)
+            4'b0010: o_result = i_data1 + i_data2; // ADDU operation
+            // Other ALU operations...
+        endcase
+    end
+endmodule
+```
+
+#### MEM (Memory Access)
+
+This stage is a pass-through for the ADDU instruction since it does not involve memory access.
+
+```verilog
+// Memory Access Stage - No action needed for ADDU
+module MemoryAccess(
+    input [31:0] i_ALUResult,
+    output [31:0] o_MemOut
+);
+    assign o_MemOut = i_ALUResult;  // Direct pass-through
+endmodule
+```
+
+#### WB (Write Back)
+
+The result from the ALU is written back to the destination register `rd`.
+
+```verilog
+// Write Back stage
+module WriteBack(
+    input [31:0] i_ALUResult,       // Result from ALU
+    input [4:0] i_rd,               // Destination register
+    output reg [31:0] o_WriteData   // Data to write back
+);
+    // Write the data back to the register file
+    always @(i_ALUResult) begin
+        o_WriteData = i_ALUResult;
+    end
+endmodule
+```
+
+### SUB (Subtract)
+
+`subtract (R,0,34)`
+ 
+`sub rd,rs,rt`
+
+`reg(rd) := reg(rs) [ reg(rt);` 
+
+#### Operation Overview:
 
 - **IF:** Fetch the instruction using the PC.
 - **ID:** Decode the instruction; read registers rs and rt.
@@ -118,7 +732,224 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No action needed (pass-through).
 - **WB:** The ALU result is written back to register rd.
 
- AND, ANDI (AND, AND Immediate)
+
+#### Operation Breakdown:
+
+1. **Instruction Fetch (IF) Stage:**
+   In this stage, the processor fetches the instruction from instruction memory using the Program Counter (PC).
+
+```verilog
+// Instruction Fetch (IF) stage
+module InstructionFetch(
+    input [31:0] i_pc,
+    output reg [31:0] o_instruction
+);
+    // Assume IMem is an array storing instructions
+    reg [31:0] IMem[0:1023]; 
+
+    // Fetch instruction
+    always @(i_pc) begin
+        o_instruction = IMem[i_pc >> 2]; // Word aligned fetch
+    end
+endmodule
+```
+
+2. **Instruction Decode (ID) Stage:**
+   Here, the instruction is decoded, and the relevant registers are read. The operation is identified, and signals are prepared for the execution stage.
+
+```verilog
+// Instruction Decode (ID) stage
+module InstructionDecode(
+    input [31:0] i_instruction,
+    output reg [4:0] o_rs, o_rt, o_rd,
+    output reg [5:0] o_opcode, o_funct
+);
+    always @(i_instruction) begin
+        o_opcode = i_instruction[31:26];
+        o_rs = i_instruction[25:21];
+        o_rt = i_instruction[20:16];
+        o_rd = i_instruction[15:11];
+        o_funct = i_instruction[5:0];
+    end
+endmodule
+```
+
+3. **Execution (EX) Stage:**
+   The ALU performs the subtraction based on the decoded instruction. The operands are taken from the registers identified in the ID stage.
+
+```verilog
+// Execution (EX) stage - ALU for SUB operation
+module ALU(
+    input [31:0] i_data1, i_data2,
+    input [3:0] i_ALUcontrol,
+    output reg [31:0] o_result
+);
+    always @(*) begin
+        case(i_ALUcontrol)
+            4'b0110: o_result = i_data1 - i_data2; // SUB operation
+            // Additional cases for other ALU operations
+        endcase
+    end
+endmodule
+```
+
+4. **Memory (MEM) Stage:**
+   For the `SUB` instruction, there is no memory operation needed. This stage can be passed through or handled with a control signal that disables memory operations.
+
+```verilog
+// Memory (MEM) stage pass-through for SUB
+module MemoryStage(
+    input i_MemRead, i_MemWrite,
+    input [31:0] i_address, i_writeData,
+    output reg [31:0] o_readData
+);
+    // Memory array
+    reg [31:0] DMem[0:1023];
+
+    always @(*) begin
+        if (i_MemWrite) DMem[i_address >> 2] = i_writeData;
+        if (i_MemRead) o_readData = DMem[i_address >> 2];
+    end
+endmodule
+```
+
+5. **Write Back (WB) Stage:**
+   The result of the ALU operation is written back to the register file, particularly in the register specified by `rd`.
+
+```verilog
+// Write Back (WB) stage
+module WriteBack(
+    input [31:0] i_ALUresult,
+    input [4:0] i_rd,
+    input i_RegWrite,
+    output reg [31:0] o_writeData
+);
+    always @(i_ALUresult) begin
+        if (i_RegWrite) begin
+            o_writeData = i_ALUresult;
+        end
+    end
+endmodule
+```
+
+### SUBU (Subtract Unsigned)
+
+`subtract unsigned (R,0,35)`
+
+`subu rd,rs,rt`
+
+`reg(rd) := reg(rs) [ reg(rt);` 
+
+#### Operation Overview:
+
+- **IF:** Fetch the instruction using the PC.
+- **ID:** Decode the instruction; read registers rs and rt.
+- **EX:** The ALU subtracts the value in rt from rs.
+- **MEM:** No action needed (pass-through).
+- **WB:** The ALU result is written back to register rd.
+
+#### Operation Breakdown:
+
+1. **Instruction Fetch (IF)**
+   - The instruction is fetched from the instruction memory using the Program Counter (PC).
+   - Verilog snippet:
+     ```verilog
+     // IF Stage
+     always @(posedge clk) begin
+         if (reset)
+             pc <= 0;
+         else if (pc_src)
+             pc <= pc_next;
+         else
+             pc <= pc + 4;
+     end
+     ```
+
+2. **Instruction Decode (ID)**
+   - The fetched instruction is decoded to identify the operation as `SUBU` and the source (`rs`, `rt`) and destination (`rd`) registers are identified.
+   - Verilog snippet:
+     ```verilog
+     // ID Stage
+     reg [31:0] instruction;
+     wire [4:0] rs, rt, rd;
+     assign rs = instruction[25:21];
+     assign rt = instruction[20:16];
+     assign rd = instruction[15:11];
+     ```
+
+3. **Execution (EX)**
+   - The actual subtraction of the contents of the registers `rs` and `rt` is performed. The result does not account for overflow because it is unsigned.
+   - Verilog snippet:
+     ```verilog
+     // EX Stage
+     reg [31:0] reg_data[31:0];  // Register file
+     wire [31:0] rs_value, rt_value, result;
+     assign rs_value = reg_data[rs];
+     assign rt_value = reg_data[rt];
+     assign result = rs_value - rt_value;
+     ```
+
+4. **Memory Access (MEM)**
+   - `SUBU` does not require a memory operation, so this stage can be considered a pass-through.
+   - Verilog snippet:
+     ```verilog
+     // MEM Stage
+     // No action required for SUBU
+     ```
+
+5. **Write Back (WB)**
+   - The result of the subtraction is written back to the destination register `rd`.
+   - Verilog snippet:
+     ```verilog
+     // WB Stage
+     always @(posedge clk) begin
+         if (reg_write)
+             reg_data[rd] <= result;
+     end
+     ```
+
+```verilog
+module MIPS_Processor(input clk, input reset, output [31:0] pc);
+    reg [31:0] pc, next_pc;
+    reg [31:0] reg_file[31:0];  // Register file
+
+    // Instruction Fetch
+    always @(posedge clk) begin
+        if (reset)
+            pc <= 0;
+        else
+            pc <= next_pc;
+    end
+
+    // Instruction Decode
+    reg [31:0] instruction;
+    wire [4:0] rs, rt, rd;
+    wire [5:0] opcode;
+    assign opcode = instruction[31:26];
+    assign rs = instruction[25:21];
+    assign rt = instruction[20:16];
+    assign rd = instruction[15:11];
+    // Execute
+    wire [31:0] rs_value, rt_value, alu_result;
+    assign rs_value = reg_file[rs];
+    assign rt_value = reg_file[rt];
+    assign alu_result = (opcode == 6'b000000) ? (rs_value - rt_value) : 32'b0;  // SUBU Opcode assumed
+    // Memory Access
+    // No memory access for SUBU
+    // Write Back
+    always @(posedge clk) begin
+        if (opcode == 6'b100011)  // SUBU Opcode
+            reg_file[rd] <= alu_result;
+    end
+    // Program Counter Update
+    always @(*) begin
+        next_pc = pc + 4;  // Simple sequential execution
+    end
+endmodule
+```
+In this example, `opcode == 6'b100011'` is the actual opcode for `SUBU`.
+
+### AND
 
 - **IF:** Instruction is fetched.
 - **ID:** Instruction is decoded. For AND, rs and rt are read; for ANDI, rs is read, and the immediate value is zero-extended.
@@ -126,7 +957,279 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No action needed.
 - **WB:** Result is written back to rd (AND) or rt (ANDI).
 
- OR, ORI (OR, OR Immediate)
+#### Instruction Breakdown
+
+The AND instruction performs a bitwise AND operation between two operands and stores the result in a destination register.
+
+1. **Instruction Fetch (IF) stage:**
+   - The Program Counter (PC) contains the address of the AND instruction.
+   - The Instruction Memory module (`InstructionMemory.v`) fetches the instruction from the memory location pointed to by the PC.
+   - The fetched instruction is passed to the next stage.
+
+2. **Instruction Decode (ID) stage:**
+   - The Control Unit module (`ControlUnit.v`) decodes the opcode of the AND instruction.
+   - Based on the opcode, the Control Unit generates the appropriate control signals for the data-path components.
+   - The Register File module reads the values of the source registers specified in the AND instruction.
+
+3. **Execution (EX) stage:**
+   - The ALU module (`ALU.v`) performs the bitwise AND operation between the values of the source registers.
+   - The ALU control signal generated by the Control Unit determines the specific operation to be performed (AND in this case).
+
+4. **Memory Access (MEM) stage:**
+   - The AND instruction does not require any memory access, so this stage is a pass-through.
+
+5. **Write Back (WB) stage:**
+   - The result of the AND operation from the ALU is written back to the destination register specified in the AND instruction.
+   - The RegWrite control signal generated by the Control Unit enables the writing of the result to the Register File.
+
+Within the control unit, the AND instruction is identified by its opcode, and the appropriate control signals are set to execute the AND operation.
+
+The ALU module performs the bitwise AND operation between the source register values, and the result is written back to the destination register.
+
+Here's an example of how the AND instruction flows through the different stages of the single-cycle MIPS processor starting within the control unit.
+```verilog
+// Control Unit
+always @(i_instruction) begin
+  case (i_instruction[31:26])
+    // ...
+    6'b001100: begin  // andi
+      o_RegDst = 0;
+      o_ALUSrc = 1;
+      o_MemtoReg = 0;
+      o_RegWrite = 1;
+      o_MemRead = 0;
+      o_MemWrite = 0;
+      o_Branch = 0;
+      o_Bne = 0;
+      o_ALUOp = 2'b11;
+      o_Jump = 0;
+      // ...
+    end
+    // ...
+  endcase
+end
+
+// ALU
+always @(i_data1, data2, i_ALUcontrol) begin
+  case (i_ALUcontrol)
+    // ...
+    4'b0000:  // AND
+      o_ALUresult = i_data1 & data2;
+    // ...
+  endcase
+  // ...
+end
+```
+
+In the Control Unit module, when the opcode of the instruction matches the AND opcode (`6'b001100` in this case), the appropriate control signals are set. 
+
+The `ALUSrc` signal is set to 1 to select the immediate value as the second operand, and the `ALUOp` signal is set to indicate an AND operation.
+
+In the ALU module, when the `ALUcontrol` signal matches the AND operation (4'b0000), the bitwise AND operation is performed between the two input operands (i_data1 and data2), and the result is assigned to `o_ALUresult`.
+
+### ANDI (AND Immediate)
+
+`and immediate (I,12,na)`
+
+`andi rt,rs,imm`  
+
+`reg(rt) := reg(rs) & zeroext(imm);` 
+
+#### Operation Overview:
+
+- **IF:** Instruction is fetched.
+- **ID:** Opcode decoded. Registers rs and rt are read for AND; rs and immediate for ANDI.
+- **EX:** ALU performs an AND operation.
+- **MEM:** No memory access.
+- **WB:** Result written to rd (AND) or rt (ANDI).
+
+#### Instruction Breakdown
+
+The ANDI (AND Immediate) instruction performs a bitwise AND operation between a register value and an immediate value.
+
+Here's a explanation of how the ANDI instruction goes through each stage of the MIPS processor pipeline:
+
+1. **Instruction Fetch (IF):**
+   - The Program Counter (PC) contains the address of the ANDI instruction in the Instruction Memory.
+   - The instruction is fetched from the Instruction Memory using the PC value.
+   - Example code in the Instruction Memory module (`InstructionMemory.v`):
+     ```verilog
+     always @(i_Addr) begin
+       if (i_Addr == -4) begin         // init
+         i_Instruction = 32'b11111100000000000000000000000000;
+       end else begin
+         i_Instruction = Imem[i_Addr>>2];
+       end
+       i_Ctr = i_Instruction[31:26];
+       i_Funcode = i_Instruction[5:0];
+     end
+     ```
+
+2. **Instruction Decode (ID):**
+   - The fetched instruction is decoded to determine the operation to be performed.
+   - The Control Unit generates the necessary control signals based on the opcode and function code of the instruction.
+   - The register to be read (rs) is determined from the instruction, and the immediate value is sign-extended.
+   - Example code in the Control Unit module (`ControlUnit.v`):
+     ```verilog
+     6'b001100: begin  // andi
+       o_RegDst = 0;
+       o_ALUSrc = 1;
+       o_MemtoReg = 0;
+       o_RegWrite = 1;
+       o_MemRead = 0;
+       o_MemWrite = 0;
+       o_Branch = 0;
+       o_Bne = 0;
+       o_ALUOp = 2'b11;
+       o_Jump = 0;
+       // ...
+     end
+     ```
+
+3. **Execute (EX):**
+   - The ALU performs the bitwise AND operation between the value of register rs and the sign-extended immediate value.
+   - The result of the AND operation is stored in a temporary register.
+   - Example code in the ALU module (`ALU.v`):
+     ```verilog
+     always @(i_data1, data2, i_ALUcontrol) begin
+       case (i_ALUcontrol)
+         // ...
+         4'b0000:  // AND
+           o_ALUresult = i_data1 & data2; // bitwise AND
+         // ...
+       endcase
+       // ...
+     end
+     ```
+
+4. **Memory Access (MEM):**
+   - The ANDI instruction does not involve memory access, so no action is needed in this stage.
+   - The result from the Execute stage is simply passed through to the next stage.
+
+5. **Write Back (WB):**
+   - The result of the AND operation, stored in the temporary register, is written back to the destination register (rt) in the Register File.
+   - Example code in the Register File module (`RegisterFile.v`):
+     ```verilog
+     always @(posedge i_Clk or posedge i_Rst) begin
+       if (i_Rst) begin
+         // Reset all registers to zero
+         for (j = 0; j < 32; j = j + 1) begin
+           RegData[j] = 32'b0;
+         end
+       end else if (i_RegWrite) begin
+         // Write data to the specified register
+         RegData[i_wReg] = i_wData;
+       end
+     end
+     ```
+
+Here's an example of how the ANDI instruction would look in machine code:
+```
+001100 01000 01010 0000000000001111
+```
+
+In this example:
+- `001100` is the opcode for the ANDI instruction.
+- `01000` represents the source register (rs), which is $8 in this case.
+- `01010` represents the destination register (rt), which is $10 in this case.
+- `0000000000001111` is the immediate value, which is 15 in decimal.
+
+### OR
+
+- **IF:** Instruction is fetched.
+- **ID:** Opcode decoded. Registers rs and rt are read for OR; rs and immediate for ORI.
+- **EX:** ALU performs an OR operation.
+- **MEM:** No action needed.
+- **WB:** Result written to rd (OR) or rt (ORI).
+
+#### Instruction Breakdown
+
+The `OR` instruction in the MIPS architecture performs a bitwise OR operation on two register values and stores the result in a destination register.
+
+1. **Instruction Fetch (IF) Stage:**
+   - The Program Counter (PC) holds the address of the `OR` instruction to be fetched.
+   - The Instruction Memory module (`InstructionMemory.v`) retrieves the instruction from the memory based on the PC value.
+   - The fetched instruction is passed to the next stage.
+
+   Example code from `InstructionMemory.v`:
+   ```verilog
+   always @(i_Addr) begin
+     if (i_Addr == -4) begin
+       i_Instruction = 32'b11111100000000000000000000000000;
+     end else begin
+       i_Instruction = Imem[i_Addr>>2];
+     end
+     i_Ctr = i_Instruction[31:26];
+     i_Funcode = i_Instruction[5:0];
+   end
+   ```
+
+2. **Instruction Decode (ID) Stage:**
+   - The fetched instruction is decoded to identify the opcode and register operands.
+   - The Control Unit module (`ControlUnit.v`) sets the appropriate control signals based on the opcode.
+   - For the `OR` instruction, the `ALUOp` control signal is set to indicate an OR operation.
+   - The register operands (`rs` and `rt`) are read from the Register File.
+
+   Example code from `ControlUnit.v`:
+   ```verilog
+   always @(i_instruction) begin
+     case (i_instruction[31:26])
+       // ...
+       6'b000000: begin  // ARITHMETIC
+         o_RegDst = 1;
+         o_ALUSrc = 0;
+         o_MemtoReg = 0;
+         o_RegWrite = 1;
+         o_MemRead = 0;
+         o_MemWrite = 0;
+         o_Branch = 0;
+         o_Bne = 0;
+         o_ALUOp = 2'b10;
+         o_Jump = 0;
+         // ...
+       end
+       // ...
+     endcase
+   end
+   ```
+
+3. **Execute (EX) Stage:**
+   - The ALU module (`ALU.v`) performs the bitwise OR operation on the values of `rs` and `rt` based on the `ALUOp` control signal.
+   - The result of the OR operation is stored in a temporary register.
+
+   Example code from `ALU.v`:
+   ```verilog
+   always @(i_data1, data2, i_ALUcontrol) begin
+     case (i_ALUcontrol)
+       // ...
+       4'b0001:  // OR
+         o_ALUresult = i_data1 | data2; // bitwise OR
+       // ...
+     endcase
+     // ...
+   end
+   ```
+
+4. **Memory Access (MEM) Stage:**
+   - For the `OR` instruction, no memory access is needed, so this stage is a pass-through.
+
+5. **Write Back (WB) Stage:**
+   - The ALU result, which is the result of the OR operation, is written back to the destination register (`rd`) in the Register File.
+
+   Example code for writing back to the Register File:
+   ```verilog
+   always @(posedge i_clk) begin
+     if (i_RegWrite) begin
+       RegData[i_wReg] = i_wData;
+     end
+   end
+   ```
+
+Throughout the execution of the `OR` instruction, the control signals generated by the Control Unit module (`ControlUnit.v`) orchestrate the flow of data and the operations performed in each stage.
+
+The ALU Control module (`ALUControl.v`) decodes the `ALUOp` signal and the function code of the instruction to generate the appropriate `ALUControl` signal for the ALU module (`ALU.v`) to perform the OR operation.
+
+### ORI (OR Immediate)
 
 - **IF:** Instruction is fetched.
 - **ID:** Opcode is decoded. Registers rs and rt are read for OR; rs and immediate for ORI.
@@ -134,13 +1237,100 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No action needed.
 - **WB:** Result is written to rd (OR) or rt (ORI).
 
- XOR, XORI (XOR, XOR Immediate)
+#### Instruction Breakdown
 
-- **IF:** Fetch the instruction.
-- **ID:** Decode the opcode. Registers rs and rt read for XOR; rs and immediate for XORI.
-- **EX:** ALU performs XOR operation.
-- **MEM:** No action needed.
-- **WB:** Write result to rd (XOR) or rt (XORI).
+The `ORI` (OR Immediate) instruction in MIPS is an I-type instruction that performs a bitwise OR operation between a register and a zero-extended immediate value.
+
+Instruction Format:
+```
+ORI rt, rs, immediate
+```
+- `rt`: The destination register where the result will be stored.
+- `rs`: The source register containing one of the operands.
+- `immediate`: A 16-bit immediate value that will be zero-extended to 32 bits.
+
+Instruction Encoding:
+```
+| opcode (6 bits) | rs (5 bits) | rt (5 bits) | immediate (16 bits) |
+```
+
+Processor Stages:
+1. Instruction Fetch (IF):
+   - The instruction is fetched from the instruction memory using the PC (Program Counter).
+   - The PC is incremented by 4 to point to the next instruction.
+
+2. Instruction Decode (ID):
+   - The instruction is decoded by the control unit.
+   - The register file is accessed to read the values of the source register `rs` and the destination register `rt`.
+   - The 16-bit immediate value is zero-extended to 32 bits.
+
+Verilog code for the instruction decode stage:
+```verilog
+// Control Unit
+always @(i_instruction) begin
+  case (i_instruction[31:26])
+    // ...
+    6'b001101: begin  // ORI
+      o_RegDst = 0;
+      o_ALUSrc = 1;
+      o_MemtoReg = 0;
+      o_RegWrite = 1;
+      o_MemRead = 0;
+      o_MemWrite = 0;
+      o_Branch = 0;
+      o_ALUOp = 2'b11;  // ALU control for OR operation
+      o_Jump = 0;
+    end
+    // ...
+  endcase
+end
+```
+
+3. Execute (EX):
+   - The ALU performs the bitwise OR operation between the value in the source register `rs` and the zero-extended immediate value.
+   - The ALU control unit generates the appropriate control signal for the OR operation based on the `ALUOp` signal from the control unit.
+
+Verilog code for the ALU control unit:
+```verilog
+// ALU Control
+always @(i_ALUOp or i_Funcode) begin
+  case (i_ALUOp)
+    // ...
+    2'b11: begin  // ORI
+      o_ALUcontrol = 4'b0001;  // ALU control for OR operation
+    end
+    // ...
+  endcase
+end
+```
+
+4. Memory (MEM):
+   - No memory access is needed for the `ORI` instruction, so this stage is a pass-through.
+
+5. Write Back (WB):
+   - The ALU result is written back to the destination register `rt` in the register file.
+
+Verilog code for the write-back stage:
+```verilog
+// Register File
+always @(posedge i_clk) begin
+  if (i_RegWrite) begin
+    RegData[i_writeReg] <= i_writeData;
+  end
+end
+```
+
+Here's an example of how the `ORI` instruction would be processed in the single-cycle MIPS processor:
+```assembly
+ORI $t0, $s0, 0xFFFF
+```
+This instruction performs a bitwise OR operation between the value in register `$s0` and the immediate value `0xFFFF` (16 bits), and stores the result in register `$t0`.
+
+In the IF stage, the instruction is fetched from the instruction memory using the PC.
+
+In the ID stage, the instruction is decoded, and the values of `$s0` and `$t0` are read from the register file. The immediate value `0xFFFF` is zero-extended to 32 bits.
+
+In the EX stage, the ALU performs the bitwise OR operation between the value in `$s0` and the zero-extended immediate value. The ALU control unit generates the appropriate control signal for the OR operation based on the `ALUOp` signal from the control unit.
 
  NOR
 
@@ -158,7 +1348,94 @@ Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB X
 - **MEM:** No action needed.
 - **WB:** If rs != rt, PC is updated to branch address (PC + offset); otherwise, move to next sequential instruction.
 
-Each instruction follows a path from fetching the opcode to potentially altering the program counter or writing back results to registers. The single-cycle processor architecture aims to complete these steps within one clock cycle for each instruction, making the process efficient but requiring a capable and fast hardware setup to manage all stages effectively in such a short time span.
+#### Instruction Breakdown
+
+The BNE (Branch Not Equal) instruction is a conditional branch instruction in the MIPS architecture.
+
+It compares the values of two registers and transfers control to a target address if the values are not equal.
+
+1. **Instruction Fetch (IF) Stage:**
+In the IF stage, the instruction is fetched from the Instruction Memory using the Program Counter (PC).
+
+```verilog
+// Fetch the instruction from the Instruction Memory
+i_Instruction = Imem[i_Addr>>2];
+```
+
+2. **Instruction Decode (ID) Stage:**
+In the ID stage, the instruction is decoded, and the registers rs and rt are read from the Register File.
+
+```verilog
+// Decode the instruction
+i_Ctr = i_Instruction[31:26];
+i_Funcode = i_Instruction[5:0];
+
+// Read registers rs and rt from the Register File
+wire [4:0] rs = i_Instruction[25:21];
+wire [4:0] rt = i_Instruction[20:16];
+wire [31:0] rs_data = RegData[rs];
+wire [31:0] rt_data = RegData[rt];
+```
+
+3. **Execution (EX) Stage:**
+In the EX stage, the values of rs and rt are compared using the ALU.
+
+```verilog
+// Compare the values of rs and rt using the ALU
+wire ALU_zero;
+ALU alu (
+    .i_data1(rs_data),
+    .i_read2(rt_data),
+    .i_ALUcontrol(ALU_control),
+    .o_Zero(ALU_zero),
+    .o_ALUresult(ALU_result)
+);
+```
+
+4. **Memory Access (MEM) Stage:**
+The BNE instruction does not require any memory access, so this stage is a pass-through.
+
+5. **Write Back (WB) Stage:**
+In the WB stage, if the values of rs and rt are not equal (ALU_zero is 0), the Program Counter (PC) is updated to the branch target address (PC + offset). Otherwise, the PC moves to the next sequential instruction.
+
+```verilog
+// Update the PC based on the branch condition
+wire [31:0] branch_target = PC + {{14{i_Instruction[15]}}, i_Instruction[15:0], 2'b00};
+wire branch_taken = i_Branch & ~ALU_zero;
+assign PC_next = branch_taken ? branch_target : PC + 4;
+```
+
+Here's an example of how the BNE instruction can be represented in Verilog:
+
+```verilog
+module BNE_example (
+    input [31:0] rs_data,
+    input [31:0] rt_data,
+    input [15:0] offset,
+    input [31:0] PC,
+    output reg [31:0] PC_next
+);
+    wire ALU_zero;
+    wire [31:0] branch_target = PC + {{14{offset[15]}}, offset, 2'b00};
+    // Compare rs and rt using ALU
+    assign ALU_zero = (rs_data == rt_data) ? 1 : 0;
+    // Update PC based on branch condition
+    always @(*) begin
+        if (~ALU_zero)
+            PC_next = branch_target;
+        else
+            PC_next = PC + 4;
+    end
+endmodule
+```
+
+In this example, the `BNE_example` module takes the values of rs and rt (`rs_data` and `rt_data`), the branch offset (`offset`), and the current Program Counter (`PC`) as inputs.
+
+It compares rs and rt using the ALU and updates the `PC_next` output based on the branch condition.
+
+If rs and rt are not equal (`ALU_zero` is 0), `PC_next` is set to the branch target address (`branch_target`).
+
+Otherwise, `PC_next` is set to the next sequential instruction address (`PC + 4`).
 
 ### Conclusion
 
@@ -301,7 +1578,6 @@ Furthermore, the longest word that can be displayed on the 7-segment displays is
 | 1000 | $1 \mathrm{X}$ | $(\mathrm{A}-\mathrm{B})$ | SuB |
 | 1001 | 00 | $(A \& B)$ | AND |
 | 1001 | 01 | $(A \mid B)$ | OR |
-| 1001 | 10 | $\left(A^{\wedge} B\right)$ | XOR |
 | 1001 | $\pi$ | $\sim(\mathrm{A} \mid \mathrm{B})$ | NOR |
 | 101 | $\mathrm{xx0}$ | signed $(A)<\operatorname{signed}(B)$ | Set-Less-Than signed |
 | 101 | $x x 1$ | $A<B$ | Set-Less-Than unsigned |
@@ -503,7 +1779,11 @@ These language servers that I used for development include [ verible ](https://g
 
 I think that using these language servers and tools in combination with NeoVim (my personal open-sourced config has a startup time of <80ms) allowed me to develop my processor more efficiently and effectively.
 
-## Components 
+## Components and Explanations
+
+The following section explains the components of the MIPS processor and their functionalities.
+
+This is done by providing the Verilog code for each component and explaining its role in the processor.
 
 #### ALU
 
@@ -606,7 +1886,6 @@ Overall, the ALU module performs the necessary arithmetic and logical operations
 The following is the code for the control unit of the MIPS processor called `ControlUnit.v`. (It can be found in the `./proj/` directory)
 
 As named, the `ControlUnit` is responsible for decoding the instruction and generating the control signals for the various components of the processor. 
-
 
 ```verilog title="ControlUnit.v"
 `timescale 1ns / 1ps
@@ -809,6 +2088,7 @@ The above Verilog code represents the Control Unit component of the single-cycle
 The Control Unit is responsible for generating control signals based on the input instruction, which determine the behavior of various components within the processor. Let's analyze the code in detail:
 
 ##### IO
+
 The Control Unit, `ControlUnit.v`, has the following inputs and outputs:
 
 Inputs:
@@ -1033,3 +2313,10 @@ It provides the instructions to the processor's data-path, enabling the processo
 ##### Summary
 
 Essentially, the Instruction Memory module in the single-cycle MIPS processor acts as a read-only memory that stores the program instructions. It fetches instructions based on the provided memory address and outputs the complete instruction along with its control bits and function code for further processing by other components of the processor.
+
+## Verbose Components Code
+ 
+The following section shows detailed code snippets for the components of the processor.
+
+It includes detailed code comments to better explain the functionality and purpose of each component within the actual verilog code.
+
