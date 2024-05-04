@@ -494,6 +494,18 @@ add wave -position insertpoint \ ../$target/*
 run 1200
 ```
 
+In addition to the tooling already mentioned, I used modelsim/questasim to simulate my processor and test-bench.
+
+Furthermore, I used the Quartus Prime software to compile my code and program my FPGA board.
+
+Even further, I used tools like [ git ](https://git-scm.com/), [ GitHub ](https://github.com), and [ markdown ](https://www.markdownguide.org/) to manage my code, version control, and documentation.
+
+For editor tooling, I used [ NeoVim ](https://neovim.io/) with a combination of popular language servers that are used for VerilogHDL.
+
+These language servers that I used for development include [ verible ](https://github.com/chipsalliance/verible), [ Tree-Sitter ](https://tree-sitter.github.io/tree-sitter/), [ veridian ](https://github.com/vivekmalneedi/veridian), and more to provide completion, syntax highlighting, code actions, linting, and more.
+
+I think that using these language servers and tools in combination with NeoVim allowed me to develop my processor more efficiently and effectively.
+
 ## Components 
 
 #### ALU
