@@ -1,0 +1,91 @@
+```verilog title=ALU.v
+`timescale 1ns / 1ps
+module ALU (
+    input      [31:0] i_data1,        // data 1
+    input      [31:0] i_read2,        // data 2 from MUX
+    input      [31:0] i_Instruction,  // used for sign-extension
+    input             i_ALUSrc,
+    input      [ 3:0] i_ALUcontrol,
+    output reg        o_Zero,
+    output reg [31:0] o_ALUresult
+);
+  reg [31:0] data2;
+  always @(i_ALUSrc, i_read2, i_Instruction) begin
+    if (i_ALUSrc == 0) begin
+      data2 = i_read2;
+    end else begin
+      if (i_Instruction[15] == 1'b0) begin
+        data2 = {16'b0, i_Instruction[15:0]};
+      end else begin
+        data2 = {{16{1'b1}}, i_Instruction[15:0]};
+      end
+    end
+  end
+  always @(i_data1, data2, i_ALUcontrol) begin
+    case (i_ALUcontrol)
+      4'b0000:  // AND
+      o_ALUresult = i_data1 & data2;
+      4'b0001:  // OR
+      o_ALUresult = i_data1 | data2;
+      4'b0010:  // ADD
+      o_ALUresult = i_data1 + data2;
+      4'b0110:  // SUB
+      o_ALUresult = i_data1 - data2;
+      4'b0111:  // SLT
+      o_ALUresult = (i_data1 < data2) ? 1 : 0;
+      4'b1100:  // NOR
+      o_ALUresult = i_data1 | ~data2;
+      default: ;
+    endcase
+    if (o_ALUresult == 0) begin
+      o_Zero = 1;
+    end else begin
+      o_Zero = 0;
+    end
+  end
+endmodule
+```
+The above code represents the ALU (Arithmetic Logic Unit) module of a single-cycle MIPS processor.
+
+The ALU is responsible for performing arithmetic and logical operations on the input data based on the ALU control signal.
+
+Inputs:
+- `i_data1` (32-bit): The first input data for the ALU operation.
+- `i_read2` (32-bit): The second input data from the MUX.
+- `i_Instruction` (32-bit): The instruction used for sign-extension.
+- `i_ALUSrc` (1-bit): A control signal indicating whether to use the second input data from the MUX or the sign-extended immediate value.
+- `i_ALUcontrol` (4-bit): The ALU control signal that determines the specific operation to be performed.
+
+Outputs:
+- `o_Zero` (1-bit): A flag indicating whether the ALU result is zero.
+- `o_ALUresult` (32-bit): The result of the ALU operation.
+
+Functionality:
+1. Data Selection:
+   - The module first determines the second input data for the ALU operation based on the `i_ALUSrc` control signal.
+   - If `i_ALUSrc` is 0, the second input data is taken directly from `i_read2`.
+   - If `i_ALUSrc` is 1, the second input data is obtained by sign-extending the 16-bit immediate value from the `i_Instruction`.
+
+2. ALU Operation:
+   - Based on the `i_ALUcontrol` signal, the module performs the corresponding ALU operation on `i_data1` and the selected second input data (`data2`).
+   - The supported ALU operations include AND, OR, ADD, SUB (subtract), SLT (set-on-less-than), and NOR.
+   - The result of the ALU operation is stored in `o_ALUresult`.
+
+3. Zero Flag:
+   - After performing the ALU operation, the module checks if the result is zero.
+   - If the result is zero, the `o_Zero` flag is set to 1; otherwise, it is set to 0.
+
+Significance in the MIPS Processor:
+- The ALU is a crucial component in the MIPS processor's datapath.
+- It performs arithmetic and logical operations on the input data based on the instructions being executed.
+- The ALU receives input data from the register file or the immediate value in the instruction, depending on the `i_ALUSrc` control signal.
+- The ALU control signal (`i_ALUcontrol`) determines the specific operation to be performed, which is decoded by the ALU control module based on the instruction opcode and function code.
+- The result of the ALU operation is used for various purposes, such as storing it back to the register file, using it as a memory address, or making branching decisions based on the zero flag.
+
+Interaction with Other Components:
+- The ALU receives input data from the register file (`i_data1` and `i_read2`) and the instruction (`i_Instruction`).
+- The ALU control module generates the `i_ALUcontrol` signal based on the instruction opcode and function code, which determines the ALU operation to be performed.
+- The ALU result (`o_ALUresult`) is used by other components, such as the data memory for memory operations or the register file for storing the result.
+- The zero flag (`o_Zero`) is used by the control unit to make branching decisions based on the comparison result.
+
+Overall, the ALU module performs the necessary arithmetic and logical operations in the MIPS processor based on the instruction being executed. It plays a crucial role in the datapath of the processor, interacting with other components to execute instructions and produce the desired results.

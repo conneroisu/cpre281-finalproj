@@ -1,0 +1,66 @@
+```verilog title=mips_tb.v
+`timescale 1ns / 1ps
+`define CYCLE_TIME 20
+module mips_tb;
+  reg clk;
+  reg rst;
+  // segments for the 7-segment displays
+  wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
+  integer i;  // loop variable
+  always #(`CYCLE_TIME / 2) clk = ~clk;
+  mips uut (
+      .i_Clk(clk),
+      .i_Rst(rst),
+      .o_Seg_first(seg_first),
+      .o_Seg_second(seg_second),
+      .o_Seg_third(seg_third),
+      .o_Seg_fourth(seg_fourth),
+      .o_Seg_fifth(seg_fifth)
+  );
+  initial begin
+    // Initialize data memory
+    for (i = 0; i < 32; i = i + 1) begin
+      uut.inst_DataMemory.Dmem[i] = 32'b0;
+    end
+    // Initialize Register File
+    for (i = 0; i < 32; i = i + 1) begin
+      uut.inst_RegisterFile.RegData[i] = 32'b0;
+    end
+    clk = 0;
+  end
+  initial begin
+    #1800 $finish;
+  end
+endmodule
+```
+The given Verilog code represents a testbench module for a single-cycle MIPS processor. Here's a detailed explanation of the code:
+
+1. The testbench module is named `mips_tb` and it operates on a timescale of 1ns/1ps.
+
+2. The module declares two reg variables:
+   - `clk`: Represents the clock signal for the processor.
+   - `rst`: Represents the reset signal for the processor.
+
+3. It also declares five wire variables (`seg_first`, `seg_second`, `seg_third`, `seg_fourth`, `seg_fifth`) to represent the segments for the 7-segment displays. These wires are used to display the current instruction being executed by the processor.
+
+4. The `integer` variable `i` is declared as a loop variable for initializing memory.
+
+5. The `always` block generates the clock signal by toggling the `clk` variable every half of the clock cycle time (`CYCLE_TIME/2`).
+
+6. The `mips` module (the actual MIPS processor) is instantiated as `uut` (unit under test) with the following connections:
+   - `i_Clk` is connected to the `clk` signal.
+   - `i_Rst` is connected to the `rst` signal.
+   - The 7-segment display outputs (`o_Seg_first`, `o_Seg_second`, `o_Seg_third`, `o_Seg_fourth`, `o_Seg_fifth`) are connected to the corresponding wires in the testbench.
+
+7. The first `initial` block is used to initialize the data memory and the register file of the MIPS processor:
+   - It uses a `for` loop to iterate over the first 32 locations of the data memory (`Dmem`) and initializes each location to zero.
+   - Similarly, it initializes the first 32 registers in the register file (`RegData`) to zero.
+   - Finally, it sets the `clk` variable to 0.
+
+8. The second `initial` block is used to specify the duration of the simulation. It uses the `$finish` system task to terminate the simulation after 1800 time units.
+
+The purpose of this testbench is to provide a simulation environment for the MIPS processor. It initializes the necessary components (data memory and register file), generates the clock signal, and instantiates the MIPS processor module. The testbench also specifies the duration of the simulation.
+
+The testbench interacts with other components of the processor through the instantiated `mips` module (`uut`). It provides the clock and reset signals to the processor and observes the output signals for the 7-segment displays.
+
+Overall, this testbench serves as a framework to verify the functionality of the single-cycle MIPS processor by providing the necessary inputs, initializing the memory, and specifying the simulation duration.

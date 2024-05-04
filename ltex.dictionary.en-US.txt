@@ -1,1 +1,8 @@
 VerilogHDL
+MEM
+XORI
+ANDI
+SUBU
+ADDU
+LW
+ADDI
