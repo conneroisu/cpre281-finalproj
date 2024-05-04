@@ -16,7 +16,7 @@ Date: **4/10/2024**
 
 A MIPS processor that can execute a subset of the MIPS instruction set with additional features such as a clock divider, displaying the current instruction on the seven segment displays present on the FPGA board, and the ability to change the frequency of execution of the processor.
 
-More specifically, the processor will be able to execute the following instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB XORI NOR BNE
+More specifically, the processor will be able to execute the following instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB XORI NOR BNE SLT
 
 The frequency of execution for the processor will be variable and will be controlled by a clock divider that divides the 50MHz clock signal by a value set by the divider that will be used to divide the clock signal.
 
@@ -330,7 +330,7 @@ module mips_tb;
   reg rst;
   // segments for the 7-segment displays
   wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
-  integer i;  // loop variable
+  integer i;
   always #(`CYCLE_TIME / 2) clk = ~clk;
   mips uut (
       .i_Clk(clk),
@@ -357,9 +357,10 @@ module mips_tb;
   end
 endmodule
 ```
-The given Verilog code represents a test-bench module for the single-cycle MIPS processor.
 
-1. The test-bench module is named `mips_tb`, and it operates on a timescale of 1ns/1ps.
+The given Verilog code represents my test-bench module that was used for testing the single-cycle MIPS processor, `mips.v`.
+
+1. The test-bench module is named `mips_tb` (titled `mips_tb.v`), and it operates on a timescale of 1ns/1ps.
 
 2. The module declares two reg variables:
    - `clk`: Represents the clock signal for the processor.
@@ -444,7 +445,7 @@ module mips_tb;
   reg clk;
   reg rst;
   wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
-  integer i;  // loop variable
+  integer i;
   always #(`CYCLE_TIME / 2) clk = ~clk;
   mips uut (
       .i_Clk(clk),
@@ -534,17 +535,17 @@ module ALU (
   always @(i_data1, data2, i_ALUcontrol) begin
     case (i_ALUcontrol)
       4'b0000:  // AND
-      o_ALUresult = i_data1 & data2;
+      o_ALUresult = i_data1 & data2; // bitwise AND
       4'b0001:  // OR
-      o_ALUresult = i_data1 | data2;
+      o_ALUresult = i_data1 | data2; // bitwise OR
       4'b0010:  // ADD
-      o_ALUresult = i_data1 + data2;
+      o_ALUresult = i_data1 + data2; // addition
       4'b0110:  // SUB
-      o_ALUresult = i_data1 - data2;
+      o_ALUresult = i_data1 - data2; // subtraction
       4'b0111:  // SLT
-      o_ALUresult = (i_data1 < data2) ? 1 : 0;
+      o_ALUresult = (i_data1 < data2) ? 1 : 0; // set-on-less-than
       4'b1100:  // NOR
-      o_ALUresult = i_data1 | ~data2;
+      o_ALUresult = i_data1 | ~data2; // bitwise NOR
       default: ;
     endcase
     if (o_ALUresult == 0) begin
@@ -870,7 +871,7 @@ module DataMemory (
     input i_MemtoReg,
     output reg [31:0] o_rData
 );
-  parameter SIZE_DM = 128;  // size of this memory, by default 128*32
+  parameter SIZE_DM = 128;       // size of this memory, by default 128*32
   reg [31:0] Dmem[SIZE_DM-1:0];  // instruction memory
   integer i;
   initial begin
@@ -955,12 +956,12 @@ The following is the code for the Instruction Memory module in the MIPS processo
 `timescale 1ns / 1ps
 module InstructionMemory (
     input [31:0] i_Addr,
-    output reg [5:0] i_Ctr,  // [31-26]
-    output reg [5:0] i_Funcode,  // [5-0]
+    output reg [5:0] i_Ctr,          // [31-26]
+    output reg [5:0] i_Funcode,      // [5-0]
     output reg [31:0] i_Instruction  // [31-0]
 );
-  parameter SIZE_IM = 128;  // size of this memory, by default 128*32
-  reg [31:0] Imem[SIZE_IM-1:0];  // instruction memory
+  parameter SIZE_IM = 128;           // size of this memory, by default 128*32
+  reg [31:0] Imem[SIZE_IM-1:0];      // instruction memory
   integer n;
   initial begin
     for (n = 0; n < SIZE_IM; n = n + 1) begin
@@ -970,7 +971,7 @@ module InstructionMemory (
     i_Instruction = 32'b11111100000000000000000000000000;
   end
   always @(i_Addr) begin
-    if (i_Addr == -4) begin  // init
+    if (i_Addr == -4) begin         // init
       i_Instruction = 32'b11111100000000000000000000000000;
     end else begin
       i_Instruction = Imem[i_Addr>>2];
@@ -1019,7 +1020,7 @@ By default, it is set to 128, meaning the memory can hold 128 32-bit instruction
 
 The following is the context of the Instruction Memory module, `InstructionMemory.v` in the single-cycle MIPS processor, `mips.v`:
 
-- The Program Counter (PC) module provides the memory address (`i_Addr`) to the Instruction Memory module to fetch the instruction at that address.
+- The Program Counter (`PC`) module provides the memory address (`i_Addr`) to the Instruction Memory module to fetch the instruction at that address.
 - The fetched instruction (`i_Instruction`) is then passed to other components of the processor, such as the Control Unit and the Register File, for further processing and execution.
 - The control bits (`i_Ctr`) and function code (`i_Funcode`) are used by the Control Unit to generate appropriate control signals for the processor's data-path.
 
