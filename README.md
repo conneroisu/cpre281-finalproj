@@ -504,7 +504,7 @@ For editor tooling, I used [ NeoVim ](https://neovim.io/) with a combination of 
 
 These language servers that I used for development include [ verible ](https://github.com/chipsalliance/verible), [ Tree-Sitter ](https://tree-sitter.github.io/tree-sitter/), [ veridian ](https://github.com/vivekmalneedi/veridian), and more to provide completion, syntax highlighting, code actions, linting, and more.
 
-I think that using these language servers and tools in combination with NeoVim allowed me to develop my processor more efficiently and effectively.
+I think that using these language servers and tools in combination with NeoVim (my personal open-sourced config has a startup time of <80ms) allowed me to develop my processor more efficiently and effectively.
 
 ## Components 
 
@@ -975,6 +975,7 @@ It acts as a read-only memory (ROM) that holds the program instructions.
 ##### IO
 
 Inputs and Outputs:
+
 - `i_Addr` (input, 32-bit): Represents the memory address from which the instruction should be fetched.
 - `i_Ctr` (output, 6-bit): Outputs the control bits of the fetched instruction (bits [31:26]).
 - `i_Funcode` (output, 6-bit): Outputs the function code of the fetched instruction (bits [5:0]).
@@ -998,7 +999,8 @@ By default, it is set to 128, meaning the memory can hold 128 32-bit instruction
    - Otherwise, the instruction is fetched from the `Imem` array using the address `i_Addr` shifted right by 2 bits (assuming word-aligned addresses).
    - The control bits (`i_Ctr`) and function code (`i_Funcode`) are extracted from the fetched instruction and assigned to the respective outputs.
 
-Interaction with Other Components:
+##### Processor Context
+
 - The Program Counter (PC) module provides the memory address (`i_Addr`) to the Instruction Memory module to fetch the instruction at that address.
 - The fetched instruction (`i_Instruction`) is then passed to other components of the processor, such as the Control Unit and the Register File, for further processing and execution.
 - The control bits (`i_Ctr`) and function code (`i_Funcode`) are used by the Control Unit to generate appropriate control signals for the processor's data-path.
