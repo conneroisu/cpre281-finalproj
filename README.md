@@ -1,8 +1,10 @@
 # cpre281-finalproj
 
 This is the final project for CPRE281 taught at Iowa State University. 
+
 The project is a simple processor that can execute a subset of the MIPS instruction set.
-The processor is implemented in HDLVerilog and tested using a testbench.
+
+The processor is implemented in VerilogHDL, tested using a test-bench, and tested on an FPGA board.
 
 Name: **Conner Ohnesorge**
 
@@ -996,4 +998,4 @@ The Instruction Memory module is a crucial component of the MIPS processor as it
 
 ##### Summary
 
-Esssentially, the Instruction Memory module in the single-cycle MIPS processor acts as a read-only memory that stores the program instructions. It fetches instructions based on the provided memory address and outputs the complete instruction along with its control bits and function code for further processing by other components of the processor.
+Essentially, the Instruction Memory module in the single-cycle MIPS processor acts as a read-only memory that stores the program instructions. It fetches instructions based on the provided memory address and outputs the complete instruction along with its control bits and function code for further processing by other components of the processor.
