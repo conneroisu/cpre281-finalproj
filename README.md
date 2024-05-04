@@ -322,7 +322,7 @@ Below is the captured wave-diagram from modelsim/questasim with the seven segmen
 
 The wave-forms show the output of the following test-bench:
 
-```verilog title=mips_tb.v
+```verilog title="mips_tb.v"
 `timescale 1ns / 1ps
 `define CYCLE_TIME 20
 module mips_tb;
@@ -508,7 +508,7 @@ I think that using these language servers and tools in combination with NeoVim (
 
 The following is the code for the ALU module of the MIPS processor called `ALU.v`. (It can be found in the `./proj/` directory)
 
-```verilog title=ALU.v
+```verilog title="ALU.v"
 `timescale 1ns / 1ps
 module ALU (
     input      [31:0] i_data1,        // data 1
@@ -607,7 +607,7 @@ The following is the code for the control unit of the MIPS processor called `Con
 As named, the `ControlUnit` is responsible for decoding the instruction and generating the control signals for the various components of the processor. 
 
 
-```verilog title=ControlUnit.v
+```verilog title="ControlUnit.v"
 `timescale 1ns / 1ps
 module ControlUnit (
     input [31:0] i_instruction,
@@ -858,7 +858,7 @@ The control signals determine the flow of data and the operations performed in e
 
 The following is the code for the Data Memory module in the MIPS processor called `DataMemory.v`. (It can be found in the `./proj/` directory)
 
-```verilog title=DataMemory.v
+```verilog title="DataMemory.v"
 `timescale 1ns / 1ps
 module DataMemory (
     input i_clk,
@@ -951,7 +951,7 @@ It responds to memory read and write requests based on the provided address and 
 
 The following is the code for the Instruction Memory module in the MIPS processor called `InstructionMemory.v`. (It can be found in the `./proj/` directory)
 
-```verilog title=Instruction_memory.v
+```verilog title="InstructionMemory.v"
 `timescale 1ns / 1ps
 module InstructionMemory (
     input [31:0] i_Addr,
@@ -980,7 +980,7 @@ module InstructionMemory (
   end
 endmodule
 ```
-The provided code represents the Instruction Memory module `Instruction_memory.v` for the single-cycle MIPS processor.
+The provided code represents "the Instruction Memory module `InstructionMemory.v` for the single-cycle MIPS processor."
 
 ##### Purpose:
 
@@ -1016,6 +1016,8 @@ By default, it is set to 128, meaning the memory can hold 128 32-bit instruction
    - The control bits (`i_Ctr`) and function code (`i_Funcode`) are extracted from the fetched instruction and assigned to the respective outputs.
 
 ##### Processor Context
+
+The following is the context of the Instruction Memory module, `InstructionMemory.v` in the single-cycle MIPS processor, `mips.v`:
 
 - The Program Counter (PC) module provides the memory address (`i_Addr`) to the Instruction Memory module to fetch the instruction at that address.
 - The fetched instruction (`i_Instruction`) is then passed to other components of the processor, such as the Control Unit and the Register File, for further processing and execution.
