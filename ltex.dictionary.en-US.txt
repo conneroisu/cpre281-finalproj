@@ -8,3 +8,5 @@ LW
 ADDI
 Ohnesorge
 ARITH
+GPIO
+addi

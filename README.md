@@ -1,6 +1,6 @@
 # cpre281-finalproj
 
-This is the final project for CPRE281 taught at Iowa State University. 
+This is the final project for CPRE281 taught at Iowa State University By Conner Ohnesorge.
 
 The project is a simple processor that can execute a subset of the MIPS instruction set.
 
@@ -16,7 +16,7 @@ Date: **4/10/2024**
 
 A MIPS processor that can execute a subset of the MIPS instruction set with additional features such as a clock divider, displaying the current instruction on the seven segment displays present on the FPGA board, and the ability to change the frequency of execution of the processor.
 
-More specifically, the processor will be able to execute the following instructions: add, addi, sub, subi, and, andi, or, ori, lw, sw, beq, j, and jr. 
+More specifically, the processor will be able to execute the following instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB XORI NOR BNE
 
 The frequency of execution for the processor will be variable and will be controlled by a clock divider that divides the 50MHz clock signal by a value set by the divider that will be used to divide the clock signal.
 
@@ -28,13 +28,7 @@ The processor will be implemented in Verilog and tested using a test-bench.
 
 The project is a simple MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on EP4CE115F29C7 FPGA board.
 
-The variable speed of the processor is achieved through the use of a clock divider connected to a GPIO connected potentiometer that divides the 50MHz clock signal by the value represented in the from the FPGA board into a slower clock signal that is used to drive the processor.
-
-A clock divider is a circuit that allows for the dividing of a given clock signal by a constant value. Below is an an example of a clock divider that divides the frequency of the clock by 2.
-
-$$
-f_{\text {out }}=\frac{f_{\text {in }}}{N}
-$$
+As a result of this desired function (and it's actualation into reality), the processor can technically be used to do all the other projects from other students in the class.
 
 ![[Pasted image 20240415105047.png]]
 
@@ -56,13 +50,7 @@ The main processor state machine has five states:
 
 ![[Pasted image 20240423092137.png]]
 
-Supported Instructions:
-
-```txt
-LW SW J ADD ADDI BEQ ADDU 
-SUBU AND ANDI OR ORI XOR 
-SUB XORI NOR BNE
-```
+Supported Instructions: LW SW J ADD ADDI BEQ ADDU SUBU AND ANDI OR ORI XOR SUB XORI NOR BNE
 
 ## State sequences for each instruction
 
@@ -133,7 +121,7 @@ SUB XORI NOR BNE
  AND, ANDI (AND, AND Immediate)
 
 - **IF:** Instruction is fetched.
-- **ID:** Instruction is decoded. For AND, rs and rt are read; for ANDI, rs is read and the immediate value is zero-extended.
+- **ID:** Instruction is decoded. For AND, rs and rt are read; for ANDI, rs is read, and the immediate value is zero-extended.
 - **EX:** The ALU performs an AND operation between operands.
 - **MEM:** No action needed.
 - **WB:** Result is written back to rd (AND) or rt (ANDI).
@@ -176,11 +164,12 @@ Each instruction follows a path from fetching the opcode to potentially altering
 
 Each instruction type (R-type, I-type, J-type) generally follows a similar flow with variations primarily in the Execute and Memory Access stages depending on whether the instruction involves arithmetic, memory access, or control flow.
 
-This model provides a consistent framework for understanding how different instructions are processed in a single-cycle MIPS architecture.
+This model provides a consistent framework for understanding how different instructions are processed in the single-cycle MIPS architecture.
 
 # Comparing Verilog vs VHDL 
 
 I think that VHDL actually provides more flexibility within the development of the processor.
+
 The language is more verbose, more type-safe, and allows for more control over the design of the processor.
 
 Verilog is more concise and easier to read, but I think that VHDL is more powerful and allows for more control over the design of the processor.
@@ -192,8 +181,8 @@ Additionally, I think that VHDL is more suited for larger projects and more comp
 ## Interesting notes about verilog
 
 The loose typing of Verilog can lead to some useful modules that can be defined in small amounts of code.
-Additionally, in verilog, you do not have to declare your components in the component that uses them which also decreases the amount of code that is needed to be written.
 
+Additionally, in verilog, you do not have to declare your components in the component that uses them which also decreases the amount of code that is needed to be written.
 
 For example, the following module is the mux module that is used in the processor to select between two inputs based on a control signal.
 
@@ -208,7 +197,7 @@ module mux #(parameter size = 1) (
 endmodule
 ```
 
-Another example of this is the sign extender module that is used to extend the sign of a 16 bit number to a 32 bit number.
+Another example of this is the sign extender module that is used to extend the sign of a 16-bit number to a 32-bit number.
 
 ```verilog
 module signextender (
@@ -221,13 +210,17 @@ endmodule
 
 Additionally, the fact that in Verilog you do not need to preemptively define components before using them allows for a more flexible design and faster development.
 
-Another nice feature of Verilog (specifically VerilogHDL) is the ability to print out the values of signals in the waveform viewer.
+Another nice feature of Verilog (specifically VerilogHDL) is the ability to print out the values of signals in the waveform viewer inside modelsim/questasim.
 
 This is a feature that is not present in VHDL and is very useful for debugging and understanding the behavior of the processor.
 
 While you can do this in VHDL, it is not as easy as it is in Verilog because in VHDL you must deal with the typings of the signals and the fact that you must declare the signals before you can use them.
 
-As an example, the following is the code in VHDL that prints out the values of the signals in the waveform viewer for an n-bit register.
+As an example, the following is the code in VHDL that prints out the values of the signals in the waveform viewer for an n-bit register which was used in a project for CPRE381.
+
+The following test-bench shows the code that can be executed inside modelsim/questasim to print out the values of the signals in the waveform viewer.
+
+It displays the additional hurdles that must be overcome in VHDL to print out the values of the signals in the waveform viewer because of the strict typing of the language.
 
 ```vhdl
 LIBRARY IEEE;
@@ -300,7 +293,7 @@ This means that we need to decode a 5-bit signal to a 35-bit signal that will be
 
 5 bits = signal
 7 bits needed per 7-segment display
-longest word = 5 characters
+the longest word = 5 characters
 thus, 5 * 7 = 35 bits needed for 5 7-segment displays
 We are decoding a 5-bit signal to 35 bits.
 
@@ -323,11 +316,11 @@ We are decoding a 5-bit signal to 35 bits.
 | 111 | 110 | A | BLEZ (Branch if Less or Equal to Zero) |
 | 111 | 111 | A | BGTZ (Branch if Greater Than Zero) |
 
-The following is the wave diagram for my test-bench of my processor without the added seven segment displays.
+The following is the wave-diagram from modelsim/questasim for my test-bench of my processor without the added seven segment displays.
 
 ![[Pasted image 20240503061843.png]]
 
-Below is the waveform with the seven segment ports included:
+Below is the captured wave-diagram from modelsim/questasim with the seven segment ports included:
 
 ![[Pasted image 20240503065359.png]]
 
@@ -368,9 +361,9 @@ module mips_tb;
   end
 endmodule
 ```
-The given Verilog code represents a test-bench module for a single-cycle MIPS processor. Here's a detailed explanation of the code:
+The given Verilog code represents a test-bench module for the single-cycle MIPS processor.
 
-1. The test-bench module is named `mips_tb` and it operates on a timescale of 1ns/1ps.
+1. The test-bench module is named `mips_tb`, and it operates on a timescale of 1ns/1ps.
 
 2. The module declares two reg variables:
    - `clk`: Represents the clock signal for the processor.
@@ -434,13 +427,15 @@ Program Counter:
 
 ![[Pasted image 20240503125021.png]]
 
-Waveform:
+Waveform of the Processor from modelsim/questasim:
 
 ![[Pasted image 20240503131222.png]]
 
 ## Tooling 
 
 First, as learned in CPRE381, I enjoy having test-benches for my code.
+
+Test-benches allow for faster debugging and more efficient development by allowing you to test your code without having to run it on the FPGA board, directly seeing the signals, how they interact with one another, and allows for testing to make sure that progress is being made.
 
 I used a test-bench to test my processor and ensure that it was working correctly.
 
@@ -882,7 +877,7 @@ endmodule
 ```
 The provided code snippet is the implementation of the Data Memory module (`DataMemory.v`) in the single-cycle MIPS processor.
 
-The Data Memory module serves as the main memory for storing and retrieving data in the processor. Here's a detailed explanation of the module:
+The Data Memory module serves as the main memory for storing and retrieving data in the processor. 
 
 ##### IO
    - `i_clk`: Input clock signal.
@@ -961,7 +956,9 @@ The provided code represents the Instruction Memory module (Instruction_memory.v
 
 ##### Purpose:
 
-The Instruction Memory module is responsible for storing the processor's instructions and providing them to the other components of the processor. It acts as a read-only memory (ROM) that holds the program instructions.
+The Instruction Memory module is responsible for storing the processor's instructions and providing them to the other components of the processor.
+
+It acts as a read-only memory (ROM) that holds the program instructions.
 
 ##### IO
 
@@ -973,7 +970,9 @@ Inputs and Outputs:
 
 ##### Functionality
 
-1. The module defines a parameter `SIZE_IM` which represents the size of the instruction memory. By default, it is set to 128, meaning the memory can hold 128 32-bit instructions.
+1. The module defines a parameter `SIZE_IM` which represents the size of the instruction memory.
+
+By default, it is set to 128, meaning the memory can hold 128 32-bit instructions.
 
 2. The module declares a register array `Imem` of size `SIZE_IM` to store the instructions.
 
@@ -982,7 +981,7 @@ Inputs and Outputs:
    - The instructions are then loaded from a file named "instructions.mem" using the `$readmemb` system task. This file contains the binary representation of the instructions.
    - The `i_Instruction` output is initialized with the default instruction.
 
-4. The module has an always block that is triggered whenever the `i_Addr` input changes:
+4. The module has an "always" block that is triggered whenever the `i_Addr` input changes:
    - If `i_Addr` is equal to -4 (used for initialization), the `i_Instruction` output is set to the default instruction.
    - Otherwise, the instruction is fetched from the `Imem` array using the address `i_Addr` shifted right by 2 bits (assuming word-aligned addresses).
    - The control bits (`i_Ctr`) and function code (`i_Funcode`) are extracted from the fetched instruction and assigned to the respective outputs.
@@ -994,7 +993,9 @@ Interaction with Other Components:
 
 ##### Significance
 
-The Instruction Memory module is a crucial component of the MIPS processor as it holds the program instructions that the processor executes. It provides the instructions to the processor's data-path, enabling the processor to perform the desired operations and execute the program stored in the memory.
+The Instruction Memory module is a crucial component of the MIPS processor as it holds the program instructions that the processor executes.
+
+It provides the instructions to the processor's data-path, enabling the processor to perform the desired operations and execute the program stored in the memory.
 
 ##### Summary
 
