@@ -296,7 +296,8 @@ Unsigned)</a></li>
 (Subtract)</a></li>
 <li><a href="#subu-subtract-unsigned"
 id="toc-subu-subtract-unsigned">SUBU (Subtract Unsigned)</a></li>
-<li><a href="#and" id="toc-and">AND</a></li>
+<li><a href="#and-bitwise-and" id="toc-and-bitwise-and">AND (Bitwise
+AND)</a></li>
 <li><a href="#andi-and-immediate" id="toc-andi-and-immediate">ANDI (AND
 Immediate)</a></li>
 <li><a href="#or" id="toc-or">OR</a></li>
@@ -1518,17 +1519,15 @@ class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb37-1"><a
 <span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
 <p>In this example, <code>opcode == 6'b100011'</code> is the actual
 opcode for <code>SUBU</code>.</p>
-<h3 id="and">AND</h3>
+<h3 id="and-bitwise-and">AND (Bitwise AND)</h3>
 <ul>
 <li><strong>IF:</strong> Instruction is fetched.</li>
 <li><strong>ID:</strong> Instruction is decoded. For AND, rs and rt are
-read; for ANDI, rs is read, and the immediate value is
-zero-extended.</li>
+read;</li>
 <li><strong>EX:</strong> The ALU performs an AND operation between
 operands.</li>
 <li><strong>MEM:</strong> No action needed.</li>
-<li><strong>WB:</strong> Result is written back to rd (AND) or rt
-(ANDI).</li>
+<li><strong>WB:</strong> Result is written back to rd (AND)</li>
 </ul>
 <h4 id="instruction-breakdown">Instruction Breakdown</h4>
 <p>The AND instruction performs a bitwise AND operation between two
@@ -1630,11 +1629,11 @@ assigned to <code>o_ALUresult</code>.</p>
 <h4 id="instruction-overview-9">Instruction Overview:</h4>
 <ul>
 <li><strong>IF:</strong> Instruction is fetched.</li>
-<li><strong>ID:</strong> Opcode decoded. Registers rs and rt are read
-for AND; rs and immediate for ANDI.</li>
+<li><strong>ID:</strong> Opcode decoded. Registers rs and immediate for
+ANDI are read.</li>
 <li><strong>EX:</strong> ALU performs an AND operation.</li>
 <li><strong>MEM:</strong> No memory access.</li>
-<li><strong>WB:</strong> Result written to rd (AND) or rt (ANDI).</li>
+<li><strong>WB:</strong> Result written to or rt (ANDI).</li>
 </ul>
 <h4 id="instruction-breakdown-1">Instruction Breakdown</h4>
 <p>The ANDI (AND Immediate) instruction performs a bitwise AND operation

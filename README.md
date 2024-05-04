@@ -967,13 +967,13 @@ endmodule
 ```
 In this example, `opcode == 6'b100011'` is the actual opcode for `SUBU`.
 
-### AND
+### AND (Bitwise AND)
 
 - **IF:** Instruction is fetched.
-- **ID:** Instruction is decoded. For AND, rs and rt are read; for ANDI, rs is read, and the immediate value is zero-extended.
+- **ID:** Instruction is decoded. For AND, rs and rt are read; 
 - **EX:** The ALU performs an AND operation between operands.
 - **MEM:** No action needed.
-- **WB:** Result is written back to rd (AND) or rt (ANDI).
+- **WB:** Result is written back to rd (AND)
 
 #### Instruction Breakdown
 
@@ -1057,10 +1057,10 @@ In the ALU module, when the `ALUcontrol` signal matches the AND operation (4'b00
 #### Instruction Overview:
 
 - **IF:** Instruction is fetched.
-- **ID:** Opcode decoded. Registers rs and rt are read for AND; rs and immediate for ANDI.
+- **ID:** Opcode decoded. Registers rs and immediate for ANDI are read.
 - **EX:** ALU performs an AND operation.
 - **MEM:** No memory access.
-- **WB:** Result written to rd (AND) or rt (ANDI).
+- **WB:** Result written to or rt (ANDI).
 
 #### Instruction Breakdown
 
