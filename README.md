@@ -2320,3 +2320,293 @@ The following section shows detailed code snippets for the components of the pro
 
 It includes detailed code comments to better explain the functionality and purpose of each component within the actual verilog code.
 
+
+### Data Memory
+
+The following is the commented code for the Data Memory module in the MIPS processor called `DataMemory.v`:
+```verilog
+// File: DataMemory.v
+// Description: This file contains the data memory module for the MIPS processor.
+// Purpose: The data memory stores data values and provides read and write access to the processor.
+//          It is responsible for handling memory read and write operations based on the control signals
+//          received from the control unit.
+
+`timescale 1ns / 1ps
+
+module DataMemory (
+    input i_clk,                    // Clock input
+    input [31:0] i_addr,            // Address input for memory access
+    input [31:0] i_wData,           // Write data input
+    input [31:0] i_ALUresult,       // ALU result input (used for memory address calculation)
+    input i_MemWrite,               // Control signal for memory write operation
+    input i_MemRead,                // Control signal for memory read operation
+    input i_MemtoReg,               // Control signal for selecting memory or ALU result as the output
+    output reg [31:0] o_rData       // Read data output
+);
+
+  parameter SIZE_DM = 128;           // Size of the data memory (default: 128 * 32 bits)
+  reg [31:0] Dmem[SIZE_DM-1:0];      // Data memory array
+
+  integer i;
+
+  // Initialize the data memory
+  initial begin
+    // Fill the data memory with zeros
+    for (i = 0; i < SIZE_DM; i = i + 1) begin
+      Dmem[i] = 32'b0;
+    end
+  end
+
+  // Memory read operation
+  always @(i_addr or i_MemRead or i_MemtoReg or i_ALUresult) begin
+    if (i_MemRead == 1) begin                  // If memory read is enabled
+      if (i_MemtoReg == 1) begin               // If MemtoReg is 1, select memory data as output
+        o_rData = Dmem[i_addr];                // Read data from the memory array
+      end else begin
+        o_rData = i_ALUresult;                 // If MemtoReg is 0, select ALU result as output
+      end
+    end else begin
+      o_rData = i_ALUresult;                   // If memory read is not enabled, select ALU result as output
+    end
+  end
+
+  // Memory write operation
+  always @(posedge i_clk) begin                // Triggered on the positive edge of the clock
+    if (i_MemWrite == 1) begin                 // If memory write is enabled
+      Dmem[i_addr] = i_wData;                  // Write data to the memory array
+    end
+  end
+
+endmodule
+```
+
+Interactions with other components:
+- The `DataMemory` module receives the address (`i_addr`), write data (`i_wData`), and control signals (`i_MemWrite`, `i_MemRead`, `i_MemtoReg`) from the `ControlUnit` and `ALU` modules.
+- It provides the read data (`o_rData`) to the `RegisterFile` module for store instructions or to the `ALU` for load instructions.
+- The `i_ALUresult` input is used as the memory address for read and write operations.
+- The `i_MemWrite` control signal determines whether a memory write operation should be performed.
+- The `i_MemRead` control signal determines whether a memory read operation should be performed.
+- The `i_MemtoReg` control signal selects whether the memory data or the ALU result should be output as the read data.
+
+The `DataMemory` module plays a crucial role in the MIPS processor by providing data storage and handling memory read and write operations.
+
+It interacts with the control unit, ALU, and register file to facilitate data movement and manipulation in the processor.
+
+### Instruction Memory
+
+Here the `ProgramCounter.v` file with detailed code comments explaining its purpose, functionality, and interactions with other components in the MIPS processor:
+
+```verilog
+// File: ProgramCounter.v
+// Description: This file contains the program counter module for the MIPS processor.
+// Purpose: The program counter keeps track of the current instruction address and updates it
+//          to the next instruction address on each clock cycle. It is responsible for providing
+//          the address of the instruction to be fetched from the instruction memory.
+
+`timescale 1ns / 1ps
+
+module ProgramCounter (
+    input i_Clk,                // Input clock signal
+    input [31:0] i_Next,        // Input next instruction address
+    output reg [31:0] o_Out     // Output current instruction address
+);
+
+  // Initialize the program counter
+  initial begin
+    o_Out = -4;                 // Set the initial address to -4 (used for reset or initialization)
+  end
+
+  // Update the program counter on the positive edge of the clock
+  always @(posedge i_Clk) begin
+    o_Out = i_Next;             // Update the current address with the next address
+  end
+
+endmodule
+```
+
+Interactions with other components:
+- The `ProgramCounter` module receives the next instruction address (`i_Next`) from the `NextProgramCounter` module.
+- It provides the current instruction address (`o_Out`) to the `InstructionMemory` module to fetch the corresponding instruction.
+- The `ProgramCounter` is updated on the positive edge of the clock signal (`i_Clk`), which is typically connected to the global clock signal of the processor.
+
+The `ProgramCounter` module is a critical component in the MIPS processor pipeline. It keeps track of the current instruction address and updates it on each clock cycle to fetch the next instruction. The program counter ensures the sequential execution of instructions and enables the processor to navigate through the program.
+
+### Program Counter 
+
+Here the `ProgramCounter.v` file with detailed code comments explaining its purpose, functionality, and interactions with other components in the MIPS processor:
+
+```verilog
+// File: ProgramCounter.v
+// Description: This file contains the program counter module for the MIPS processor.
+// Purpose: The program counter keeps track of the current instruction address and updates it to the next address.
+//          It is responsible for providing the current instruction address to the instruction memory and updating
+//          the address based on the next address input.
+
+`timescale 1ns / 1ps
+
+module ProgramCounter (
+    input i_Clk,                   // Input clock signal
+    input [31:0] i_Next,           // Input next instruction address
+    output reg [31:0] o_Out        // Output current instruction address
+);
+  // Initialize the program counter
+  initial begin
+    o_Out = -4;                    // Set the initial instruction address to -4
+  end
+  // Update the program counter on the positive edge of the clock
+  always @(posedge i_Clk) begin
+    o_Out = i_Next;                // Update the current instruction address with the next address
+  end
+endmodule
+```
+
+Purpose and Functionality:
+- The `ProgramCounter` module keeps track of the current instruction address in the MIPS processor.
+- It is responsible for providing the current instruction address to the instruction memory (`InstructionMemory`) for fetching the corresponding instruction.
+- The program counter is updated on the positive edge of the clock signal (`i_Clk`).
+- The next instruction address (`i_Next`) is provided as an input to the module, which is used to update the current instruction address (`o_Out`) on each clock cycle.
+- The initial value of the program counter is set to -4, which represents the initial state before the first instruction is fetched.
+
+Interactions with other components:
+- The `ProgramCounter` module receives the next instruction address (`i_Next`) from the `NextProgramCounter` module, which calculates the next address based on the current instruction and control signals.
+- It provides the current instruction address (`o_Out`) to the `InstructionMemory` module to fetch the corresponding instruction.
+- The `ProgramCounter` is updated on the positive edge of the clock signal (`i_Clk`), which is typically connected to the main processor clock.
+
+The `ProgramCounter` module is to manages the flow of execution by keeping track of the current instruction address. It ensures that instructions are fetched and executed in the correct order by updating the address on each clock cycle based on the next address input provided by the `NextProgramCounter` module.
+
+### ALU
+
+Here the `ALU.v` file with detailed code comments explaining its purpose, functionality, and interactions with other components in the MIPS processor:
+
+```verilog
+// File: ALU.v
+// Description: This file contains the Arithmetic Logic Unit (ALU) module for the MIPS processor.
+// Purpose: The ALU performs arithmetic and logic operations based on the ALU control signals.
+//          It takes two input operands (i_data1 and i_read2/immediate value) and performs the specified operation.
+//          The ALU also generates a zero flag (o_Zero) to indicate if the result is zero.
+
+`timescale 1ns / 1ps
+
+module ALU (
+    input      [31:0] i_data1,        // Input operand 1 (from RegisterFile)
+    input      [31:0] i_read2,        // Input operand 2 (from RegisterFile or immediate value)
+    input      [31:0] i_Instruction,  // Input instruction (used for sign-extension of immediate value)
+    input             i_ALUSrc,       // Control signal to select between i_read2 or immediate value
+    input      [ 3:0] i_ALUcontrol,   // Control signal to specify the ALU operation
+    output reg        o_Zero,         // Output zero flag (1 if the ALU result is zero, 0 otherwise)
+    output reg [31:0] o_ALUresult     // Output ALU result
+);
+
+  reg [31:0] data2;
+
+  // Determine the second operand based on the ALUSrc control signal
+  always @(i_ALUSrc, i_read2, i_Instruction) begin
+    if (i_ALUSrc == 0) begin
+      data2 = i_read2;                 // Use i_read2 as the second operand
+    end else begin
+      // Sign-extend the immediate value
+      if (i_Instruction[15] == 1'b0) begin
+        data2 = {16'b0, i_Instruction[15:0]};  // Zero-extend if the immediate value is positive
+      end else begin
+        data2 = {{16{1'b1}}, i_Instruction[15:0]};  // Sign-extend if the immediate value is negative
+      end
+    end
+  end
+
+  // Perform the ALU operation based on the ALUcontrol signal
+  always @(i_data1, data2, i_ALUcontrol) begin
+    case (i_ALUcontrol)
+      4'b0000:  // AND
+        o_ALUresult = i_data1 & data2;
+      4'b0001:  // OR
+        o_ALUresult = i_data1 | data2;
+      4'b0010:  // ADD
+        o_ALUresult = i_data1 + data2;
+      4'b0110:  // SUB
+        o_ALUresult = i_data1 - data2;
+      4'b0111:  // SLT (Set Less Than)
+        o_ALUresult = (i_data1 < data2) ? 1 : 0;
+      4'b1100:  // NOR
+        o_ALUresult = ~(i_data1 | data2);
+      default: ;
+    endcase
+
+    // Set the zero flag if the ALU result is zero
+    o_Zero = (o_ALUresult == 0) ? 1 : 0;
+  end
+
+endmodule
+```
+
+Interactions with other components:
+- The `ALU` module receives input operands (`i_data1` and `i_read2`) from the `RegisterFile` module.
+- The `i_ALUSrc` control signal from the `ControlUnit` determines whether the second operand is `i_read2` or an immediate value from the instruction (`i_Instruction`).
+- The `i_ALUcontrol` signal from the `ALUControl` module specifies the ALU operation to be performed.
+- The `ALU` module outputs the result (`o_ALUresult`) to the `DataMemory` and `RegisterFile` modules for memory access and register writeback.
+- The zero flag (`o_Zero`) is used by
+
+### Control Unit
+
+### Testbench
+
+Here is the `mips_tb.v` file with detailed code comments explaining its purpose, functionality, and interactions with other components in the MIPS processor:
+```verilog
+// File: mips_tb.v
+// Description: This file contains the testbench for the MIPS processor.
+// Purpose: The testbench is used to simulate and verify the functionality of the MIPS processor.
+//          It instantiates the MIPS processor module, provides clock and reset signals, and
+//          initializes the data memory and register file. It also displays the output on 7-segment displays.
+`timescale 1ns / 1ps
+`define CYCLE_TIME 20
+module mips_tb;
+  reg clk;                 // Clock signal
+  reg rst;                 // Reset signal
+  
+  // Segments for the 7-segment displays
+  wire [6:0] seg_first, seg_second, seg_third, seg_fourth, seg_fifth;
+  
+  integer i;               // Loop variable
+  // Generate clock signal
+  always #(`CYCLE_TIME / 2) clk = ~clk;
+  // Instantiate the MIPS processor module
+  mips uut (
+      .i_Clk(clk),
+      .i_Rst(rst),
+      .o_Seg_first(seg_first),
+      .o_Seg_second(seg_second),
+      .o_Seg_third(seg_third),
+      .o_Seg_fourth(seg_fourth),
+      .o_Seg_fifth(seg_fifth)
+  );
+  // Initialize data memory and register file
+  initial begin
+    // Initialize data memory
+    for (i = 0; i < 32; i = i + 1) begin
+      uut.inst_DataMemory.Dmem[i] = 32'b0;
+    end
+    
+    // Initialize register file
+    for (i = 0; i < 32; i = i + 1) begin
+      uut.inst_RegisterFile.RegData[i] = 32'b0;
+    end
+    
+    clk = 0;                // Initialize clock signal
+  end
+  // End the simulation after a certain time
+  initial begin
+    #1800 $finish;
+  end
+endmodule
+```
+
+Interactions with other components:
+
+- The `mips_tb` module instantiates the `mips` module, which represents the MIPS processor.
+- It provides the clock signal (`clk`) to the `mips` module for synchronization.
+- The reset signal (`rst`) is not used in this testbench but can be used to reset the processor if needed.
+- The testbench initializes the data memory (`inst_DataMemory.Dmem`) and register file (`inst_RegisterFile.RegData`) of the `mips` module to zero.
+- The 7-segment display outputs (`seg_first`, `seg_second`, `seg_third`, `seg_fourth`, `seg_fifth`) from the `mips` module are connected to the testbench for monitoring purposes.
+
+The `mips_tb` module serves as a testbench to simulate and verify the functionality of the MIPS processor.
+
+It provides the necessary inputs (clock and reset) and initializes the memory and registers. The testbench can be modified to apply different test cases and monitor the processor's behavior through the 7-segment display outputs.
