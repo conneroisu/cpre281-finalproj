@@ -1,20 +1,6 @@
-## Proposal
-
-This section contains the proposal that was submitted for the project.
-
-A MIPS processor that can execute a subset of the MIPS instruction set with additional features such as a clock divider, displaying the current instruction on the seven segment displays present on the FPGA board, and the ability to change the frequency of execution of the processor.
-
-More specifically, the processor will be able to execute the following instructions: **LW** **SW** **J** **ADD** **ADDI** **BEQ** **ADDU** **SUBU** **AND** **ANDI** **OR** **ORI** **SUB** **NOR** **BNE** **SLT**
-
-The frequency of execution for the processor will be controlled by a clock divider. The current instruction being executed will be displayed on the seven segment displays present on the FPGA board. The processor will be implemented in Verilog and tested using a test-bench.
-
-After the processor has been verified using the test-bench, the processor will be tested on an FPGA board to verify the functionality of the processor.
-
-The comparison and contrast of the experience writing the same processor in both Verilog and VHDL will be also included in the final report.
-
 ## Introduction
 
-The project is a single-cycle MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on **EP4CE115F29C7** FPGA board.
+A single-cycle MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on **EP4CE115F29C7** FPGA board.
 
 <div style="max-width: fit-content; margin-left: auto; margin-right: auto;">
 ![Circuit Diagram.png](./assets/Circuit%20Diagram.png)
