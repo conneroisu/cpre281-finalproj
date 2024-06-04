@@ -1,17 +1,3 @@
----
-title: Cpre281 Final Project
-abstract: "This is the final project for CPRE281 taught at Iowa State University By Conner Ohnesorge. The project is a single-cycle MIPS processor written in verilog with reflections from writing a similar single-cycle processor project in vhdl that can execute a subset of the MIPS instruction set with additional features such as a clock divider and displays the current instruction on the seven segment displays present on the FPGA board. The processor is implemented in Verilog and tested using a test-bench to verify the functionality of the processor. The processor is tested on an FPGA board to verify the functionality of the processor. The processor is implemented in Verilog and tested using a test-bench to verify the functionality of the processor. The processor is tested on an FPGA board to verify the functionality of the processor."
-keywords: [MIPS, Processor, FPGA, Verilog, VHDL, Single-Cycle, CPRE281, Iowa State University, Conner Ohnesorge, EP4CE115F29C7, Cyclone IV, Altera, Intel, Quartus, ModelSim, Test-Bench, Seven-Segment, Display, Clock, Divider, Frequency, Execution, Instruction, Set, State, Machine, Fetch, Decode, Execute, Memory, Write-Back, Staging, ALU, Operation, Decide, Next, Stage, Access, Read, Write, Register, File, Update, PC, Branch, Jump, Load, Store, Compare, Contrast, Experience, Verilog, VHDL, Comparison, Contrast, Experience, Write, Processor, State, Machine, Single, Cycle, MIPS, Staging, Proposal, Introduction, Table, Contents, References, Final, Project, CPRE281, Iowa, State, University, Conner, Ohnesorge, Date, 4/10/2024, Drawio, Image, Diagram, Proposal, Introduction, State, Machines, Single, Cycle, MIPS, Processor, Staging, Fetch, Decode, Execute, Memory, Write-Back, Supported, Instructions, LW, SW, J, ADD, ADDI, BEQ, ADDU, SUBU, AND, ANDI, OR, ORI, SUB, NOR, BNE, SLT, State, Machines, Single, Cycle, MIPS, Processor, Staging, Fetch, Decode, Execute, Memory, Write-Back, Supported, Instructions, LW, SW, J, ADD, ADDI, BEQ, ADDU, SUBU, AND, ANDI, OR, ORI, SUB, NOR, BNE, SLT, State, Machines, Single, Cycle, MIPS, Processor, Staging, Fetch, Decode, Execute, Memory, Write-Back, Supported, Instructions, LW, SW, J, ADD, ADDI, BEQ, ADDU, SUBU, AND, ANDI, OR, ORI, SUB, NOR, BNE, SLT, State, Machines, Single, Cycle, MIPS, Processor, Staging, Fetch, Decode, Execute, Memory, Write-Back, Supported, Instructions, LW, SW, J, ADD, ADDI, BEQ, ADDU, SUBU, AND, ANDI, OR, ORI, SUB, NOR, BNE, SLT, State, Machines, Single, Cycle, MIPS, Processor, Staging, Fetch, Decode, Execute, Memory, Write-Back, Supported, Instructions, LW, SW, J, ADD, ADDI, BEQ]
-date: 2024-04-10
-author:
-  - name: Conner Ohnesorge
-    affiliation: School of Electrical and Computer Engineering
-    institution: University of Iowa State
-author: Conner Ohnesorge
-toc-title: '<div style="max-width: fit-content; margin-left: auto; margin-right: auto;">Table of Contents</div>'
-institution: University of Iowa State
-email: conneroisu@outlook.com
----
 ## Proposal
 
 This section contains the proposal that was submitted for the project.
