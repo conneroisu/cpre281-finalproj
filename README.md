@@ -29,7 +29,7 @@ Each instruction type (R-type, I-type, J-type) generally follows a similar flow 
 
 This model provides a consistent framework for understanding how different instructions are processed in the single-cycle MIPS architecture.
 
-[Single-Cycle MIPS Execution Diagram](assets/flow.png)
+![Single-Cycle MIPS Execution Diagram](assets/flow.png)
 
 ### ADD (R-type instruction)
 
