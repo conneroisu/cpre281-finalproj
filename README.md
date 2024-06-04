@@ -17,7 +17,7 @@ The comparison and contrast of the experience writing the same processor in both
 The project is a single-cycle MIPS processor that can at a variable speed execute a subset of the MIPS instruction set displaying the current instruction on the seven segment displays present on **EP4CE115F29C7** FPGA board.
 
 <div style="max-width: fit-content; margin-left: auto; margin-right: auto;">
-![Circuit Diagram.png](Circuit%20Diagram.png)
+![Circuit Diagram.png](./assets/Circuit%20Diagram.png)
 </div>
 
 As a result of this desired function (and it's actualation into reality), the processor can technically be used to do **all** the other projects from other students in the class. As I took this class whilst also taking CPRE381, I additionally decided to compare and contrast the experience writing the same processor in both Verilog and VHDL.
